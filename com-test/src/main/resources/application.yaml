@@ -1,0 +1,25 @@
+rocketmq:
+  name-server: 127.0.0.1:9876  # 测试时使用内存RocketMQ
+  producer:
+    group: please_rename_unique_group_name
+  consumer:
+    group: please_rename_unique_group_name_4
+
+spring:
+  application:
+    name: rocketmq-demo
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8080 # 监听端口
+  context-path: / # 访问路径
+
+common:
+  apiHost: http://123.125.111.126
+
+#封装okhttpclient扫描路径
+components:
+  api:
+    base-packages: "com.commons.api.**"
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="qlive-jfrog-snapshots" />
+      <option name="name" value="qlive-jfrog-shapshots" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-snapshot/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jitpack.io" />
+      <option name="name" value="jitpack.io" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="old-maven-release" />
+      <option name="name" value="old-maven-release" />
+      <option name="url" value="http://maven.qiyi.virtual/a/repository" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="iqiyi-internal-repo" />
+      <option name="name" value="iqiyi-internal-repo" />
+      <option name="url" value="http://maven.qiyi.virtual/a/iqiyi-internal-repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="qlive-jfrog-releases" />
+      <option name="name" value="qlive-jfrog-releases" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-qlive/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="iqiyi-maven-qixiu" />
+      <option name="name" value="iqiyi-maven-qixiu" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-qixiu" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven.ai" />
+      <option name="name" value="maven.ai" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-ai" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="iqiyi-maven-release" />
+      <option name="name" value="iqiyi-maven-release" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-release" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="iqiyi-maven-mcg" />
+      <option name="name" value="iqiyi-maven-mcg" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-mcg/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="iqiyi-maven-cloudservice" />
+      <option name="name" value="iqiyi-maven-cloudservice" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/iqiyi-maven-cloudservice" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jcenter-cache" />
+      <option name="name" value="jcenter-cache" />
+      <option name="url" value="http://jfrog.cloud.qiyi.domain/jcenter-cache" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+  </component>
+</project>
