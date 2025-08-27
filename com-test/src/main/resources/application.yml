@@ -1,11 +1,7 @@
-rocketmq:
-  name-server: 127.0.0.1:9876  # 测试时使用内存RocketMQ
-  producer:
-    group: please_rename_unique_group_name
-  consumer:
-    group: please_rename_unique_group_name_4
-
 spring:
+  config:
+    import:
+      - database.yml
   application:
     name: rocketmq-demo
   main:

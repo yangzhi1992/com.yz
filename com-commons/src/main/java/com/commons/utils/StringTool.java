@@ -637,7 +637,7 @@ public final class StringTool {
 
 
     public static String shorten(String name) {
-        if (StringUtils.isEmpty(name)) {
+        if (org.springframework.util.StringUtils.isEmpty(name)) {
             return name;
         }
         int maxLength = name.length() > MAX_NAME_LENGTH ? MAX_NAME_LENGTH : name.length();

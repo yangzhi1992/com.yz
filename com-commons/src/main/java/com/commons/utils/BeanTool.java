@@ -211,36 +211,6 @@ public final class BeanTool {
     }
 
     /**
-     * 设置属性
-     *
-     * @param bean 目标对象
-     * @param name 属性名
-     * @param value 属性值
-     */
-    public static void setProperty(Object bean, String name, Object value) {
-        try {
-            org.apache.commons.beanutils.BeanUtils.setProperty(bean, name, value);
-        } catch (Exception e) {
-            throw new BusinessException("设置属性[" + name + "]失败!", e);
-        }
-    }
-
-    /**
-     * 获取属性的值
-     *
-     * @param bean 目标对象
-     * @param name 属性名
-     * @return 属性的值，其实是String类型
-     */
-    public static String getProperty(Object bean, String name) {
-        try {
-            return org.apache.commons.beanutils.BeanUtils.getProperty(bean, name);
-        } catch (Exception e) {
-            throw new BusinessException("获取属性[" + name + "]失败!", e);
-        }
-    }
-
-    /**
      * 设置Field值
      *
      * @param bean 要设置对象

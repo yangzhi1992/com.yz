@@ -107,7 +107,7 @@ public interface CommonApiTest {
             @Query(value = "name", encoded = true) String name,
             @Part MultipartBody.Part file,
             @Part(value = "value") RequestBody value,
-            @Part("value1") RequestBody value1
+            @Part(value = "value") RequestBody value1
     );
 
     /**
@@ -118,7 +118,7 @@ public interface CommonApiTest {
     @ApiOptions(connectTimeout = 5000, readTimeout = 5000, writeTimeout = 5000, retries = 3)
     Call<Map<String, Object>> post_upload_partMap(
             @Query(value = "name", encoded = true) String name,
-            @Part(value = "file") MultipartBody.Part file,
+            @Part MultipartBody.Part file,
             @PartMap Map<String, RequestBody> params
     );
 

@@ -280,35 +280,6 @@ public final class CollectionTool {
         return new ArrayList<>(new LinkedHashSet<>(list));
     }
 
-    /**
-     * 分组函数
-     */
-    public static final <T extends Comparable<T>, D> Map<T, List<D>> group(Collection<D> collection,
-            String groupBy) {
-        if (isBlank(collection) || StringTool.isBlank(groupBy)) {
-            return null;
-        }
-        Iterator<D> iter = collection.iterator();
-        Map<T, List<D>> map = new HashMap<>();
-        while (iter.hasNext()) {
-            D d = iter.next();
-            T key;
-            if (d instanceof Map) {
-                key = (T) ((Map) d).get(groupBy);
-            } else {
-                key = (T) BeanTool.getProperty(d, groupBy);
-            }
-            if (map.containsKey(key)) {
-                map.get(key).add(d);
-            } else {
-                List<D> list = new ArrayList<>();
-                list.add(d);
-                map.put(key, list);
-            }
-        }
-        return map;
-    }
-
     public static List<Integer> convert2Int(Collection<String> strList) {
         if (isBlank(strList)) {
             return null;
