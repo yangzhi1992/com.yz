@@ -2,6 +2,8 @@ package com.commons.controller;
 
 import com.commons.db.mapper.DbCommonMapper;
 import com.commons.db.model.DbCommonEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "dbCommon接口", description = "dbCommon接口")
 @RestController
 public class DbController {
 
     @Autowired
-    @Qualifier("giftSpecialPackageEntityMapper")
-    private DbCommonMapper giftSpecialPackageEntityMapper;
+    @Qualifier("dbCommonMapper")
+    private DbCommonMapper dbCommonMapper;
 
-    @PostMapping("/health1")
-    public String health(@RequestParam String msg) throws IOException {
-        List<Object> objects = giftSpecialPackageEntityMapper.selectDb(DbCommonEntity.builder().build());
+    @Operation(summary = "获取db信息", description = "获取db信息")
+    @PostMapping("/selectDb")
+    public String selectDb(@RequestParam String msg) throws IOException {
+        List<Object> objects = dbCommonMapper.selectDb(DbCommonEntity.builder().build());
         return "Message sent: " + objects;
     }
 
