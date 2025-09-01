@@ -1,0 +1,7 @@
+#封装okhttpclient扫描路径
+components:
+  api:
+    base-packages: "com.commons.api.**"
+
+common:
+  apiHost: http://123.125.111.126

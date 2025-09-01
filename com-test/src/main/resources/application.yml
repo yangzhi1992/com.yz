@@ -2,8 +2,10 @@ spring:
   config:
     import:
       - database.yml
+      - resilience4j.yml
+      - api.yml
   application:
-    name: rocketmq-demo
+    name: test-demo
   main:
     allow-bean-definition-overriding: true
 
@@ -11,11 +13,21 @@ server:
   port: 8080 # 监听端口
   context-path: / # 访问路径
 
-common:
-  apiHost: http://123.125.111.126
+# 暴露Actuator端点，用于监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus, circuitbreakers, ratelimiters, bulkheads, retries
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
-#封装okhttpclient扫描路径
-components:
-  api:
-    base-packages: "com.commons.api.**"
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    com.example.resilience4jdemo: DEBUG
 

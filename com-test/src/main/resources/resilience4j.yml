@@ -1,0 +1,63 @@
+resilience4j:
+  circuitbreaker:
+    instances:
+      backendA:
+        register-health-indicator: true
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 5s
+        failure-rate-threshold: 50
+        permitted-number-of-calls-in-half-open-state: 3
+        event-consumer-buffer-size: 10
+        record-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+          - java.lang.RuntimeException
+      backendB:
+        register-health-indicator: true
+        sliding-window-type: TIME_BASED
+        sliding-window-size: 60
+        minimum-number-of-calls: 10
+        wait-duration-in-open-state: 10s
+        failure-rate-threshold: 60
+        permitted-number-of-calls-in-half-open-state: 5
+
+  ratelimiter:
+    instances:
+      apiService:
+        limit-for-period: 1
+        limit-refresh-period: 1s
+        timeout-duration: 0
+        register-health-indicator: true
+        allow-health-indicator-to-fail: true
+
+  retry:
+    instances:
+      backendA:
+        max-attempts: 3
+        wait-duration: 500ms
+        retry-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.lang.RuntimeException
+
+  bulkhead:
+    instances:
+      backendA:
+        max-concurrent-calls: 5
+        max-wait-duration: 10ms
+        register-health-indicator: true
+
+  timelimiter:
+    instances:
+      backendA:
+        timeout-duration: 2s
+        cancel-running-future: true
+
+  cache:
+    instances:
+      userCache:
+        cache-size: 200
+        time-to-live: 60s
