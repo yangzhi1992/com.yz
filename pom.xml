@@ -162,7 +162,7 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
-                <version>1.7.0</version> <!-- 检查最新版本 -->
+                <version>1.7.0</version>
             </dependency>
 
             <!-- Resilience4j -->
