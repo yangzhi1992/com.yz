@@ -1,5 +1,6 @@
 package com.commons.security;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@ConditionalOnProperty(prefix = "components.security", name = "enabled", matchIfMissing = true)
 public class SecurityConfig {
 
     @Bean
