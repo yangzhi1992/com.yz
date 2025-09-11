@@ -3,8 +3,8 @@ package com.commons.api.retrofit;
 
 import static com.commons.api.retrofit.Utils.checkNotNull;
 
-import com.commons.utils.JsonTool;
-import com.commons.utils.StringTool;
+import com.commons.common.utils.JsonTool;
+import com.commons.common.utils.StringTool;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Map;

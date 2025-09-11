@@ -4,7 +4,7 @@ package com.commons.api.retrofit;
 import static com.commons.api.retrofit.Utils.checkNotNull;
 import static com.commons.api.retrofit.Utils.throwIfFatal;
 
-import com.commons.utils.StringTool;
+import com.commons.common.utils.StringTool;
 import java.io.IOException;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;

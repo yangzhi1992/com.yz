@@ -2,10 +2,10 @@ package com.commons.db;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.commons.db.interceptor.DBStatInterceptor;
-import com.commons.exception.ConfigException;
-import com.commons.utils.ArrayTool;
-import com.commons.utils.CollectionTool;
-import com.commons.utils.PropertiesTool;
+import com.commons.common.exception.ConfigException;
+import com.commons.common.utils.ArrayTool;
+import com.commons.common.utils.CollectionTool;
+import com.commons.common.utils.PropertiesTool;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;

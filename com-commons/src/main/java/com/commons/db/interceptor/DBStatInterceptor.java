@@ -2,7 +2,7 @@ package com.commons.db.interceptor;
 
 import com.commons.db.DynamicDataSource;
 import com.commons.db.annotation.DBKey;
-import com.commons.utils.StringTool;
+import com.commons.common.utils.StringTool;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;

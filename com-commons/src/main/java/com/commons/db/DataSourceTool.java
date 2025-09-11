@@ -1,12 +1,12 @@
 package com.commons.db;
 
-import static com.commons.utils.PropertiesTool.getBoolean;
-import static com.commons.utils.PropertiesTool.getInt;
-import static com.commons.utils.PropertiesTool.getString;
-import static com.commons.utils.PropertiesTool.isLazy;
+import static com.commons.common.utils.PropertiesTool.getBoolean;
+import static com.commons.common.utils.PropertiesTool.getInt;
+import static com.commons.common.utils.PropertiesTool.getString;
+import static com.commons.common.utils.PropertiesTool.isLazy;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.commons.utils.StringTool;
+import com.commons.common.utils.StringTool;
 import java.util.List;
 import java.util.Properties;
 import org.springframework.core.env.Environment;

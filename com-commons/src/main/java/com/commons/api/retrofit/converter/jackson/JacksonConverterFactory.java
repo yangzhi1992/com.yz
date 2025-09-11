@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.commons.api.retrofit.Converter;
 import com.commons.api.retrofit.Retrofit;
-import com.commons.support.ReturnValue;
+import com.commons.common.support.ReturnValue;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

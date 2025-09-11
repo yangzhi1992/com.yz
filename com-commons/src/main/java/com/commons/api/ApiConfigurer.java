@@ -4,8 +4,8 @@ import static org.springframework.beans.factory.support.BeanDefinitionBuilder.ro
 import static org.springframework.util.ClassUtils.resolveClassName;
 
 import com.commons.api.annotation.ApiClass;
-import com.commons.utils.CollectionTool;
-import com.commons.utils.StringTool;
+import com.commons.common.utils.CollectionTool;
+import com.commons.common.utils.StringTool;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.springframework.beans.BeansException;

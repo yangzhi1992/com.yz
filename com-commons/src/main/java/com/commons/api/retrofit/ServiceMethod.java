@@ -4,7 +4,7 @@ import static org.springframework.core.annotation.AnnotationUtils.findAnnotation
 
 import com.commons.api.annotation.ApiOptions;
 import com.commons.api.retrofit.http.*;
-import com.commons.utils.StringTool;
+import com.commons.common.utils.StringTool;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

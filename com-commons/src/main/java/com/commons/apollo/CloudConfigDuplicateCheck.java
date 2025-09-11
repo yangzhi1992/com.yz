@@ -1,6 +1,6 @@
 package com.commons.apollo;
 
-import com.commons.utils.JsonTool;
+import com.commons.common.utils.JsonTool;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
