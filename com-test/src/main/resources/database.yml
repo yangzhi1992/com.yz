@@ -1,3 +1,6 @@
+components:
+  db:
+    enabled: true
 mybatis:
   configLocation: "classpath:mybatis-config.xml"
   mapperLocations: "classpath:mapper/*.xml"

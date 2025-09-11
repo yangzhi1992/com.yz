@@ -12,6 +12,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 查看应用下/env中同一个key在不同namespace中重复的记录
+ */
 public class CloudConfigDuplicateCheck {
 
     public static void main(String[] args) throws Exception {

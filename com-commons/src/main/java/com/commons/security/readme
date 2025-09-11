@@ -1,0 +1,8 @@
+1、应用jar
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+        <version>${spring.boot.version}</version>
+    </dependency>
+2、配置文件
+    security.yml
