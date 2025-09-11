@@ -22,6 +22,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.ConnectionPool;
 import okhttp3.Dispatcher;
 import okhttp3.FormBody;
@@ -31,6 +33,7 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OkhttpClientTool {
 
@@ -449,5 +452,66 @@ public class OkhttpClientTool {
         } catch (Exception e) {
             throw new RuntimeException("Error performing POST Multipart request", e);
         }
+    }
+
+    /**
+     * 同步http请求
+     */
+    public static void main1(String[] args) throws Exception {
+        // 创建 OkHttpClient 实例
+        OkHttpClient client = new OkHttpClient();
+
+        // 构建请求对象
+        Request request = new Request.Builder()
+                .url("https://jsonplaceholder.typicode.com/posts/1") // URL 地址
+                .get() // GET 请求 (默认)
+                .build();
+
+        // 执行请求并获取响应
+        try (Response response = client.newCall(request)
+                                       .execute()) {
+            if (response.isSuccessful()) {
+                // 读取响应数据
+                System.out.println("Response Body: " + response.body()
+                                                               .string());
+            } else {
+                System.out.println("Request Failed: " + response.code());
+            }
+        }
+    }
+
+    /**
+     * 一步http请求
+     */
+    public static void main2(String[] args) {
+        // 创建 OkHttpClient 实例
+        OkHttpClient client = new OkHttpClient();
+
+        // 构建请求对象
+        Request request = new Request.Builder()
+                .url("https://jsonplaceholder.typicode.com/posts/1")
+                .get()
+                .build();
+
+        // 异步执行请求
+        client.newCall(request)
+              .enqueue(new Callback() {
+                  @Override
+                  public void onFailure(Call call, IOException e) {
+                      // 请求失败
+                      System.err.println("Request Failed: " + e.getMessage());
+                  }
+
+                  @Override
+                  public void onResponse(Call call, Response response) throws IOException {
+                      if (response.isSuccessful()) {
+                          // 请求成功
+                          System.out.println("Response Body: " + response.body()
+                                                                         .string());
+                      } else {
+                          System.out.println("Request Failed: " + response.code());
+                      }
+                  }
+              });
     }
 }

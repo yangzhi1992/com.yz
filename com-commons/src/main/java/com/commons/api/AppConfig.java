@@ -1,7 +1,5 @@
 package com.commons.api;
 
-import com.commons.api.retrofit.RequestInterceptor;
-import com.commons.api.retrofit.ResponseInterceptor;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
