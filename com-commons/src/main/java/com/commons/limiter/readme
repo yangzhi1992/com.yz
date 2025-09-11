@@ -1,7 +1,7 @@
 1、限流方式
    google ratelimiter
    alibaba sentinel
-   resilience4j
+   resilience4j  grafana关于prometheus指标的模版 https://github.com/resilience4j/resilience4j/blob/master/grafana_dashboard.json
 2、应用jar
     <!-- ratelimiter -->
     <dependency>

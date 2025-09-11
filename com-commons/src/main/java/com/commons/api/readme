@@ -1,3 +1,5 @@
 1、代码示例
   com.commons.api包下
   CommonApiController 接口请求
+  OkhttpClientTool 工具类使用
+  注意：重新新建一个okhttp实例 new OkHttpClient() 性能较使用线程池获取实例性能较低

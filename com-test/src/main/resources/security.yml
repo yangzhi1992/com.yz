@@ -13,4 +13,4 @@ components:
       - /db/**
       - /limiter/**
     admin-urls:
-      - /actuator/**
+        - /actuator/**
