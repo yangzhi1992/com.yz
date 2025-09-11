@@ -1,5 +1,8 @@
 package com.commons.security;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,38 +17,52 @@ import org.springframework.security.web.SecurityFilterChain;
 @ConditionalOnProperty(prefix = "components.security", name = "enabled", matchIfMissing = true)
 public class SecurityConfig {
 
+    @Autowired
+    private SecurityInfoProperties securityInfoProperties;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 //对 RESTAPI 需要禁用 CSRF 防护,POST请求必须
-                .csrf().disable()
+                .csrf()
+                .disable()
                 //设置请求权限
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .antMatchers(
-                        "/api/**","/db/**","/limiter/**"
+                        securityInfoProperties.getPermitAllUrls().toArray(new String[0])
                 )
                 .permitAll()
+                .antMatchers(securityInfoProperties.getAdminUrls().toArray(new String[0]))
+                .hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()                    // 其余路径需要认证
+                .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")                // 登录页配置
-                .permitAll()
+                .loginPage("/login")
+                .permitAll() // 登录页配置
                 .and()
                 .logout()
-                .permitAll();
+                .permitAll() //登出配置
+                .and()
+                .httpBasic();
 
         return http.build();                    // 返回 SecurityFilterChain
     }
 
+    /**
+     * 添加用户和角色
+     */
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                               .username("user")
-                               .password("password")
-                               .roles("USER")
-                               .build();
+        //{noop}" + user.getPassword() {noop}后面添加明文密码
+        List<UserDetails> users = securityInfoProperties.getUsers().stream()
+                                                    .map(user -> User.builder()
+                                                                         .username(user.getUsername())
+                                                                         .password("{noop}" + user.getPassword())
+                                                                         .roles(user.getRoles())
+                                                                         .build())
+                                                    .collect(Collectors.toList());
 
-        return new InMemoryUserDetailsManager(user);
+        return new InMemoryUserDetailsManager(users);
     }
 }

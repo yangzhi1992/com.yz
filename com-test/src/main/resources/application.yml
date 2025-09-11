@@ -4,6 +4,8 @@ spring:
       - database.yml
       - resilience4j.yml
       - api.yml
+      - security.yml
+      - actuator.yml
   application:
     name: test-demo
   main:
@@ -12,19 +14,6 @@ spring:
 server:
   port: 8080 # 监听端口
   context-path: / # 访问路径
-
-# 暴露Actuator端点，用于监控
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, metrics, prometheus, circuitbreakers, ratelimiters, bulkheads, retries
-  endpoint:
-    health:
-      show-details: always
-  metrics:
-    tags:
-      application: ${spring.application.name}
 
 logging:
   level:

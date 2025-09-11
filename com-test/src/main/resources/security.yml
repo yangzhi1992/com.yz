@@ -1,0 +1,16 @@
+components:
+  security:
+    enabled: true
+    users:
+      - username: user
+        password: user
+        roles: USER
+      - username: user2
+        password: user
+        roles: ADMIN
+    permit-all-urls:
+      - /api/**
+      - /db/**
+      - /limiter/**
+    admin-urls:
+      - /actuator/**
