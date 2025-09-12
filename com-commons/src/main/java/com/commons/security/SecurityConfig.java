@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -29,10 +31,12 @@ public class SecurityConfig {
                 //设置请求权限
                 .authorizeHttpRequests()
                 .antMatchers(
-                        securityInfoProperties.getPermitAllUrls().toArray(new String[0])
+                        securityInfoProperties.getPermitAllUrls()
+                                              .toArray(new String[0])
                 )
                 .permitAll()
-                .antMatchers(securityInfoProperties.getAdminUrls().toArray(new String[0]))
+                .antMatchers(securityInfoProperties.getAdminUrls()
+                                                   .toArray(new String[0]))
                 .hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
@@ -55,14 +59,26 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         //{noop}" + user.getPassword() {noop}后面添加明文密码
-        List<UserDetails> users = securityInfoProperties.getUsers().stream()
-                                                    .map(user -> User.builder()
+        List<UserDetails> users = securityInfoProperties.getUsers()
+                                                        .stream()
+                                                        .map(user -> User.builder()
                                                                          .username(user.getUsername())
-                                                                         .password("{noop}" + user.getPassword())
+                                                                         .password("{noop}" + user.getPassword()) //明文
+                                                                         .password(passwordEncoder().encode(
+                                                                                 user.getPassword())) //密文
                                                                          .roles(user.getRoles())
                                                                          .build())
-                                                    .collect(Collectors.toList());
+                                                        .collect(Collectors.toList());
 
         return new InMemoryUserDetailsManager(users);
     }
+
+    /**
+     * Spring Security 加密
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // 推荐使用 BCrypt
+    }
+
 }

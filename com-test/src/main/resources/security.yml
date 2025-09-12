@@ -12,5 +12,16 @@ components:
       - /api/**
       - /db/**
       - /limiter/**
+
+      ## swagger 相关资源去掉权限 ##
+      - /swagger-ui.html          # Swagger 2 主页面
+      - /swagger-ui/**            # Swagger 3 主页面
+      - /v2/api-docs              # Swagger 2 API 文档
+      - /v3/api-docs/**           # Swagger 3 API 文档
+      - /swagger-resources/**     # Swagger 资源路径
+      - /webjars/**               # Webjars 静态资源路径
+      - /configuration/ui         # Swagger 配置文件路径
+      - /configuration/security   # Swagger security 权限
+      ## swagger 相关资源去掉权限 ##
     admin-urls:
         - /actuator/**
