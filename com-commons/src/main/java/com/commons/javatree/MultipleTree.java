@@ -40,12 +40,6 @@ public class MultipleTree {
 		for (Iterator it = entrySet.iterator(); it.hasNext();) {
 			Node node = (Node) ((Map.Entry) it.next()).getValue();
 			if (node.parentId == null || node.parentId.equals("")) {
-//				// 输出无序的树形菜单的JSON字符串
-//				System.out.println(root.toString());
-//				// 对多叉树进行横向排序
-//				root.sortChildren();
-				// 输出有序的树形菜单的JSON字符串
-//				System.out.println(root.toString());
 				root = node;
 				root.sortChildren();
 				list.add(root);
