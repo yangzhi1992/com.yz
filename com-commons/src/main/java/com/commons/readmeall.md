@@ -3,7 +3,7 @@
 3、apollo->apollo 待完善
 *4、db->mybaties使用
 *5、engine->逻辑表达式引擎使用
-6、grok->用于解析和匹配非结构化的日志数据，将其转换为结构化的键值对格式
+*6、grok->用于解析和匹配非结构化的日志数据，将其转换为结构化的键值对格式
 7、javatree->树型菜单
 8、limiter->限流 待完善
 9、prometheus->待完善
