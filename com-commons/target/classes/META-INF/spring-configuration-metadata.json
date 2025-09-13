@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "name": "components.security",
+      "type": "com.commons.security.SecurityInfoProperties",
+      "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "mybatis",
+      "type": "com.commons.db.MybatisProperties",
+      "sourceType": "com.commons.db.MybatisProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "components.security.admin-urls",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "components.security.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.commons.security.SecurityInfoProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "components.security.permit-all-urls",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "components.security.users",
+      "type": "java.util.List<com.commons.security.SecurityInfoProperties$UserInfo>",
+      "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "mybatis.base-package",
+      "type": "java.lang.String",
+      "description": "Mapper类所在的base package",
+      "sourceType": "com.commons.db.MybatisProperties",
+      "defaultValue": "com.commons.db.mapper"
+    },
+    {
+      "name": "mybatis.config-location",
+      "type": "java.lang.String",
+      "description": "mybatis配置文件路径",
+      "sourceType": "com.commons.db.MybatisProperties",
+      "defaultValue": "classpath:mybatis-config.xml"
+    },
+    {
+      "name": "mybatis.expression",
+      "type": "java.lang.String",
+      "description": "mapper aop拦截路径，一般不需要修改",
+      "sourceType": "com.commons.db.MybatisProperties",
+      "defaultValue": "execution(* com.iqiyi..*.repository.*.*(..))"
+    },
+    {
+      "name": "mybatis.mapper-locations",
+      "type": "java.lang.String",
+      "description": "mapper文件路径:多个location以,分隔",
+      "sourceType": "com.commons.db.MybatisProperties",
+      "defaultValue": "classpath*:mapper\/*.xml"
+    },
+    {
+      "name": "mybatis.nodes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "com.commons.db.MybatisProperties"
+    },
+    {
+      "name": "mybatis.params",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "自动注入配置",
+      "sourceType": "com.commons.db.MybatisProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,34 @@
+components:
+  db:
+    enabled: true
+mybatis:
+  configLocation: "classpath:mybatis-config.xml"
+  mapperLocations: "classpath:mapper/*.xml"
+  basePackage: "com.commons.db.mapper"
+
+  params:
+    druid.driverClassName: com.mysql.jdbc.Driver
+    druid.filters: stat
+    druid.maxActive: 20
+    druid.initialSize: 1
+    druid.maxWait: 60000
+    druid.minIdle: 1
+    druid.timeBetweenEvictionRunsMillis: 60000
+    druid.minEvictableIdleTimeMillis: 300000
+    druid.validationQuery: select 'x'
+    druid.testWhileIdle: true
+    druid.testOnBorrow: false
+    druid.testOnReturn: false
+    druid.poolPreparedStatements: true
+    druid.maxOpenPreparedStatements: 20
+    druid.connectionInitSqls: "set names utf8mb4;"
+
+  nodes:
+    default:
+      url: jdbc:mysql://127.0.0.1:3306/xxx?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useAffectedRows=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useLocalSessionState=true
+      username: xxx
+      password: 'xxx'
+    db2:
+      url: jdbc:mysql://127.0.0.1:3306/xxx?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useAffectedRows=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useLocalSessionState=true
+      username: xxx
+      password: 'xxx'

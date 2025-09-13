@@ -1,0 +1,26 @@
+# 暴露Actuator端点，用于监控
+management:
+  endpoints:
+    enabled-by-default: true                              #是否默认启用所有端点
+    web:
+      base-path: /actuator                                #Actuator端点的基本路径
+      exposure:
+#        include: env,metrics                             #通过HTTP暴露的端点列表 '*' 表示所有
+        exclude: mappings,prometheus                      #不通过HTTP暴露的端点列表
+        include: '*'
+      discovery:
+        enabled: true                                     #是否启用发现页面（/actuator） 当 true（默认值）时，访问 /actuator 会返回上述的链接列表。false 时，访问 /actuator 将会返回一个 HTTP 404 Not Found 错误，因为发现页面被禁用了。
+      path-mapping:                                       #端点路径映射
+        health: healthcheck
+        metrics: metrics
+  endpoint:
+    health:
+      show-details: always      # never,when_authorized,always
+#     roles: ACTUATOR          # 自定义角色（spring-security 设置的角色），默认为 ACTUATOR（相当于无权限，此时设置spring-security权限无效）,当show-details为when_authorized时需要配置
+# show-details 为always或者never时受到 spring-security 权限控制，为when_authorized时roles是ACTUATOR设置spring-security无效
+# never默认值（处于安全考虑），返回结果响应示例 {"status":"UP"}
+# when_authorized 仅当用户已认证并且具有特定角色时才显示详细信息。否则，行为与 never 相同
+# always 总是显示完整的健康详细信息，无论用户是否经过认证
+  metrics:
+    tags:
+      application: ${spring.application.name}  #prometheus指标的tag标签

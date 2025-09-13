@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resilience4j Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .endpoint { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .btn { background: #4CAF50; color: white; padding: 10px 15px;
+               text-decoration: none; border-radius: 4px; display: inline-block; margin: 5px; }
+        .monitoring { margin-top: 30px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${message}">Resilience4j Demo</h1>
+
+    <h2>API Endpoints</h2>
+
+    <div class="endpoint">
+        <h3>Circuit Breaker + Retry + Bulkhead</h3>
+        <p>Endpoint: <code>/api/call/{param}</code></p>
+        <a class="btn" href="/api/call/test1">Test 1</a>
+        <a class="btn" href="/api/call/test2">Test 2</a>
+    </div>
+
+    <div class="endpoint">
+        <h3>Rate Limiter (5 requests/sec)</h3>
+        <p>Endpoint: <code>/api/rate-limited/{param}</code></p>
+        <a class="btn" href="/api/rate-limited/test">Test</a>
+    </div>
+
+    <div class="endpoint">
+        <h3>Time Limiter (Async with 2s timeout)</h3>
+        <p>Endpoint: <code>/api/async/{param}</code></p>
+        <a class="btn" href="/api/async/test">Test</a>
+    </div>
+
+    <div class="endpoint">
+        <h3>Cache + Circuit Breaker</h3>
+        <p>Endpoint: <code>/api/user/{userId}</code></p>
+        <a class="btn" href="/api/user/123">User 123</a>
+        <a class="btn" href="/api/user/456">User 456</a>
+    </div>
+
+    <div class="monitoring">
+        <h2>Monitoring</h2>
+        <p><a class="btn" href="http://localhost:8080//actuator">Actuator Endpoints</a></p>
+        <p><a class="btn" href="http://localhost:8080//actuator/health">Health Check</a></p>
+        <p><a class="btn" href="http://localhost:8080//actuator/prometheus">Prometheus Metrics</a></p>
+        <p><a class="btn" href="http://localhost:8080//actuator/circuitbreakers">Circuit Breakers</a></p>
+    </div>
+</div>
+</body>
+</html>
