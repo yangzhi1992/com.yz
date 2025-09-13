@@ -2,6 +2,7 @@ prometheus 收集指标 ， 及PromQL语句
     https://prometheus.io/download/ 下载
     https://prometheus.io/docs/alerting/latest/alertmanager/ 报警
     https://prometheus.io/docs/instrumenting/exporters/ exoirters
+    http://localhost:9090/ prometheus启动后prometheus管理页面
     grafana 展示指标    
 
 altermanager prometheus指标任务报警

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: java-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: java-app
+              image: java-app:latest
+              command: ["java", "-jar", "/app.jar"]
+          restartPolicy: OnFailure
