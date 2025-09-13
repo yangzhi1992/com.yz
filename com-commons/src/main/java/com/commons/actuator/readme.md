@@ -16,7 +16,7 @@
 5、集成安全控制
     见security
 6、使用 Prometheus 或 Grafana 监控
-    引用jar
+    引用jar 提供了将 Micrometer 的指标转换为 Prometheus 格式的能力
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
