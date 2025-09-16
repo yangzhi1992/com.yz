@@ -1,6 +1,8 @@
 * actuator->spring boot actuator
-* apo->okhttp http请求
+* api->okhttp http请求
   * apollo->apollo 待完善
+* boomfilter->布隆过滤器
+  * cache->本地换成
 * db->mybaties使用
 * engine->逻辑表达式引擎使用
   * es->es 待完善

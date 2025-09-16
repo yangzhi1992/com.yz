@@ -34,7 +34,7 @@ public class SpringScheduler2 {
     @Async("taskExecutor")
     // 每5秒执行一次 间隔时间（以毫秒为单位），不论前一个任务是否完成，都会定时开始新的任务。
     @Scheduled(fixedRate = 5000)
-    public void fixedRateTask() {
+    public void fixedRateTask2() {
         System.out.println("Fixed rate task executed at: " + new Date());
     }
 

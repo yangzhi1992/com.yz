@@ -1,0 +1,7 @@
+# 自动配置（Spring Boot 默认）Spring Boot 会自动检测到 Caffeine 在类路径中，并配置相应的 CacheManager。您只需要在配置文件中添加一些属性：
+# spring:
+#  cache:
+#    type: caffeine
+#    caffeine:
+#      spec: maximumSize=500,expireAfterAccess=600s
+#    cache-names: users,products,orders

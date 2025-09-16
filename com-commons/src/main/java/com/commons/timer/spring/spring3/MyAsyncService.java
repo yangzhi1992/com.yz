@@ -24,7 +24,7 @@ public class MyAsyncService {
         System.out.println("Task completed in thread: " + Thread.currentThread().getName());
     }
 
-    @Async("taskScheduler2")  // 使用名为 "asyncExecutor" 的线程池
+    @Async("taskScheduler3")  // 使用名为 "asyncExecutor" 的线程池
     public void executeAsyncTaskWithCustomExecutor() {
         System.out.println("Task started in thread: " + Thread.currentThread().getName());
         try {

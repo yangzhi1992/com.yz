@@ -12,7 +12,7 @@ spring:
     allow-bean-definition-overriding: true
 
 server:
-  port: 8080 # 监听端口
+  port: 8085 # 监听端口
   context-path: / # 访问路径
 
 logging:

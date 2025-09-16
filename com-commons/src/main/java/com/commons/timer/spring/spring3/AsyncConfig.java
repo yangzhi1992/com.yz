@@ -20,7 +20,7 @@ public class AsyncConfig {
      * 设置为 CPU 核心数的 2 倍，用于 I/O 密集任务。
      */
     @Bean
-    public ThreadPoolTaskScheduler taskScheduler2() {
+    public ThreadPoolTaskScheduler taskScheduler3() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(5);                                                           // 设置线程池的线程数量
         scheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());   //设置拒绝策略
