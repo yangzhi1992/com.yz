@@ -66,7 +66,7 @@ management:
     特定缓存：http://localhost:8080/actuator/caches/{cacheName}
     指标数据：http://localhost:8080/actuator/metrics
     Prometheus 格式指标：http://localhost:8080/actuator/prometheus
-3、ehcache
+3、ehcache 支持内存，堆外内存，磁盘
     <dependency>
         <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>caffeine</artifactId>
