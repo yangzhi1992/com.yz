@@ -1,22 +1,11 @@
 1、ConcurrentHashMap
-1.1 集成spring-boot引入jar
+1.1 ConcurrentHashMapTest
+1.2 集成spring-boot引入jar
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
-2、GuavaCache
-2.1 集成spring-boot引入jar
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-cache</artifactId>
-    </dependency>
-2.2 引入jar
-    <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>32.1.3-jre</version>
-    </dependency>
-3、Caffeine
+2、Caffeine
     简介：当今 Java 本地缓存领域的王者，是 Guava Cache 的“现代化”重构版，性能极其优异，API 友好，功能丰富。
     核心特性：
     高性能：使用 Window-TinyLFU 淘汰算法，提供了近乎最佳的命中率，尤其擅长处理突发性的稀疏流量（突然的大量访问）。其读写性能在众多框架中名列前茅。
@@ -25,18 +14,18 @@
     事件监听：支持缓存移除事件监听器（removalListener）。
     完善的统计：内置强大的统计功能，可轻松获取命中率等信息。
     与 Spring 完美集成：Spring Boot 2.x 后已将默认缓存实现从 Guava Cache 切换为 Caffeine。
-3.1 引用cacffeinejar
+2.1 引用cacffeinejar
     <dependency>
         <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>caffeine</artifactId>
         <version>3.1.8</version>
     </dependency>
-3.2 集成spring-boot引入jar  见 com.commons.cache.caffenine及CacheController
+2.2 集成spring-boot引入jar  见 com.commons.cache.caffenine及CacheController
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
-3.3 若需要统计引入
+2.3 若需要统计引入
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-actuator</artifactId>
@@ -73,4 +62,4 @@ management:
     特定缓存：http://localhost:8080/actuator/caches/{cacheName}
     指标数据：http://localhost:8080/actuator/metrics
     Prometheus 格式指标：http://localhost:8080/actuator/prometheus
-4、ehcache
+3、ehcache
