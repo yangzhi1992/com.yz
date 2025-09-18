@@ -74,3 +74,10 @@ management:
     </dependency>
     com.commons.cache.ehcache 单独java编码及配置文件方式
     com.commons.cache.springcache.cacheyml.EhcacheCacheService 和 cache.yml springboot配置文件方式
+
+4、spring cache
+@EnableCaching spring boot启动缓存
+@CacheConfig：指定缓配置
+@Cacheable: 方法调用结果会存入缓存，后续使用缓存。
+@CacheEvict: 清除缓存。
+@CachePut: 强制更新缓存。
