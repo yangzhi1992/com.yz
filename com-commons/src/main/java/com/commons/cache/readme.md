@@ -55,22 +55,22 @@ management:
     endpoint:
         health:
             show-details: always
-# 指标导出配置（如果使用Prometheus）
-management:
-    metrics:
-        export:
-            prometheus:
-                enabled: true
-        distribution:
-            percentiles-histogram:
-                http.server.requests: true
-        cache:
-            caffeine:
-                    stats: true
-
-缓存统计：http://localhost:8080/actuator/cachestats
-所有缓存：http://localhost:8080/actuator/caches
-特定缓存：http://localhost:8080/actuator/caches/{cacheName}
-指标数据：http://localhost:8080/actuator/metrics
-Prometheus 格式指标：http://localhost:8080/actuator/prometheus
-   
+    # 指标导出配置（如果使用Prometheus）
+    management:
+        metrics:
+            export:
+                prometheus:
+                    enabled: true
+            distribution:
+                percentiles-histogram:
+                    http.server.requests: true
+            cache:
+                caffeine:
+                        stats: true
+    
+    缓存统计：http://localhost:8080/actuator/cachestats
+    所有缓存：http://localhost:8080/actuator/caches
+    特定缓存：http://localhost:8080/actuator/caches/{cacheName}
+    指标数据：http://localhost:8080/actuator/metrics
+    Prometheus 格式指标：http://localhost:8080/actuator/prometheus
+4、ehcache
