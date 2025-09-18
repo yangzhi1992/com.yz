@@ -1,7 +1,7 @@
 package com.commons.controller;
 
-import com.commons.cache.UserInfo;
-import com.commons.cache.UserService;
+import com.commons.cache.springcache.cffenine.UserInfo;
+import com.commons.cache.springcache.cffenine.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -16,16 +16,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/cache")
 public class CacheController {
-    
+
     private final CacheManager cacheManager;
-    
+
     public CacheController(CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
 
     @Autowired
     private UserService userService;
-    
+
     /**
      * 获取所有缓存名称
      */
@@ -35,22 +35,24 @@ public class CacheController {
         result.put("cacheNames", cacheManager.getCacheNames());
         return result;
     }
-    
+
     /**
      * 获取指定缓存的统计信息
      */
     @GetMapping("/{cacheName}/stats")
     public Map<String, Object> getCacheStats(@PathVariable String cacheName) {
         Map<String, Object> result = new HashMap<>();
-        
-        if (cacheManager.getCache(cacheName) != null && 
-            cacheManager.getCache(cacheName).getNativeCache() instanceof com.github.benmanes.caffeine.cache.Cache) {
-            
-            com.github.benmanes.caffeine.cache.Cache<Object, Object> nativeCache = 
-                (com.github.benmanes.caffeine.cache.Cache<Object, Object>) cacheManager.getCache(cacheName).getNativeCache();
-            
+
+        if (cacheManager.getCache(cacheName) != null &&
+                cacheManager.getCache(cacheName)
+                            .getNativeCache() instanceof com.github.benmanes.caffeine.cache.Cache) {
+
+            com.github.benmanes.caffeine.cache.Cache<Object, Object> nativeCache =
+                    (com.github.benmanes.caffeine.cache.Cache<Object, Object>)cacheManager.getCache(cacheName)
+                                                                                          .getNativeCache();
+
             com.github.benmanes.caffeine.cache.stats.CacheStats stats = nativeCache.stats();
-            
+
             result.put("hitCount", stats.hitCount());
             result.put("missCount", stats.missCount());
             result.put("hitRate", stats.hitRate());
@@ -62,38 +64,41 @@ public class CacheController {
         } else {
             result.put("error", "Cache not found or not a Caffeine cache");
         }
-        
+
         return result;
     }
-    
+
     /**
      * 获取指定缓存的所有键
      */
     @GetMapping("/{cacheName}/keys")
     public Map<String, Object> getCacheKeys(@PathVariable String cacheName) {
         Map<String, Object> result = new HashMap<>();
-        
-        if (cacheManager.getCache(cacheName) != null && 
-            cacheManager.getCache(cacheName).getNativeCache() instanceof com.github.benmanes.caffeine.cache.Cache) {
-            
-            com.github.benmanes.caffeine.cache.Cache<Object, Object> nativeCache = 
-                (com.github.benmanes.caffeine.cache.Cache<Object, Object>) cacheManager.getCache(cacheName).getNativeCache();
-            
-            result.put("keys", nativeCache.asMap().keySet());
+
+        if (cacheManager.getCache(cacheName) != null &&
+                cacheManager.getCache(cacheName)
+                            .getNativeCache() instanceof com.github.benmanes.caffeine.cache.Cache) {
+
+            com.github.benmanes.caffeine.cache.Cache<Object, Object> nativeCache =
+                    (com.github.benmanes.caffeine.cache.Cache<Object, Object>)cacheManager.getCache(cacheName)
+                                                                                          .getNativeCache();
+
+            result.put("keys", nativeCache.asMap()
+                                          .keySet());
         } else {
             result.put("error", "Cache not found or not a Caffeine cache");
         }
-        
+
         return result;
     }
-    
+
     /**
      * 获取指定键的缓存值
      */
     @GetMapping("/{cacheName}/key/{key}")
     public Map<String, Object> getCacheValue(@PathVariable String cacheName, @PathVariable String key) {
         Map<String, Object> result = new HashMap<>();
-        
+
         Cache cache = cacheManager.getCache(cacheName);
         if (cache != null) {
             Cache.ValueWrapper valueWrapper = cache.get(key);
@@ -105,7 +110,7 @@ public class CacheController {
         } else {
             result.put("error", "Cache not found");
         }
-        
+
         return result;
     }
 
@@ -115,5 +120,13 @@ public class CacheController {
     @GetMapping("/getUserById")
     public UserInfo getUserById(Long id) {
         return userService.getUserById(id);
+    }
+
+    /**
+     * 获取所有缓存名称
+     */
+    @GetMapping("/deleteUserById")
+    public void deleteUserById(Long id) {
+        userService.deleteUser(id, null);
     }
 }

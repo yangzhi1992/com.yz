@@ -1,10 +1,7 @@
-package com.commons.cache;
+package com.commons.cache.springcache.cffenine;
 
-import com.commons.thread.书籍.并发编程艺术.chapter07.AtomicReferenceTest.User;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -74,7 +71,7 @@ public class UserService {
                                     .id(id)
                                     .name(username)
                                     .build();
-        userInfos.removeIf(user -> user.getId().equals(id));
+        //userInfos.removeIf(user -> Objects.equals(user.getId(),id));
     }
 
     // 获取所有用户（不缓存，因为数据量大且变化频繁）

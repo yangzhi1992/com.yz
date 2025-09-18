@@ -6,6 +6,11 @@
       "sourceType": "com.commons.security.SecurityInfoProperties"
     },
     {
+      "name": "management.endpoint.cachestats",
+      "type": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
+      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint"
+    },
+    {
       "name": "mybatis",
       "type": "com.commons.db.MybatisProperties",
       "sourceType": "com.commons.db.MybatisProperties"
@@ -32,6 +37,20 @@
       "name": "components.security.users",
       "type": "java.util.List<com.commons.security.SecurityInfoProperties$UserInfo>",
       "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "management.endpoint.cachestats.cache.time-to-live",
+      "type": "java.time.Duration",
+      "description": "Maximum time that a response can be cached.",
+      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
+      "defaultValue": "0ms"
+    },
+    {
+      "name": "management.endpoint.cachestats.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the cachestats endpoint.",
+      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
+      "defaultValue": true
     },
     {
       "name": "mybatis.base-package",

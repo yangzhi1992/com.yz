@@ -1,4 +1,4 @@
-package com.commons.cache;
+package com.commons.cache.springcache.cffenine;
 
 import lombok.Builder;
 import lombok.Data;
