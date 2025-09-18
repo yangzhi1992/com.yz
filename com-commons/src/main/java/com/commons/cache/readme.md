@@ -1,10 +1,12 @@
 1、ConcurrentHashMap
-1.1 ConcurrentHashMapTest
+1.1 ConcurrentHashMapTest 单独使用
 1.2 集成spring-boot引入jar
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
+    com.commons.cache.springcache.cacheyml.SimpleCacheService cache.yml 配置文件使用方式
+    com.commons.cache.springcache.java.concurrentmap 下编码方式使用
 2、Caffeine
     简介：当今 Java 本地缓存领域的王者，是 Guava Cache 的“现代化”重构版，性能极其优异，API 友好，功能丰富。
     核心特性：
@@ -20,7 +22,9 @@
         <artifactId>caffeine</artifactId>
         <version>3.1.8</version>
     </dependency>
-2.2 集成spring-boot引入jar  见 com.commons.cache.caffenine及CacheController
+2.2 集成spring-boot引入jar  
+    com.commons.cache.springcache.java.caffenine及CacheController 编码方式
+    com.commons.cache.springcache.cacheyml.CaffeineCacheService 和 cache.yml springboot配置文件方式
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
@@ -63,3 +67,10 @@ management:
     指标数据：http://localhost:8080/actuator/metrics
     Prometheus 格式指标：http://localhost:8080/actuator/prometheus
 3、ehcache
+    <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
+        <artifactId>caffeine</artifactId>
+        <version>3.1.6</version>
+    </dependency>
+    com.commons.cache.ehcache 单独java编码及配置文件方式
+    com.commons.cache.springcache.cacheyml.EhcacheCacheService 和 cache.yml springboot配置文件方式

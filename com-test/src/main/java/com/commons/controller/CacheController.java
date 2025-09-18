@@ -1,7 +1,7 @@
 package com.commons.controller;
 
-import com.commons.cache.springcache.cffenine.UserInfo;
-import com.commons.cache.springcache.cffenine.UserService;
+import com.commons.cache.springcache.java.caffenine.UserInfo;
+import com.commons.cache.springcache.java.caffenine.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;

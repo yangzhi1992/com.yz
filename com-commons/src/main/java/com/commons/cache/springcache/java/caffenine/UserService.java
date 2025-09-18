@@ -1,4 +1,4 @@
-package com.commons.cache.springcache.cffenine;
+package com.commons.cache.springcache.java.caffenine;
 
 import java.util.Arrays;
 import java.util.Objects;

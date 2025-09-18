@@ -1,0 +1,29 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.ehcache.org/v3"
+    xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+    xsi:schemaLocation="
+            http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+            http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+    <!--磁盘储存路径-->
+    <persistence directory="D:/ehcacheData"/>
+    <!--用于orders的管理-->
+    <cache alias="orders">
+        <key-type>java.lang.String</key-type>
+        <value-type>com.stc.login.model.userTokenCacheInfo</value-type>
+        <!-- 省略 <expiry> 标签 就不过期了 -->
+        <expiry>
+            <!--缓存的生存时间（TTL）为30秒-->
+            <ttl unit="seconds">30</ttl>
+            <!--缓存的空闲时间（TTI）为20秒 无法同时配置条目的生存时间（TTL）和空闲时间（TTI）-->
+            <!--<tti unit="seconds"> 20</tti>-->
+        </expiry>
+        <resources>
+            <!--堆内存的大小限制为2个条目-->
+            <heap unit="entries">2</heap>
+            <!--堆外内存的大小限制为10MB。-->
+            <offheap unit="MB">10</offheap>
+            <!--磁盘缓存 persistent属性用于指定磁盘缓存是否持久化-->
+            <disk unit="MB" persistent="false">20</disk>
+        </resources>
+    </cache>
+</config>

@@ -1,4 +1,4 @@
-package com.commons.cache.springcache.cffenine;
+package com.commons.cache.springcache.java.caffenine;
 
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -84,12 +84,6 @@ public class CacheConfig {
             public Object load(Object key) throws Exception {
                 // 当缓存未命中时，调用此方法加载数据
                 return loadDataFromDatabase(key);
-            }
-
-            @Override
-            public Map<Object, Object> loadAll(Iterable<?> keys) throws Exception {
-                // 批量加载数据
-                return batchLoadDataFromDatabase(keys);
             }
         };
     }

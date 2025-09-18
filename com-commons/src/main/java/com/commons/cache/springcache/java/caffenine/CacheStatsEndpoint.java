@@ -1,4 +1,4 @@
-package com.commons.cache.springcache.cffenine;
+package com.commons.cache.springcache.java.caffenine;
 
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
 import org.springframework.cache.CacheManager;
