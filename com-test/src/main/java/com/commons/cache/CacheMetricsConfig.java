@@ -13,20 +13,20 @@ import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 缓存统计监控配置
+ * 缓存统计监控配置-prometheus配置
  */
 @Configuration
 @EnableScheduling
 public class CacheMetricsConfig {
-    
+
     private final CacheManager cacheManager;
     private final MeterRegistry meterRegistry;
-    
+
     public CacheMetricsConfig(CacheManager cacheManager, MeterRegistry meterRegistry) {
         this.cacheManager = cacheManager;
         this.meterRegistry = meterRegistry;
     }
-    
+
     @PostConstruct
     public void bindCacheToMetrics() {
         // 为所有Caffeine缓存绑定指标
@@ -37,7 +37,7 @@ public class CacheMetricsConfig {
             }
         });
     }
-    
+
     // 定期打印缓存统计信息（可选）
     @Scheduled(fixedRate = 5, timeUnit = TimeUnit.MINUTES)
     public void logCacheStats() {
@@ -46,15 +46,15 @@ public class CacheMetricsConfig {
             if (cache != null) {
                 CacheStats stats = cache.getNativeCache().stats();
                 System.out.printf("缓存 %s 统计: %s%n", cacheName, stats.toString());
-                
+
                 // 记录到监控系统
-                meterRegistry.gauge("cache.hit.count", stats.hitCount());
-                meterRegistry.gauge("cache.miss.count", stats.missCount());
-                meterRegistry.gauge("cache.hit.rate", stats.hitRate());
-                meterRegistry.gauge("cache.miss.rate", stats.missRate());
-                meterRegistry.gauge("cache.load.success.count", stats.loadSuccessCount());
-                meterRegistry.gauge("cache.load.failure.count", stats.loadFailureCount());
-                meterRegistry.gauge("cache.eviction.count", stats.evictionCount());
+                meterRegistry.gauge("cache.hit.count1", stats.hitCount());
+                meterRegistry.gauge("cache.miss.count1", stats.missCount());
+                meterRegistry.gauge("cache.hit.rate1", stats.hitRate());
+                meterRegistry.gauge("cache.miss.rate1", stats.missRate());
+                meterRegistry.gauge("cache.load.success.count1", stats.loadSuccessCount());
+                meterRegistry.gauge("cache.load.failure.count1", stats.loadFailureCount());
+                meterRegistry.gauge("cache.eviction.count1", stats.evictionCount());
             }
         });
     }

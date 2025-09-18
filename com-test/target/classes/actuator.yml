@@ -6,7 +6,7 @@ management:
       base-path: /actuator                                #Actuator端点的基本路径
       exposure:
 #        include: env,metrics                             #通过HTTP暴露的端点列表 '*' 表示所有
-        exclude: mappings,prometheus                      #不通过HTTP暴露的端点列表
+        exclude: mappings                      #不通过HTTP暴露的端点列表
         include: '*'
       discovery:
         enabled: true                                     #是否启用发现页面（/actuator） 当 true（默认值）时，访问 /actuator 会返回上述的链接列表。false 时，访问 /actuator 将会返回一个 HTTP 404 Not Found 错误，因为发现页面被禁用了。

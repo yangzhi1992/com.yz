@@ -14,7 +14,7 @@
         <artifactId>caffeine</artifactId>
         <version>3.1.8</version>
     </dependency>
-2.2 集成spring-boot引入jar
+2.2 集成spring-boot引入jar  见 com.commons.cache及CacheController
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
@@ -34,7 +34,7 @@ management:
     endpoints:
         web:
             exposure:
-                include: health,info,metrics,caches,beans
+                include: metrics,caches
     endpoint:
         health:
             show-details: always
@@ -50,4 +50,10 @@ management:
         cache:
             caffeine:
                     stats: true
+
+缓存统计：http://localhost:8080/actuator/cachestats
+所有缓存：http://localhost:8080/actuator/caches
+特定缓存：http://localhost:8080/actuator/caches/{cacheName}
+指标数据：http://localhost:8080/actuator/metrics
+Prometheus 格式指标：http://localhost:8080/actuator/prometheus
    

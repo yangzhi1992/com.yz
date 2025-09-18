@@ -34,7 +34,7 @@ public class CacheConfig {
 
     /**
      * 多缓存配置
-     */
+     *//*
     @Bean
     public CacheManager cacheManager2() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
@@ -68,9 +68,9 @@ public class CacheConfig {
         return cacheManager;
     }
 
-    /**
+    *//**
      * 高级配置：自定义缓存加载器
-     */
+     *//*
     @Bean
     public CacheManager cacheManager3() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
@@ -80,7 +80,7 @@ public class CacheConfig {
         cacheManager.setCacheLoader(cacheLoader());
 
         return cacheManager;
-    }
+    }*/
 
     private CacheLoader<Object, Object> cacheLoader() {
         return new CacheLoader<Object, Object>() {
