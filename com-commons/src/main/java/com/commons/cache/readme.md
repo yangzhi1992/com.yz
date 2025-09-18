@@ -5,7 +5,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
-    com.commons.cache.springcache.cacheyml.SimpleCacheService cache.yml 配置文件使用方式
+    com.commons.cache.springcache.cacheyml.SimpleCacheYmlService cache.yml 配置文件使用方式
     com.commons.cache.springcache.java.concurrentmap 下编码方式使用
 2、Caffeine
     简介：当今 Java 本地缓存领域的王者，是 Guava Cache 的“现代化”重构版，性能极其优异，API 友好，功能丰富。

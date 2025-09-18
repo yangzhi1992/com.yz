@@ -7,8 +7,8 @@
     },
     {
       "name": "management.endpoint.cachestats",
-      "type": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
-      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint"
+      "type": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint",
+      "sourceType": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint"
     },
     {
       "name": "mybatis",
@@ -42,14 +42,14 @@
       "name": "management.endpoint.cachestats.cache.time-to-live",
       "type": "java.time.Duration",
       "description": "Maximum time that a response can be cached.",
-      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
+      "sourceType": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint",
       "defaultValue": "0ms"
     },
     {
       "name": "management.endpoint.cachestats.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable the cachestats endpoint.",
-      "sourceType": "com.commons.cache.springcache.cffenine.CacheStatsEndpoint",
+      "sourceType": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint",
       "defaultValue": true
     },
     {
