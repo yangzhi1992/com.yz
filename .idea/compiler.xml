@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="com-test" />
         <module name="com-commons" />
+        <module name="com-gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="com-commons" options="-parameters" />
+      <module name="com-gateway" options="-parameters" />
       <module name="com-test" options="-parameters" />
       <module name="yz" options="-parameters" />
     </option>

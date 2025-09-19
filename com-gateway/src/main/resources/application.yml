@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: test-demo
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+  main:
+    web-application-type: reactive
+
+server:
+  port: 8084
+  context-path: /
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    com.example.resilience4jdemo: DEBUG
+
