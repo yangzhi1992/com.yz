@@ -11,6 +11,8 @@ spring:
       discovery:
         locator:
           enabled: false
+      routes: []
+
   main:
     web-application-type: reactive
 

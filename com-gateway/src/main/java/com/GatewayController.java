@@ -1,4 +1,4 @@
-package com.commons.controller;
+package com;
 
 import java.io.IOException;
 import org.springframework.web.bind.annotation.GetMapping;

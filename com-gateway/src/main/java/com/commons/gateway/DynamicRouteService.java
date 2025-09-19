@@ -1,5 +1,7 @@
 package com.commons.gateway;
 
+import static com.commons.gateway.ServiceRegistry.servicesMap;
+
 import java.net.URI;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
@@ -19,19 +21,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class DynamicRouteService implements ApplicationEventPublisherAware {
 
-    private final CustomDiscoveryClient customDiscoveryClient;
     private final RouteDefinitionWriter routeDefinitionWriter;
     private final RouteDefinitionLocator routeDefinitionLocator;
     private ApplicationEventPublisher publisher;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    public DynamicRouteService(
-            CustomDiscoveryClient customDiscoveryClient,
-            RouteDefinitionWriter routeDefinitionWriter,
-            RouteDefinitionLocator routeDefinitionLocator
-    ) {
-        this.customDiscoveryClient = customDiscoveryClient;
+    public DynamicRouteService(RouteDefinitionWriter routeDefinitionWriter,
+            RouteDefinitionLocator routeDefinitionLocator) {
         this.routeDefinitionWriter = routeDefinitionWriter;
         this.routeDefinitionLocator = routeDefinitionLocator;
     }
@@ -51,21 +48,19 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
         // 删除所有动态路由
         routeDefinitionLocator.getRouteDefinitions()
                               .then(Mono.defer(() -> {
-                                  return Flux.fromIterable(customDiscoveryClient.getServices())
+                                  return Flux.fromIterable(servicesMap.keySet())
                                              .flatMap(v -> {
                                                  RouteDefinition definition = new RouteDefinition();
                                                  definition.setId(v);
                                                  // 设置一个无效的URI，因为我们不会使用它
-                                                 definition.setUri(URI.create(v));
+                                                 definition.setUri(URI.create("http://invalid-backend:9999"));
 
                                                  definition.setPredicates(Arrays.asList(
                                                          new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
                                                                  "Path=/**")));
 
                                                  return routeDefinitionWriter.save(Mono.just(definition));
-                                             })
-                                             .collectList()
-                                             .then();
+                                             }).collectList().then();
                               }))
                               .then(Mono.defer(() -> {
                                   // 发布路由刷新事件
