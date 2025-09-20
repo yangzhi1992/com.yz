@@ -34,14 +34,14 @@ public class CustomLoadBalancer implements ReactiveLoadBalancer<ServiceInstance>
                     }
 
                     // 使用负载均衡算法选择一个实例
-                    ServiceInstance selectedInstance = instances.get(0);
+                    ServiceInstance selectedInstance = instances.get(random.nextInt(instances.size()));
 
                     return Mono.just(new DefaultResponse(new DefaultServiceInstance(
-                            "1",
+                            selectedInstance.getInstanceId(),
                             selectedInstance.getServiceId(),
                             selectedInstance.getHost(),
                             selectedInstance.getPort(),
-                            false  // 是否为 HTTPS
+                            false
                     )));
                 });
     }

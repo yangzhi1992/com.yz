@@ -16,13 +16,13 @@ public class ServiceRegistry implements ReactiveDiscoveryClient {
 
     static {
         servicesMap.put("routea", Arrays.asList(
-                new CustomServiceInstance("routea", "10.75.81.44",8080,"/apis/admin/room/**")
+                new CustomServiceInstance("1","routea", "10.75.81.44",8080,"/apis/admin/room/**")
         ));
         servicesMap.put("routec", Arrays.asList(
-            new CustomServiceInstance("routec", "10.75.70.31",8080,"/apis/msg/**"),
-            new CustomServiceInstance("routec", "10.72.158.179",8080,"/apis/msg/**"),
-            new CustomServiceInstance("routec", "10.75.35.9",8080,"/apis/msg/**"),
-            new CustomServiceInstance("routec", "10.75.88.146",8080,"/apis/msg/**")
+            new CustomServiceInstance("2","routec", "10.75.70.31",8080,"/apis/msg/**"),
+            new CustomServiceInstance("3","routec", "10.72.158.179",8080,"/apis/msg/**"),
+            new CustomServiceInstance("4","routec", "10.75.35.9",8080,"/apis/msg/**"),
+            new CustomServiceInstance("5","routec", "10.75.88.146",8080,"/apis/msg/**")
         ));
     }
 
@@ -42,12 +42,14 @@ public class ServiceRegistry implements ReactiveDiscoveryClient {
 
 
     public static class CustomServiceInstance  implements ServiceInstance {
+        private final String instanceId;
         private final String serviceId;
         private final String host;
         private final int port;
         private final String predicates;
 
-        public CustomServiceInstance(String serviceId, String host, int port, String predicates) {
+        public CustomServiceInstance(String instanceId, String serviceId, String host, int port, String predicates) {
+            this.instanceId = instanceId;
             this.serviceId = serviceId;
             this.host = host;
             this.port = port;
@@ -88,6 +90,11 @@ public class ServiceRegistry implements ReactiveDiscoveryClient {
 
         public String getPredicates() {
             return predicates;
+        }
+
+        @Override
+        public String getInstanceId() {
+            return instanceId;
         }
     }
 }
