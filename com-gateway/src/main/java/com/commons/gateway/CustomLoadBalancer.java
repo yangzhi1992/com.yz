@@ -1,16 +1,13 @@
 package com.commons.gateway;
 
-import org.reactivestreams.Publisher;
 import org.springframework.cloud.client.DefaultServiceInstance;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultResponse;
 import org.springframework.cloud.client.loadbalancer.Request;
 import org.springframework.cloud.client.loadbalancer.Response;
 import org.springframework.cloud.client.loadbalancer.reactive.ReactiveLoadBalancer;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.Random;
 
 public class CustomLoadBalancer implements ReactiveLoadBalancer<ServiceInstance> {
@@ -19,7 +16,7 @@ public class CustomLoadBalancer implements ReactiveLoadBalancer<ServiceInstance>
     private final ServiceRegistry serviceRegistry;
     private final Random random = new Random();
 
-    public CustomLoadBalancer(String serviceId,ServiceRegistry serviceRegistry) {
+    public CustomLoadBalancer(String serviceId, ServiceRegistry serviceRegistry) {
         this.serviceId = serviceId;
         this.serviceRegistry = serviceRegistry;
     }
