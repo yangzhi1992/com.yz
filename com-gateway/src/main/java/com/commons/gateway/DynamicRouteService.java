@@ -1,13 +1,5 @@
 package com.commons.gateway;
 
-import static com.commons.gateway.ServiceRegistry.servicesMap;
-
-import java.net.URI;
-import java.util.Arrays;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import javax.annotation.PostConstruct;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
@@ -18,19 +10,30 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+import static com.commons.gateway.ServiceRegistry.servicesMap;
+
 @Service
 public class DynamicRouteService implements ApplicationEventPublisherAware {
 
     private final RouteDefinitionWriter routeDefinitionWriter;
     private final RouteDefinitionLocator routeDefinitionLocator;
+    private final MultiServiceLoadBalancer multiServiceLoadBalancer;
     private ApplicationEventPublisher publisher;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public DynamicRouteService(RouteDefinitionWriter routeDefinitionWriter,
-            RouteDefinitionLocator routeDefinitionLocator) {
+                               RouteDefinitionLocator routeDefinitionLocator, MultiServiceLoadBalancer multiServiceLoadBalancer) {
         this.routeDefinitionWriter = routeDefinitionWriter;
         this.routeDefinitionLocator = routeDefinitionLocator;
+        this.multiServiceLoadBalancer = multiServiceLoadBalancer;
     }
 
     @Override
@@ -47,30 +50,31 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
     public void refreshRoutes() {
         // 删除所有动态路由
         routeDefinitionLocator.getRouteDefinitions()
-                              .then(Mono.defer(() -> {
-                                  return Flux.fromIterable(servicesMap.keySet())
-                                             .flatMap(v -> {
-                                                 RouteDefinition definition = new RouteDefinition();
-                                                 definition.setId(v);
-                                                 // 设置一个无效的URI，因为我们不会使用它
-                                                 definition.setUri(URI.create("http://invalid-backend:9999"));
-
-                                                 definition.setPredicates(Arrays.asList(
-                                                         new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
-                                                                 "Path=/**")));
-
-                                                 return routeDefinitionWriter.save(Mono.just(definition));
-                                             }).collectList().then();
-                              }))
-                              .then(Mono.defer(() -> {
-                                  // 发布路由刷新事件
-                                  publisher.publishEvent(new RefreshRoutesEvent(this));
-                                  return Mono.empty();
-                              }))
-                              .subscribe(
-                                      null,
-                                      error -> System.err.println("Error refreshing routes: " + error.getMessage()),
-                                      () -> System.out.println("Routes refreshed successfully")
-                              );
+                .then(Mono.defer(() -> {
+                    return Flux.fromIterable(servicesMap.keySet())
+                            .flatMap(v -> {
+                                RouteDefinition definition = new RouteDefinition();
+                                definition.setId(v);
+                                try {
+                                    definition.setUri(new URI("lb://" + v));
+                                } catch (URISyntaxException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                definition.setPredicates(Arrays.asList(
+                                        new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
+                                                "Path=/**")));
+                                return routeDefinitionWriter.save(Mono.just(definition));
+                            }).collectList().then();
+                }))
+                .then(Mono.defer(() -> {
+                    // 发布路由刷新事件
+                    publisher.publishEvent(new RefreshRoutesEvent(this));
+                    return Mono.empty();
+                }))
+                .subscribe(
+                        null,
+                        error -> System.err.println("Error refreshing routes: " + error.getMessage()),
+                        () -> System.out.println("Routes refreshed successfully")
+                );
     }
 }

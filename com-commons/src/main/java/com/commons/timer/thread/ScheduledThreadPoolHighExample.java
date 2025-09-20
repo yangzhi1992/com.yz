@@ -2,7 +2,7 @@ package com.commons.timer.thread;
 
 import java.util.concurrent.*;
 
-public class ScheduledThreadPoolHighExample {
+public class  ScheduledThreadPoolHighExample {
     public static void main(String[] args) throws InterruptedException {
         //1. 自定义线程工厂
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(2, r -> {

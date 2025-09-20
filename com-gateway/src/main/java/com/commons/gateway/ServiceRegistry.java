@@ -1,43 +1,93 @@
 package com.commons.gateway;
 
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
+import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
+
 import java.net.URI;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ServiceRegistry {
+@Component
+public class ServiceRegistry implements ReactiveDiscoveryClient {
 
     public static final Map<String, List<ServiceInstance>> servicesMap = new ConcurrentHashMap<>();
 
     static {
-        // 自定义服务实例列表
+        servicesMap.put("routea", Arrays.asList(
+                new CustomServiceInstance("routea", "127.0.0.1",8085,"/security/**")
+        ));
         servicesMap.put("routec", Arrays.asList(
-            new ServiceInstance("routec", "http://10.75.70.31:8080"),
-            new ServiceInstance("routec", "http://10.72.158.179:8080"),
-            new ServiceInstance("routec", "http://10.75.35.9:8080"),
-            new ServiceInstance("routec", "http://10.75.88.146:8080")
+            new CustomServiceInstance("routec", "10.75.70.31",8080,"/apis/**"),
+            new CustomServiceInstance("routec", "10.72.158.179",8080,"/apis/**"),
+            new CustomServiceInstance("routec", "10.75.35.9",8080,"/apis/**"),
+            new CustomServiceInstance("routec", "10.75.88.146",8080,"/apis/**")
         ));
     }
 
-    public static List<ServiceInstance> getInstances(String serviceId) {
-        return servicesMap.getOrDefault(serviceId, Collections.emptyList());
+    @Override
+    public String description() {
+        return "Custom Discovery Client";
     }
 
-    public static class ServiceInstance {
-        private final String serviceId;
-        private final String uri;
+    @Override
+    public Flux<ServiceInstance> getInstances(String serviceId) {
+        return Flux.fromIterable(servicesMap.getOrDefault(serviceId, Collections.emptyList()));
+    }
+    @Override
+    public Flux<String> getServices() {
+        return Flux.fromIterable(new ArrayList<>(servicesMap.keySet()));
+    }
 
-        public ServiceInstance(String serviceId, String uri) {
+
+    public static class CustomServiceInstance  implements ServiceInstance {
+        private final String serviceId;
+        private final String host;
+        private final int port;
+        private final String predicates;
+
+        public CustomServiceInstance(String serviceId, String host, int port, String predicates) {
             this.serviceId = serviceId;
-            this.uri = uri;
+            this.host = host;
+            this.port = port;
+            this.predicates = predicates;
         }
 
+        @Override
         public String getServiceId() {
             return serviceId;
         }
 
+        @Override
+        public String getHost() {
+            return host;
+        }
+
+        @Override
+        public int getPort() {
+            return port;
+        }
+
+        @Override
+        public boolean isSecure() {
+            return false;
+        }
+
+        @Override
         public URI getUri() {
-            return URI.create(uri);
+            return URI.create(String.format("http://%s:%d", host, port));
+        }
+
+        @Override
+        public Map<String, String> getMetadata() {
+            Map<String,String> map = new HashMap<>();
+            map.put("weight","1");
+            return map; // 默认权重为1
+        }
+
+        public String getPredicates() {
+            return predicates;
         }
     }
 }

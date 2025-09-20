@@ -6,7 +6,6 @@ spring:
       - api.yml
       - security.yml
       - actuator.yml
-      - gateway.yml
 #      - cache.yml
   application:
     name: test-demo
