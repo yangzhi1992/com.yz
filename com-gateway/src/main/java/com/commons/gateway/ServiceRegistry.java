@@ -16,13 +16,13 @@ public class ServiceRegistry implements ReactiveDiscoveryClient {
 
     static {
         servicesMap.put("routea", Arrays.asList(
-                new CustomServiceInstance("routea", "127.0.0.1",8085,"/security/**")
+                new CustomServiceInstance("routea", "10.75.81.44",8080,"/apis/admin/room/**")
         ));
         servicesMap.put("routec", Arrays.asList(
-            new CustomServiceInstance("routec", "10.75.70.31",8080,"/apis/**"),
-            new CustomServiceInstance("routec", "10.72.158.179",8080,"/apis/**"),
-            new CustomServiceInstance("routec", "10.75.35.9",8080,"/apis/**"),
-            new CustomServiceInstance("routec", "10.75.88.146",8080,"/apis/**")
+            new CustomServiceInstance("routec", "10.75.70.31",8080,"/apis/msg/**"),
+            new CustomServiceInstance("routec", "10.72.158.179",8080,"/apis/msg/**"),
+            new CustomServiceInstance("routec", "10.75.35.9",8080,"/apis/msg/**"),
+            new CustomServiceInstance("routec", "10.75.88.146",8080,"/apis/msg/**")
         ));
     }
 

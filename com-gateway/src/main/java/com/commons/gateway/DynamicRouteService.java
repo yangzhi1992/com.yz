@@ -60,9 +60,10 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
                                 } catch (URISyntaxException e) {
                                     throw new RuntimeException(e);
                                 }
+                                ServiceRegistry.CustomServiceInstance customServiceInstance = (ServiceRegistry.CustomServiceInstance) servicesMap.get(v).get(0);
                                 definition.setPredicates(Arrays.asList(
                                         new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
-                                                "Path=/**")));
+                                                "Path="+customServiceInstance.getPredicates())));
                                 return routeDefinitionWriter.save(Mono.just(definition));
                             }).collectList().then();
                 }))
