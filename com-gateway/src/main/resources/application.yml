@@ -12,7 +12,6 @@ spring:
         locator:
           enabled: true
       routes: []
-
   main:
     web-application-type: reactive
 
