@@ -50,7 +50,7 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
         refreshRoutes();
     }
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
     public void refreshRoutes() {
         // 删除所有动态路由
         routeDefinitionLocator.getRouteDefinitions()
