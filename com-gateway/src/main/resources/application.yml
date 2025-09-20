@@ -1,23 +1,22 @@
 spring:
   application:
     name: test-demo
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password:
-    database: 0
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
       routes: []
-  main:
-    web-application-type: reactive
 
 server:
   port: 8084
   context-path: /
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+  resources:
+    add-mappings: false
 
 logging:
   level:

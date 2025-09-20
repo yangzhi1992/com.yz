@@ -1,5 +1,6 @@
-package com.commons.gateway;
+package com.commons.gateway.filter;
 
+import com.commons.gateway.MultiServiceLoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.Request;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
