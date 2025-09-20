@@ -1,5 +1,6 @@
-package com.commons.gateway;
+package com.commons.gateway.serviceinstance;
 
+import com.commons.gateway.route.ClientRouteService;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.stereotype.Component;
@@ -7,24 +8,11 @@ import reactor.core.publisher.Flux;
 
 import java.net.URI;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class ServiceRegistry implements ReactiveDiscoveryClient {
+public class DiscoveryClient implements ReactiveDiscoveryClient {
 
-    public static final Map<String, List<ServiceInstance>> servicesMap = new ConcurrentHashMap<>();
 
-    static {
-        servicesMap.put("routea", Arrays.asList(
-                new CustomServiceInstance("1","routea", "10.75.81.44",8080,"/apis/admin/room/**")
-        ));
-        servicesMap.put("routec", Arrays.asList(
-            new CustomServiceInstance("2","routec", "10.75.70.31",8080,"/apis/msg/**"),
-            new CustomServiceInstance("3","routec", "10.72.158.179",8080,"/apis/msg/**"),
-            new CustomServiceInstance("4","routec", "10.75.35.9",8080,"/apis/msg/**"),
-            new CustomServiceInstance("5","routec", "10.75.88.146",8080,"/apis/msg/**")
-        ));
-    }
 
     @Override
     public String description() {
@@ -33,11 +21,11 @@ public class ServiceRegistry implements ReactiveDiscoveryClient {
 
     @Override
     public Flux<ServiceInstance> getInstances(String serviceId) {
-        return Flux.fromIterable(servicesMap.getOrDefault(serviceId, Collections.emptyList()));
+        return Flux.fromIterable(ClientRouteService.servicesMap.getOrDefault(serviceId, Collections.emptyList()));
     }
     @Override
     public Flux<String> getServices() {
-        return Flux.fromIterable(new ArrayList<>(servicesMap.keySet()));
+        return Flux.fromIterable(new ArrayList<>(ClientRouteService.servicesMap.keySet()));
     }
 
 

@@ -1,4 +1,4 @@
-package com.commons.gateway;
+package com.commons.gateway.serviceinstance;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.DefaultResponse;
@@ -13,12 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
-public class MultiServiceLoadBalancer implements ReactiveLoadBalancer<ServiceInstance> {
+public class ServiceLoadBalancer implements ReactiveLoadBalancer<ServiceInstance> {
     
-    private final ServiceRegistry serviceRegistry;
+    private final DiscoveryClient serviceRegistry;
     private final Map<String, AtomicInteger> positionMap = new ConcurrentHashMap<>();
     
-    public MultiServiceLoadBalancer(ServiceRegistry serviceRegistry) {
+    public ServiceLoadBalancer(DiscoveryClient serviceRegistry) {
         this.serviceRegistry = serviceRegistry;
     }
     

@@ -1,6 +1,6 @@
 package com.commons.gateway.filter;
 
-import com.commons.gateway.MultiServiceLoadBalancer;
+import com.commons.gateway.serviceinstance.ServiceLoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.Request;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -18,12 +18,12 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR;
 
 @Component
-public class MultiServiceLoadBalancerFilter implements GlobalFilter, Ordered {
+public class ServiceLoadBalancerFilter implements GlobalFilter, Ordered {
 
     private static final int LOAD_BALANCER_CLIENT_FILTER_ORDER = 10100;
-    private final MultiServiceLoadBalancer loadBalancer;
+    private final ServiceLoadBalancer loadBalancer;
 
-    public MultiServiceLoadBalancerFilter(MultiServiceLoadBalancer loadBalancer) {
+    public ServiceLoadBalancerFilter(ServiceLoadBalancer loadBalancer) {
         this.loadBalancer = loadBalancer;
     }
 

@@ -1,11 +1,15 @@
-package com.commons.gateway;
+package com.commons.gateway.route;
 
+import com.commons.gateway.serviceinstance.DiscoveryClient;
+import com.commons.gateway.serviceinstance.ServiceLoadBalancer;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,20 +21,19 @@ import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-import static com.commons.gateway.ServiceRegistry.servicesMap;
-
 @Service
+@EnableScheduling
 public class DynamicRouteService implements ApplicationEventPublisherAware {
 
     private final RouteDefinitionWriter routeDefinitionWriter;
     private final RouteDefinitionLocator routeDefinitionLocator;
-    private final MultiServiceLoadBalancer multiServiceLoadBalancer;
+    private final ServiceLoadBalancer multiServiceLoadBalancer;
     private ApplicationEventPublisher publisher;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public DynamicRouteService(RouteDefinitionWriter routeDefinitionWriter,
-                               RouteDefinitionLocator routeDefinitionLocator, MultiServiceLoadBalancer multiServiceLoadBalancer) {
+                               RouteDefinitionLocator routeDefinitionLocator, ServiceLoadBalancer multiServiceLoadBalancer) {
         this.routeDefinitionWriter = routeDefinitionWriter;
         this.routeDefinitionLocator = routeDefinitionLocator;
         this.multiServiceLoadBalancer = multiServiceLoadBalancer;
@@ -47,11 +50,12 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
         refreshRoutes();
     }
 
+    @Scheduled(fixedRate = 5000)
     public void refreshRoutes() {
         // 删除所有动态路由
         routeDefinitionLocator.getRouteDefinitions()
                 .then(Mono.defer(() -> {
-                    return Flux.fromIterable(servicesMap.keySet())
+                    return Flux.fromIterable(ClientRouteService.servicesMap.keySet())
                             .flatMap(v -> {
                                 RouteDefinition definition = new RouteDefinition();
                                 definition.setId(v);
@@ -60,7 +64,7 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
                                 } catch (URISyntaxException e) {
                                     throw new RuntimeException(e);
                                 }
-                                ServiceRegistry.CustomServiceInstance customServiceInstance = (ServiceRegistry.CustomServiceInstance) servicesMap.get(v).get(0);
+                                DiscoveryClient.CustomServiceInstance customServiceInstance = (DiscoveryClient.CustomServiceInstance) ClientRouteService.servicesMap.get(v).get(0);
                                 definition.setPredicates(Arrays.asList(
                                         new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
                                                 "Path="+customServiceInstance.getPredicates())));
