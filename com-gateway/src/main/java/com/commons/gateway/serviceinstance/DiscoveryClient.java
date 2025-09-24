@@ -73,7 +73,7 @@ public class DiscoveryClient implements ReactiveDiscoveryClient {
         public Map<String, String> getMetadata() {
             Map<String,String> map = new HashMap<>();
             map.put("weight","1");
-            return map; // 默认权重为1
+            return map;
         }
 
         public String getPredicates() {

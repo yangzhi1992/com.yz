@@ -50,7 +50,7 @@ public class ServiceLoadBalancer implements ReactiveLoadBalancer<ServiceInstance
                 
                 // 使用轮询算法选择一个实例
                 int index = position.getAndIncrement() % instances.size();
-                if (position.get() > 10000) { // 防止整数溢出
+                if (position.get() > 10000) {
                     position.set(0);
                 }
                 
