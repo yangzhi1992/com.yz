@@ -7,7 +7,6 @@ spring:
         locator:
           enabled: true
       routes: []
-
 server:
   port: 8084
   context-path: /
@@ -22,4 +21,12 @@ logging:
   level:
     io.github.resilience4j: DEBUG
     com.example.resilience4jdemo: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
 

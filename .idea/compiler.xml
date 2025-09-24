@@ -18,7 +18,7 @@
       <module name="com-commons" options="-parameters" />
       <module name="com-gateway" options="-parameters" />
       <module name="com-test" options="-parameters" />
-      <module name="yz" options="-parameters" />
+      <module name="com.yz" options="-parameters" />
     </option>
   </component>
 </project>
