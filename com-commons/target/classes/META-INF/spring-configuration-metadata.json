@@ -6,6 +6,11 @@
       "sourceType": "com.commons.security.SecurityInfoProperties"
     },
     {
+      "name": "components.snowflake",
+      "type": "com.commons.snowflake.SnowflakeProperties",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
+    },
+    {
       "name": "management.endpoint.cachestats",
       "type": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint",
       "sourceType": "com.commons.cache.springcache.java.caffenine.CacheStatsEndpoint"
@@ -37,6 +42,82 @@
       "name": "components.security.users",
       "type": "java.util.List<com.commons.security.SecurityInfoProperties$UserInfo>",
       "sourceType": "com.commons.security.SecurityInfoProperties"
+    },
+    {
+      "name": "components.snowflake.heartbeat-grace-second",
+      "type": "java.lang.Integer",
+      "description": "心跳过期宽限时间，默认1s",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 1
+    },
+    {
+      "name": "components.snowflake.heartbeat-second",
+      "type": "java.lang.Integer",
+      "description": "心跳时间，默认30s",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 30
+    },
+    {
+      "name": "components.snowflake.lock-expire-second",
+      "type": "java.lang.Long",
+      "description": "锁过期时间",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 5
+    },
+    {
+      "name": "components.snowflake.millisecond",
+      "type": "java.lang.Boolean",
+      "description": "时间类型，默认毫秒，否则是秒",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "components.snowflake.redis-error-random-init",
+      "type": "java.lang.Boolean",
+      "description": "redis 异常时使用随机数初始化",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "components.snowflake.redis-template",
+      "type": "java.lang.String",
+      "description": "redis 实例Bean",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
+    },
+    {
+      "name": "components.snowflake.sequence-bits",
+      "type": "java.lang.Long",
+      "description": "每个时间粒度内自增位数量，默认12",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 12
+    },
+    {
+      "name": "components.snowflake.start-timestamp",
+      "type": "java.lang.Long",
+      "description": "开始时间戳，默认2019-07-26",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 1564128000000
+    },
+    {
+      "name": "components.snowflake.try-lock-max-times",
+      "type": "java.lang.Integer",
+      "description": "获取锁最大尝试次数",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 100
+    },
+    {
+      "name": "components.snowflake.try-lock-sleep-ms",
+      "type": "java.lang.Integer",
+      "description": "获取锁休息时间",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 100
+    },
+    {
+      "name": "components.snowflake.worker-bits",
+      "type": "java.lang.Integer",
+      "description": "机器位，默认10",
+      "sourceType": "com.commons.snowflake.SnowflakeProperties",
+      "defaultValue": 10
     },
     {
       "name": "management.endpoint.cachestats.cache.time-to-live",

@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: test-demo2
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes: []
+server:
+  port: 8085
+  context-path: /
+  error:
+    whitelabel:
+      enabled: false
+    path: /error
+  resources:
+    add-mappings: false
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    com.example.resilience4jdemo: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
