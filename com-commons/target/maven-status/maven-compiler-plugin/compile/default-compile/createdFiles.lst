@@ -39,6 +39,7 @@ com\commons\thread\书籍\并发编程艺术\chapter07\AtomicIntegerTest.class
 com\commons\thread\并发工具类\信号量\SemaphoreTest.class
 com\commons\thread\书籍\并发编程实战\TransformingSequential$2.class
 com\commons\api\retrofit\BuiltInConverters$VoidResponseBodyConverter.class
+com\commons\redis\test.class
 com\commons\common\utils\CollectionTool$1.class
 com\commons\thread\书籍\并发编程实战\CasNumberRange$IntPair.class
 com\commons\cache\springcache\java\caffenine\CacheStatsEndpoint.class
