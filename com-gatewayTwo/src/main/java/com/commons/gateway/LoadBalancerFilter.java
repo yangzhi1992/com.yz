@@ -122,9 +122,6 @@ public class LoadBalancerFilter implements GlobalFilter, Ordered {
         // 获取请求方法和内容类型
         HttpMethod method = exchange.getRequest()
                                     .getMethod();
-        MediaType contentType = exchange.getRequest()
-                                        .getHeaders()
-                                        .getContentType();
 
         // 创建WebClient请求构建器
         WebClient.RequestBodySpec requestSpec = webClient

@@ -19,6 +19,7 @@
         <module>com-test</module>
         <module>com-gateway</module>
         <module>com-gateway2</module>
+        <module>com-gatewayTwo</module>
     </modules>
 
     <properties>
