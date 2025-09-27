@@ -36,8 +36,6 @@ public class ServiceInitializer implements ApplicationRunner {
     @Scheduled(fixedRate = 30000) // 每30秒检查一次
     public void checkServicesHealth() throws IOException {
         logger.info("Starting health check for all backend services");
-//        exec(RedisBackendService.BACKEND_SERVICES_LIVECHAT_KEY);
-//        exec(RedisBackendService.BACKEND_SERVICES_LIVECHAT_EXTERNAL_KEY);
         execPrometheus(RedisBackendService.BACKEND_SERVICES_PROMETHEUS_KEY);
     }
 

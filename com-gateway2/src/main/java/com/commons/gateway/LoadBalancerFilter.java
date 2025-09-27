@@ -48,19 +48,7 @@ public class LoadBalancerFilter implements GlobalFilter, Ordered {
                                         .getHeaders()
                                         .getFirst("x-service-id");
             logger.info("Processing API request: {}?{}", path, query);
-            String key = RedisBackendService.BACKEND_SERVICES_LIVECHAT_KEY;
-            /*if (path.startsWith("/apis/msg/broker_addr.action") || path.startsWith("/apis/msg/ws_addr.action")) {
-                key = RedisBackendService.BACKEND_SERVICES_LIVECHAT_EXTERNAL_KEY;
-            } else if(Objects.equals(xServiceId,"prometheus") ||
-                    Objects.equals(path,"/") ||
-                    Objects.equals(path,"/graph") ||
-                    Objects.equals(path,"/favicon.ico") ||
-                    Objects.equals(path,"/manifest.json") ||
-                    Objects.equals(path,"/static/css/main.132f8bd2.css") ||
-                    Objects.equals(path,"/static/js/main.8abd4fa4.js")
-            )*/
-
-            key = RedisBackendService.BACKEND_SERVICES_PROMETHEUS_KEY;
+            String key = RedisBackendService.BACKEND_SERVICES_PROMETHEUS_KEY;
             return redisBackendService.getAllServices(key)
                                       .collectList()
                                       .flatMap(services -> {
