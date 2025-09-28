@@ -1,0 +1,47 @@
+spring:
+  redis:
+    multi:
+      enabled: true
+      datasources:
+        primary:
+          mode: master-slave  # 主从模式
+          database: 0
+          password: 123456
+          timeout: 2000ms
+          lettuce:
+            pool:
+              max-active: 8
+              max-idle: 8
+              min-idle: 0
+          master:
+            host: 127.0.0.1
+            port: 6379
+          slaves:
+            - host: 127.0.0.1
+              port: 6379
+            - host: 127.0.0.1
+              port: 6379
+
+        secondary:
+          mode: cluster  # 集群模式
+          password: 123456
+          timeout: 3000ms
+          lettuce:
+            pool:
+              max-active: 16
+              max-idle: 8
+              min-idle: 4
+          cluster:
+            nodes:
+              - 127.0.0.1:6379
+              - 127.0.0.1:6379
+              - 127.0.0.1:6379
+            max-redirects: 3
+
+        cache:
+          mode: single  # 单机模式
+          host: 127.0.0.1
+          port: 6379
+          database: 1
+          password: 123456
+          timeout: 1000ms

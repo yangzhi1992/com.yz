@@ -19,6 +19,11 @@
       "name": "mybatis",
       "type": "com.commons.db.MybatisProperties",
       "sourceType": "com.commons.db.MybatisProperties"
+    },
+    {
+      "name": "spring.redis.multi",
+      "type": "com.commons.redis.lettuce.MultiRedisProperties",
+      "sourceType": "com.commons.redis.lettuce.MultiRedisProperties"
     }
   ],
   "properties": [
@@ -171,6 +176,17 @@
       "type": "java.util.Map<java.lang.String,java.lang.String>",
       "description": "自动注入配置",
       "sourceType": "com.commons.db.MybatisProperties"
+    },
+    {
+      "name": "spring.redis.multi.datasources",
+      "type": "java.util.Map<java.lang.String,com.commons.redis.lettuce.MultiRedisProperties$RedisConfig>",
+      "sourceType": "com.commons.redis.lettuce.MultiRedisProperties"
+    },
+    {
+      "name": "spring.redis.multi.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.commons.redis.lettuce.MultiRedisProperties",
+      "defaultValue": false
     }
   ],
   "hints": []
