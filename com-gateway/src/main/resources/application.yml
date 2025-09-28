@@ -22,6 +22,25 @@ logging:
     io.github.resilience4j: DEBUG
     com.example.resilience4jdemo: DEBUG
 
+# 暴露Actuator端点，用于监控
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, info, metrics, prometheus
+      discovery:
+        enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
