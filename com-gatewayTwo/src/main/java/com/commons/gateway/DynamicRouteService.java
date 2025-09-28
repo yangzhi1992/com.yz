@@ -26,8 +26,8 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public DynamicRouteService(RouteDefinitionWriter routeDefinitionWriter,
-            RouteDefinitionLocator routeDefinitionLocator,
-            RedisBackendService redisBackendService) {
+                              RouteDefinitionLocator routeDefinitionLocator,
+                              RedisBackendService redisBackendService) {
         this.routeDefinitionWriter = routeDefinitionWriter;
         this.routeDefinitionLocator = routeDefinitionLocator;
         this.redisBackendService = redisBackendService;
@@ -58,29 +58,28 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
     public void refreshRoutes() {
         // 删除所有动态路由
         routeDefinitionLocator.getRouteDefinitions()
-                              .filter(route -> "dynamic_route".equals(route.getId()))
-                              .flatMap(route -> routeDefinitionWriter.delete(Mono.just(route.getId())))
-                              .then(Mono.defer(() -> {
-                                  RouteDefinition definition = new RouteDefinition();
-                                  definition.setId("dynamic_route");
-                                  // 设置一个无效的URI，因为我们不会使用它
-                                  definition.setUri(URI.create("http://invalid-backend:9999"));
+                .filter(route -> "dynamic_route".equals(route.getId()))
+                .flatMap(route -> routeDefinitionWriter.delete(Mono.just(route.getId())))
+                .then(Mono.defer(() -> {
+                    RouteDefinition definition = new RouteDefinition();
+                    definition.setId("dynamic_route");
+                    // 设置一个无效的URI，因为我们不会使用它
+                    definition.setUri(URI.create("http://invalid-backend:9999"));
 
-                                  definition.setPredicates(Arrays.asList(
-                                          new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
-                                                  "Path=/**")));
+                    definition.setPredicates(Arrays.asList(new org.springframework.cloud.gateway.handler.predicate.PredicateDefinition(
+                            "Path=/**")));
 
-                                  return routeDefinitionWriter.save(Mono.just(definition));
-                              }))
-                              .then(Mono.defer(() -> {
-                                  // 发布路由刷新事件
-                                  publisher.publishEvent(new RefreshRoutesEvent(this));
-                                  return Mono.empty();
-                              }))
-                              .subscribe(
-                                      null,
-                                      error -> System.err.println("Error refreshing routes: " + error.getMessage()),
-                                      () -> System.out.println("Routes refreshed successfully")
-                              );
+                    return routeDefinitionWriter.save(Mono.just(definition));
+                }))
+                .then(Mono.defer(() -> {
+                    // 发布路由刷新事件
+                    publisher.publishEvent(new RefreshRoutesEvent(this));
+                    return Mono.empty();
+                }))
+                .subscribe(
+                    null,
+                    error -> System.err.println("Error refreshing routes: " + error.getMessage()),
+                    () -> System.out.println("Routes refreshed successfully")
+                );
     }
 }

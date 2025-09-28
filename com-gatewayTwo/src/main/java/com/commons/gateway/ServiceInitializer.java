@@ -55,11 +55,7 @@ public class ServiceInitializer implements ApplicationRunner {
                                               service.setPort(9090);
                                               service.setHealthy(true);
                                               service.setKey(key);
-                                              service.setPredicates(
-                                                      Objects.equals(key,
-                                                              RedisBackendService.BACKEND_SERVICES_LIVECHAT_EXTERNAL_KEY)
-                                                              ? "/apis/msg" : "/**"
-                                              );
+                                              service.setPredicates("/**");
 
                                               logger.info("Adding service: {} - {}:{}", service.getId(),
                                                       service.getHost(), service.getPort());

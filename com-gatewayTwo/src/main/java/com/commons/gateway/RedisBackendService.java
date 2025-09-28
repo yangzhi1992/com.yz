@@ -9,8 +9,6 @@ import reactor.core.publisher.Mono;
 @Service
 public class RedisBackendService {
 
-    public static final String BACKEND_SERVICES_LIVECHAT_KEY = "BACKEND_SERVICES_LIVECHAT";
-    public static final String BACKEND_SERVICES_LIVECHAT_EXTERNAL_KEY = "BACKEND_SERVICES_LIVECHAT_EXTERNAL";
     public static final String BACKEND_SERVICES_PROMETHEUS_KEY = "BACKEND_SERVICES_PROMETHEUS_KEY";
 
     private final ReactiveRedisTemplate<String, Object> redisTemplate;
