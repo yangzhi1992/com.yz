@@ -10,5 +10,6 @@
         <artifactId>commons-pool2</artifactId>
         <version>2.11.1</version>
     </dependency>
-    RedisTransactionService 事务,popl
+    RedisTransactionService 事务,piplenine,lua
+    RedisLettuceController
 2、jedis
