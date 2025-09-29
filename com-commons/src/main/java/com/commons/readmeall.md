@@ -10,6 +10,7 @@
 * grok->用于解析和匹配非结构化的日志数据，将其转换为结构化的键值对格式
 * javatree->树型菜单
   * jetcache->
+* json->jackson
   * kafka->kafka 待完善
 * limiter->限流 ratelimiter，sentinel，resilience4j
 * prometheus-> prometheus 采集指标，grafana 展示指标，altermanager prometheus报警，grafanaAalert 报警，prometheus pushgateway中心采集，exporter，PromQL等
