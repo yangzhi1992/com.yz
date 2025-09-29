@@ -12,6 +12,7 @@ components:
       - /api/**
       - /db/**
       - /limiter/**
+      - /redis/**
 
       ## swagger 相关资源去掉权限 ##
       - /swagger-ui.html          # Swagger 2 主页面

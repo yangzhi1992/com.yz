@@ -24,6 +24,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.util.StringUtils;
 
 @Configuration
 @EnableConfigurationProperties(MultiRedisProperties.class)
@@ -78,11 +79,12 @@ public class MultiRedisConfig {
         standaloneConfig.setHostName(config.getHost());
         standaloneConfig.setPort(config.getPort());
         standaloneConfig.setDatabase(config.getDatabase());
-        if (config.getPassword() != null) {
+        if (!StringUtils.isEmpty(config.getPassword())) {
             standaloneConfig.setPassword(RedisPassword.of(config.getPassword()));
         }
-        
-        return new LettuceConnectionFactory(standaloneConfig, clientConfig);
+        LettuceConnectionFactory lettuceConnectionFactory =new LettuceConnectionFactory(standaloneConfig, clientConfig);
+        lettuceConnectionFactory.afterPropertiesSet();
+        return lettuceConnectionFactory;
     }
     
     private RedisConnectionFactory createMasterSlaveConnectionFactory(
@@ -193,9 +195,6 @@ public class MultiRedisConfig {
         if (config.getLettuce() != null && config.getLettuce().getShutdownTimeout() != null) {
             builder.shutdownTimeout(config.getLettuce().getShutdownTimeout());
         }
-
-        // SSL配置（可选）
-        builder.useSsl().disablePeerVerification();
 
         return builder.build();
     }

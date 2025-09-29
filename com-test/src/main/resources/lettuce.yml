@@ -1,5 +1,8 @@
 spring:
   redis:
+    ssl: false
+    lettuce:
+      ssl: false
     multi:
       enabled: true
       datasources:
@@ -43,5 +46,10 @@ spring:
           host: 127.0.0.1
           port: 6379
           database: 1
-          password: 123456
-          timeout: 1000ms
+          password:
+          timeout: 2000ms
+          lettuce:
+            pool:
+              max-active: 8
+              max-idle: 8
+              min-idle: 0
