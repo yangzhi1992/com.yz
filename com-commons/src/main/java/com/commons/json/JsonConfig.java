@@ -1,5 +1,6 @@
 package com.commons.json;
 
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -15,6 +16,15 @@ import org.springframework.http.MediaType;
  */
 @Configuration
 public class JsonConfig {
+    // Fastjson 安全防护指南：如何避免常见漏洞
+    static {
+        // 完全关闭 AutoType 功能
+        ParserConfig.getGlobalInstance().setAutoTypeSupport(false);
+        // 或者使用安全模式（推荐）
+        ParserConfig.getGlobalInstance().setSafeMode(true);
+    }
+
+
     // 替换Spring默认的Jackson
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
