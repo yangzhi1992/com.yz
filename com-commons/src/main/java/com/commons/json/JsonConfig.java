@@ -1,16 +1,18 @@
 package com.commons.json;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 
+/**
+ * // 替换Spring默认的Jackson
+ */
 @Configuration
 public class JsonConfig {
     // 替换Spring默认的Jackson
@@ -20,10 +22,12 @@ public class JsonConfig {
         FastJsonConfig config = new FastJsonConfig();
 
         // 2. 配置序列化规则
-        config.setSerializerFeatures(
+        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(
                 SerializerFeature.PrettyFormat,          // 格式化输出
                 SerializerFeature.WriteMapNullValue,     // 输出空字段
                 SerializerFeature.WriteNullListAsEmpty,  // 空列表返回[]
+                SerializerFeature.WriteNullStringAsEmpty, // 空字符串返回""
                 SerializerFeature.DisableCircularReferenceDetect // 禁用循环引用检测
         );
 
