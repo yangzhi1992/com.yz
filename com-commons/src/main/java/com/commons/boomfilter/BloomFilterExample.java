@@ -2,6 +2,8 @@ package com.commons.boomfilter;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
+import com.google.common.io.Files;
+import java.nio.charset.Charset;
 
 public class BloomFilterExample {
     public static void main(String[] args) {
@@ -29,5 +31,8 @@ public class BloomFilterExample {
             }
         }
         System.out.println("误判率：" + (falsePositive / 1000.0));
+
+        //BloomFilter 支持序列化，可以保存到磁盘
+
     }
 }
