@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/com-gatewayTwo/com-gatewayTwo.iml" filepath="$PROJECT_DIR$/com-gatewayTwo/com-gatewayTwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-monitor.iml" filepath="$PROJECT_DIR$/com-monitor.iml" />
     </modules>
   </component>
 </project>

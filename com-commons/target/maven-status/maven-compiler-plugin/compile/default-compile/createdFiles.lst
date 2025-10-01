@@ -16,6 +16,7 @@ com\commons\redis\lettuce\MultiRedisService.class
 com\commons\thread\书籍\并发编程艺术\chapter04\Deprecated.class
 com\commons\thread\书籍\并发编程艺术\chapter04\Priority.class
 com\commons\api\annotation\ApiClass.class
+com\commons\es\dto\PagedResultDTO.class
 com\commons\api\retrofit\ParameterHandler$FieldMap.class
 com\commons\thread\书籍\并发编程实战\ListenerExamples$6$1.class
 com\commons\thread\书籍\并发编程艺术\chapter03\VolatileFeaturesExample.class
@@ -39,8 +40,8 @@ com\commons\thread\书籍\并发编程实战\SequentialPuzzleSolver.class
 com\commons\thread\书籍\并发编程艺术\chapter07\AtomicIntegerTest.class
 com\commons\thread\并发工具类\信号量\SemaphoreTest.class
 com\commons\thread\书籍\并发编程实战\TransformingSequential$2.class
+com\commons\es\dto\MqMsg$MqMsgBuilder.class
 com\commons\api\retrofit\BuiltInConverters$VoidResponseBodyConverter.class
-com\commons\redis\test.class
 com\commons\common\utils\CollectionTool$1.class
 com\commons\thread\书籍\并发编程实战\CasNumberRange$IntPair.class
 com\commons\cache\springcache\java\caffenine\CacheStatsEndpoint.class
@@ -56,6 +57,7 @@ com\commons\thread\书籍\并发编程实战\LifecycleWebServer$1.class
 com\commons\redis\lettuce\MultiRedisProperties$ReadFrom.class
 com\commons\security\SecurityInfoProperties$UserInfo.class
 com\commons\thread\书籍\并发编程艺术\chapter04\DefaultThreadPool$Worker.class
+com\commons\common\utils\BooleanPair.class
 com\commons\thread\书籍\并发编程实战\ListenerExamples$3$1.class
 com\commons\thread\书籍\并发编程实战\ListenerExamples$4.class
 com\commons\thread\书籍\并发编程艺术\chapter07\AtomicReferenceTest.class
@@ -69,8 +71,10 @@ com\commons\thread\书籍\并发编程艺术\chapter04\ThreadState$Sync.class
 com\commons\thread\并发工具类\闭锁\futuretask\FutureTaskTest.class
 com\commons\common\utils\DateTool.class
 com\commons\common\utils\RequestTool.class
+com\commons\es\ElasticSearchRestFactoryBean.class
 com\commons\common\utils\http\OkhttpClientTool$2.class
 com\commons\thread\书籍\并发编程实战\PrimeProducer.class
+com\commons\es\props\ElasticNode.class
 com\commons\thread\书籍\并发编程实战\LifecycleWebServer$Request.class
 com\commons\thread\书籍\并发编程艺术\chapter03\InstanceFactory.class
 com\commons\thread\书籍\并发编程实战\CooperatingNoDeadlock$Image.class
@@ -87,6 +91,7 @@ com\commons\thread\书籍\并发编程艺术\chapter06\ConcurrentPutHashMap.clas
 com\commons\api\retrofit\ParameterHandler$HeaderMap.class
 com\commons\thread\书籍\并发编程实战\CasCounter.class
 com\commons\thread\书籍\并发编程艺术\chapter04\Synchronized.class
+com\commons\es\dto\PagedResultWithScore.class
 com\commons\timer\java\SimpleTimer.class
 com\commons\thread\书籍\并发编程艺术\chapter07\AtomicIntegerArrayTest.class
 com\commons\api\retrofit\BuiltInConverters.class
@@ -109,6 +114,7 @@ com\commons\thread\书籍\并发编程实战\EagerInitialization$Resource.class
 com\commons\thread\书籍\并发编程实战\TaskExecutionWebServer$1.class
 com\commons\thread\书籍\并发编程实战\SwingUtilities$SwingThreadFactory.class
 com\commons\thread\书籍\并发编程艺术\chapter08\CyclicBarrierTest3.class
+com\commons\es\dto\EsDoc.class
 com\commons\thread\书籍\并发编程实战\MyAppThread.class
 com\commons\thread\书籍\并发编程实战\PossibleReordering$2.class
 com\commons\api\retrofit\Call.class
@@ -116,7 +122,6 @@ com\commons\thread\书籍\并发编程实战\NumberRange.class
 com\commons\thread\书籍\并发编程艺术\chapter08\CyclicBarrierTest3$1.class
 com\commons\thread\书籍\并发编程实战\InterruptibleLocking.class
 com\commons\thread\书籍\并发编程实战\TimedRun.class
-com\commons\redis\lettuce\RedisController.class
 com\commons\api\retrofit\http\QueryName.class
 com\commons\thread\书籍\并发编程实战\SafeListener.class
 com\commons\thread\书籍\并发编程实战\CellularAutomata$1.class
@@ -164,6 +169,7 @@ com\commons\thread\并发工具类\关卡\CyclicBarrierTest.class
 com\commons\thread\书籍\并发编程艺术\chapter11\Message.class
 com\commons\thread\书籍\并发编程实战\CooperatingDeadlock$Dispatcher.class
 com\commons\thread\书籍\并发编程艺术\chapter03\MonitorExample.class
+com\commons\common\utils\BooleanPairUtil.class
 com\commons\redis\lettuce\MultiRedisConfig.class
 com\commons\thread\书籍\并发编程实战\TestBoundedBuffer$Big.class
 com\commons\thread\callback\asynchronous\Test.class
@@ -216,6 +222,7 @@ com\commons\api\retrofit\http\Url.class
 com\commons\api\annotation\ApiOptions.class
 com\commons\thread\书籍\并发编程实战\IndexingService$IndexerThread.class
 com\commons\thread\书籍\并发编程实战\WorkerThread.class
+com\commons\es\dto\ScoreWrapper.class
 com\commons\thread\书籍\并发编程实战\TaskRunnable$Task.class
 com\commons\thread\并发工具类\闭锁\futuretask\FutureTaskTest$2.class
 com\commons\api\retrofit\OkHttpCall$1.class
@@ -236,8 +243,8 @@ com\commons\api\retrofit\ExecutorCallAdapterFactory.class
 com\commons\thread\书籍\并发编程实战\CasNumberRange.class
 com\commons\timer\spring\spring3\AsyncController.class
 com\commons\engine\aviator\SimpleCalculatorDemo.class
-com\commons\redis\lettuce\RedisTransactionService$1.class
 com\commons\thread\书籍\并发编程实战\ListenerExamples.class
+com\commons\es\dto\IndexOption$IndexOptionBuilder.class
 com\commons\api\retrofit\DefaultCallAdapterFactory$1.class
 com\commons\thread\书籍\并发编程实战\ProducerConsumer$FileCrawler$1.class
 com\commons\thread\书籍\并发编程实战\ThreadDeadlock$LoadFileTask.class
@@ -258,10 +265,10 @@ com\commons\cache\springcache\java\caffenine\UserInfo$UserInfoBuilder.class
 com\commons\thread\书籍\并发编程实战\ThreadPerTaskWebServer$1.class
 com\commons\thread\书籍\并发编程实战\TravelQuote.class
 com\commons\thread\书籍\并发编程艺术\chapter04\SimpleHttpServer$HttpRequestHandler.class
-com\commons\redis\lettuce\BusinessService.class
 com\commons\redis\lettuce\MultiRedisProperties$LettuceConfig.class
 com\commons\db\DataSourceConfig.class
 com\commons\api\retrofit\CallAdapter.class
+com\commons\es\ElasticSearchRestConfigure.class
 com\commons\snowflake\Snowflake.class
 com\commons\thread\书籍\并发编程实战\BoundedHashSet.class
 com\commons\api\retrofit\http\FieldMap.class
@@ -300,6 +307,7 @@ com\commons\thread\书籍\并发编程实战\UnsafeLazyInitialization$Resource.c
 com\commons\thread\书籍\并发编程艺术\chapter04\Join.class
 com\commons\api\retrofit\http\ModelParam.class
 com\commons\timer\spring\spring2\SchedulerConfig.class
+com\commons\es\EsUtils.class
 com\commons\thread\书籍\并发编程实战\SafeListener$EventListener.class
 com\commons\api\retrofit\ParameterHandler$ModelMap.class
 com\commons\api\retrofit\Retrofit.class
@@ -342,6 +350,7 @@ com\commons\api\retrofit\BuiltInConverters$ToStringResponseBodyConverter.class
 com\commons\api\retrofit\Converter.class
 com\commons\thread\callback\asynchronous\CallBack.class
 com\commons\thread\书籍\并发编程实战\Animals$Ark.class
+com\commons\common\support\ElasticConfigItem.class
 com\commons\api\ApiFactoryBean$SimpleInterceptor.class
 com\commons\thread\callback\asynchronous\Wang$1.class
 com\commons\thread\书籍\并发编程实战\ValueLatch.class
@@ -424,6 +433,7 @@ com\commons\thread\书籍\并发编程实战\Preloader$4.class
 com\commons\thread\书籍\并发编程艺术\chapter03\SynchronizedExample.class
 com\commons\thread\书籍\并发编程艺术\chapter08\CyclicBarrierTest2.class
 com\commons\api\test\OkHttpFileDownloadExample.class
+com\commons\es\ElasticSearchRestAutoConfiguration.class
 com\commons\thread\书籍\并发编程艺术\chapter03\FinalReferenceEscapeExample.class
 com\commons\thread\书籍\并发编程实战\ProducerConsumer$Indexer.class
 com\commons\timer\spring\spring3\AsyncConfig.class
@@ -431,6 +441,8 @@ com\commons\api\ApiClassPathBeanDefinitionScanner.class
 com\commons\common\utils\StatusCode.class
 com\commons\api\ApiAutoConfiguration.class
 com\commons\common\utils\NetTool$InetAddressComparator.class
+com\commons\es\dto\IndexOption.class
+com\commons\es\props\ElasticSearchProperties.class
 com\commons\thread\书籍\并发编程艺术\chapter04\Deprecated$Runner.class
 com\commons\api\retrofit\http\Query.class
 com\commons\thread\书籍\并发编程实战\NoVisibility$1.class
@@ -548,6 +560,7 @@ com\commons\thread\书籍\并发编程实战\SocketUsingTask$1.class
 com\commons\cache\ehcache\EhcacheXmlExample.class
 com\commons\thread\书籍\并发编程实战\BackgroundTask$Computation$1.class
 com\commons\thread\书籍\并发编程实战\Point.class
+com\commons\es\dto\EsOperateType.class
 com\commons\thread\书籍\并发编程实战\ThisEscape$Event.class
 com\commons\api\retrofit\OkHttpCall$NoContentResponseBody.class
 com\commons\thread\书籍\并发编程艺术\chapter04\Profiler.class
@@ -622,6 +635,7 @@ com\commons\thread\书籍\并发编程艺术\chapter08\JoinCountDownLatchTest$2.
 com\commons\thread\书籍\并发编程实战\ThisEscape$EventSource.class
 com\commons\thread\AsyncThreadExample.class
 com\commons\common\utils\DateTool$ModifyType.class
+com\commons\es\EsUtils$1.class
 com\commons\thread\书籍\并发编程实战\BackgroundTask$1.class
 com\commons\thread\书籍\并发编程实战\TrackingExecutor.class
 com\commons\thread\callback\synchronous\Test.class
@@ -629,6 +643,7 @@ com\commons\thread\书籍\并发编程实战\Renderer$ImageData.class
 com\commons\thread\书籍\并发编程实战\FutureRenderer$1.class
 com\commons\timer\timewheel\RetryTask.class
 com\commons\common\utils\RandomGenerator.class
+com\commons\es\dto\MqMsg.class
 com\commons\common\utils\ArrayTool.class
 com\commons\thread\书籍\并发编程艺术\chapter04\MultiThread.class
 com\commons\thread\书籍\并发编程实战\MutableInteger.class
@@ -647,7 +662,6 @@ com\commons\thread\书籍\并发编程艺术\chapter04\ThreadState$Waiting.class
 com\commons\api\retrofit\ServiceMethod.class
 com\commons\thread\书籍\并发编程实战\ProducerConsumer$1.class
 com\commons\thread\书籍\并发编程艺术\chapter03\DoubleCheckedLocking$Instance.class
-com\commons\redis\lettuce\RedisTransactionService.class
 com\commons\api\retrofit\DefaultCallAdapterFactory.class
 com\commons\thread\书籍\并发编程实战\Animals$Species.class
 com\commons\api\retrofit\http\HeaderMap.class

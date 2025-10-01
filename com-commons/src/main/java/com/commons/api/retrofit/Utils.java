@@ -17,7 +17,7 @@ import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 
-final class Utils {
+public final class Utils {
 
     static final Type[] EMPTY_TYPE_ARRAY = new Type[0];
 
@@ -275,7 +275,7 @@ final class Utils {
         return ResponseBody.create(body.contentType(), body.contentLength(), buffer);
     }
 
-    static ResponseBody buffer(MediaType contentType, final byte[] body) throws IOException {
+    public static ResponseBody buffer(MediaType contentType, final byte[] body) throws IOException {
         return ResponseBody.create(contentType, body);
     }
 

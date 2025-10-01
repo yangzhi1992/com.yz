@@ -1,12 +1,17 @@
 spring:
   application:
     name: test-demo2
+  redis:
+    host: 127.0.0.1
+    port: 6380
+    password:
+    database: 0
   cloud:
     gateway:
       discovery:
         locator:
-          enabled: true
-      routes: []
+          enabled: false
+
 server:
   port: 8085
   context-path: /

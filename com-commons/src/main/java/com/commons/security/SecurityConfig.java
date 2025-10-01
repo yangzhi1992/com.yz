@@ -16,7 +16,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@ConditionalOnProperty(prefix = "components.security", name = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "components.security", name = "enabled", matchIfMissing = false)
 public class SecurityConfig {
 
     @Autowired

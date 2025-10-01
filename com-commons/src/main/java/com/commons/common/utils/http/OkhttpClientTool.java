@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -75,6 +76,7 @@ public class OkhttpClientTool {
                 .connectionPool(connectionPool)
                 .dispatcher(dispatcher)
                 .addInterceptor(new DynamicTimeoutInterceptor())
+                .addNetworkInterceptor(new ResponseDeflateInterceptor())
                 .retryOnConnectionFailure(true)
                 .build();
 
@@ -263,23 +265,21 @@ public class OkhttpClientTool {
 
             // 2. 创建JSON请求体
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(JSON, jsonBody.toJSONString());
+            RequestBody body = RequestBody.create(JSON, jsonBody.toJSONString()
+                                                                .getBytes(StandardCharsets.UTF_8));
 
             // 3. 构建 HTTP POST 请求
             Request.Builder requestBuilder = new Request.Builder()
                     .url(url)
-                    .post(body); // 设置POST方法和请求体
-
+                    .post(body);
             // 添加请求头
             if (headers != null) {
                 for (Entry<String, String> entry : headers.entrySet()) {
                     requestBuilder.addHeader(entry.getKey(), entry.getValue());
                 }
             }
-
-            // 确保有Content-Type头
-            requestBuilder.addHeader("Content-Type", "application/json");
-
+            requestBuilder.addHeader("Accept", "application/json;charset=utf-8");
+            requestBuilder.addHeader("Content-Type", "application/json;charset=utf-8");
             // 添加超时头信息（如果需要通过拦截器处理超时）
             if (timeout != null) {
                 requestBuilder.addHeader("X-Timeout-Seconds", String.valueOf(timeout));
@@ -291,8 +291,7 @@ public class OkhttpClientTool {
             try (okhttp3.Response response = client.newCall(request)
                                                    .execute()) {
                 if (response.isSuccessful() && response.body() != null) {
-                    return response.body()
-                                   .string(); // 返回响应体
+                    return response.body().string();
                 } else {
                     throw new RuntimeException(
                             "Unexpected response: " + response.code() + ", message: " + response.message());

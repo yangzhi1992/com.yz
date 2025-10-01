@@ -37,7 +37,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 @Configuration
-@ConditionalOnProperty(prefix = "components.db", name = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "components.db", name = "enabled", matchIfMissing = false)
 @MapperScan(basePackages = "com.commons.db.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
 public class DataSourceConfig
         implements ApplicationContextAware, EnvironmentAware, ApplicationListener<ApplicationEvent> {

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API监控排障系统</title>
+
+    <!-- Ant Design Vue CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ant-design-vue@1.7.8/dist/antd.min.css">
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <!-- Ant Design Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@1.7.8/dist/antd.min.js"></script>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+
+    <style>
+        .paramhover {
+            background: #fff;
+        }
+        .paramhover:hover {
+            background: aliceblue;
+        }
+        .ant-layout-header {
+            padding: 0 20px;
+            line-height: 64px;
+        }
+        .ant-card-small > .ant-card-head {
+            min-height: 36px;
+            padding: 0 12px;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class="mt--7 container-fluid">
+    <div>
+        <a-row>
+            <a-col :span="24">
+                <a-layout id="components-layout">
+                    <a-layout-header style="background:#f7f7f7;color:#333;text-align: left;font-weight: lighter">
+                        <div style="margin:0px">
+                            类型
+                            <a-radio-group v-model="requestType" @change="onChange" style="margin-right: 20px">
+                                <a-radio-button value="qce">虚机</a-radio-button>
+                            </a-radio-group>
+
+                            域名
+                            <a-radio-group v-model="host" @change="onChange" style="margin-right: 20px">
+                                <a-radio-button value="mp-live.iqiyi.com">外网</a-radio-button>
+                                <a-radio-button value="mp-live.qiyi.domain">内网</a-radio-button>
+                            </a-radio-group>
+
+                            方式
+                            <a-radio-group v-model="method" @change="onChange" style="margin-right: 20px">
+                                <a-radio-button value="GET">GET</a-radio-button>
+                                <a-radio-button value="POST">POST</a-radio-button>
+                            </a-radio-group>
+
+                            接口
+                            <a-auto-complete
+                                    v-model="path"
+                                    :data-source="urlSearchData"
+                                    style="width: 200px"
+                                    placeholder="接口路径"
+                                    @select="onUrlSelect"
+                                    @search="onUrlSearch"
+                                    @change="onChange"
+                                    :disabled="scheduleProgress"
+                            />
+                        </div>
+                    </a-layout-header>
+                </a-layout>
+            </a-col>
+        </a-row>
+        <a-row v-show="showQae" style="border:none">
+            <a-col :span="24">
+                <div style="padding:0;margin:10px">
+                    <div>选择QAE应用：</div>
+                    <a-radio-group v-model="qaeApp" @change="qaeHostSearch" v-show="showQae">
+                        <a-radio-button value="qlive-ops.fuyoo-server-docker.bjzjy-online01">
+                            fuyoo-server-docker.bjzjy
+                        </a-radio-button>
+                        <a-radio-button value="guoyuehua.fuyoo-server-canary.bjzyx-online01">
+                            fuyoo-server-canary.bjzyx
+                        </a-radio-button>
+                        <a-radio-button value="xuxiang.fuyoo-server-docker.bjzyx-online01">
+                            fuyoo-server-docker.bjzyx
+                        </a-radio-button>
+                        <a-radio-button value="caoqiang.fuyoo-server-initialattach-online.bjzjy-online01">
+                            fuyoo-server-initialattach-online.bjzjy-online01
+                        </a-radio-button>
+                        <a-radio-button value="caoqiang.fuyoo-server-initialattach-online.bjzyx-online01">
+                            fuyoo-server-initialattach-online.bjzyx-online01
+                        </a-radio-button>
+                        <a-radio-button value="chenjuntao.fuyoo-serve-gift.bjzjy-online01">
+                            fuyoo-serve-gift.bjzjy
+                        </a-radio-button>
+                        <a-radio-button value="guoyuehua.fuyoo-serve-gift.cnhb4-public-prod01">
+                            fuyoo-serve-gift.cnhb4-public-prod01
+                        </a-radio-button>
+                        <a-radio-button value="guoyuehua.fuyoo-server-vote-online.cnhb4-public-prod01">
+                            fuyoo-server-vote-online.cnhb4-public-prod01
+                        </a-radio-button>
+                        <a-radio-button value="caoqiang.fuyoo-server-vote-online.bjzyx-online01">
+                            fuyoo-server-vote-online.bjzyx-online01
+                        </a-radio-button>
+                        <a-radio-button value="caoqiang.fuyoo-server-vote-online.bjdxt-online03">
+                            fuyoo-server-vote-online.bjdxt-online03
+                        </a-radio-button>
+                    </a-radio-group>
+                </div>
+            </a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="16">
+                <div style="margin:10px 0px;color:#00BCD4">选择的参数：</div>
+                <div style="height: 50px;padding-left: 10px">
+                    <a-tag v-show="requestType !=''" color="pink">{{ requestType }}</a-tag>
+                    <a-tag v-show="host !=''" color="red">{{host}}</a-tag>
+                    <a-tag v-show="method !=''" color="orange">{{method}}</a-tag>
+                    <a-tag v-show="path !=''" color="green">{{path}}</a-tag>
+                </div>
+            </a-col>
+            <a-col :span="8">
+                <div style="margin-top: 30px">
+                    <a-affix :offset-top="top">
+                        <a-button type="danger" icon="bug" @click="onCheckClick"
+                                  :disabled="scheduleProgress"
+                                  style="margin-left: 40px;height:40px">
+                            一键排障
+                        </a-button>
+                    </a-affix>
+                </div>
+            </a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="24">
+                <div style="margin:10px 0px;color:#00BCD4">节点选择：</div>
+                <div>
+                    <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChange">
+                        全选 （{{selectedIps.length}} / {{hostOptions.length}}）
+                    </a-checkbox>
+                </div>
+                <!--                :options="hostOptions"-->
+                <a-card style="margin-top: 10px">
+                    <a-checkbox-group v-model="selectedIps" name="checkboxgroup">
+                        <a-card size="small" style="float:left;margin:10px" v-for="host in hostOptions" :key="host.ip">
+                            <a-checkbox slot="title" @change="onCheckHostChange" :value="host.ip">{{host.ip}}
+                            </a-checkbox>
+                            <a-tag v-show="host.success" style="border:none">版本：{{host.version}}</a-tag>
+                            <a-tag v-show="host.success" style="border:none">运行：{{host.uptime}}h</a-tag>
+                        </a-card>
+                    </a-checkbox-group>
+                </a-card>
+            </a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="24">
+                <div style="margin:10px 0px;color:#00BCD4">请求参数：</div>
+                <div>
+                    <a-spin v-if="showSpin" tip="加载中..." style="height: 50px">
+                        <div class="spin-content">
+                            正在搜索请求参数，请稍候...
+                        </div>
+                    </a-spin>
+                </div>
+                <a-textarea placeholder="双击自动查询参数" v-model="param" :rows="4" @change="onChange" v-show="!showSpin"
+                            :disabled="scheduleProgress" @dblclick="onParamsDbclick"/>
+            </a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="24">
+                <div style="margin-top:10px">
+                    <template>
+                        <a-modal
+                                title="参数选择-双击" :mask="false" :closable="true"
+                                :dialog-style="{top: '120px' }" width="60%"
+                                @cancel="showSearchList=false" :body-style="{padding:'0px'}"
+                                :visible="showSearchList" :footer="null">
+                            <a-card style="margin:0px 10px;overflow:auto;border:none;height:400px"
+                                    v-show="showSearchList">
+                                <a-list item-layout="horizontal" :data-source="params" style="margin:0px;padding:0px">
+                                    <a-list-item slot="renderItem" slot-scope="item, index" v-bind:class="{paramhover:isHover}"
+                                                 @dblclick="onParamSelect(item)" @mouseover="isHover=true">
+                                        <span>{{ item.value }}</span>
+                                    </a-list-item>
+                                </a-list>
+                            </a-card>
+                        </a-modal>
+                    </template>
+                </div>
+            </a-col>
+        </a-row>
+        <a-row>
+            <a-col :span="24"><a-alert style="margin-bottom: 5px;" v-if="!websocketEnabled" message="长连接已中断，您无法使用拨测功能！" banner closable /></a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="24">
+                <div style="margin:10px 0px;color:#00BCD4">排障结果：</div>
+                <template v-show="showResultList">
+                    <a-result v-show="showResultList"
+                              :status="(contentSame && resultSuccess)? 'success' : (resultSuccess?'warning':'error')"
+                              :title="'本次排障结果：' + resultMsg[0] + ' / ' + resultMsg[1] + '　' + ((contentSame && resultSuccess)?'结果响应一致！':(resultMsg[1] - normalHosts.length) + '个响应结果不一致！')"
+                              :sub-title="'响应时间： 最大：' + resultMsg[2] + 'ms　最小：'+　resultMsg[3] + 'ms　平均：' + resultMsg[4] + 'ms'"
+                    >
+                    </a-result>
+                </template>
+            </a-col>
+        </a-row>
+        <a-row style="border:none">
+            <a-col :span="24">
+                <div v-show="showResultList" style="margin-top:0 0 10 0;color:#00BCD4">结果详情：</div>
+                <a-card style="margin-top: 20px" v-show="showResultList">
+                    <a-list :grid="{ gutter: 16, column: 3 }" item-layout="horizontal" :data-source="checkData">
+                        <a-list-item slot="renderItem" slot-scope="item, index">
+                            <a-card v-if="item.success">
+                                <a-card-meta>
+                                    <template slot="description">
+                                        <div style="background: #fff;color:#666;border:none">
+                                            <pre style="background:#fff;color:#555;border:none;margin:0">{{item.headerText}}</pre>
+                                            <div style="padding:5px;">
+                                                <a-tag style="margin: 5px" v-for="patch in item.patch" :key="patch"
+                                                       :color="normalHosts.indexOf(item.host)==-1?'red':'green'">
+                                                    {{ patch }}
+                                                </a-tag>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </a-card-meta>
+                                <span slot="title">
+                                    <span style="font-weight:500;padding-right:12px;font-size:20px;line-height:32px">{{ item.host }}</span>
+                                    <a-tag style="border:none"
+                                           v-if="scheduleItem == null || scheduleItem.host != item.host">状态码：{{ item.status }}</a-tag>
+                                    <a-tag style="border:none"
+                                           v-if="scheduleItem == null || scheduleItem.host != item.host">耗时：{{ item.duration }} ms</a-tag>
+                                    <a-tag style="border:none"
+                                           v-if="scheduleItem == null || scheduleItem.host != item.host">大小：{{ item.response.length }} B</a-tag>
+                                    <span v-if="scheduleItem != null && scheduleItem.host == item.host">
+                                        <a-progress style="width:100px" :percent="progressPercent" size="small"/>
+                                        <a-tag style="border:none">请求数：{{progress}}</a-tag>
+                                    </span>
+                                    <a-tag style="border:none"
+                                           v-if="scheduleItem != null && scheduleItem.host == item.host">QPS：{{ Math.round(1000/qps * 100)/100 }}</a-tag>
+                                </span>
+                                <template slot="actions" class="ant-card-actions">
+                                    <a-popover title="响应结果" trigger="click" style="max-width:60%">
+                                        <template slot="content">
+                                            <pre style="max-height:600px;background:#055862">{{JSON.stringify(JSON.parse(item.response), null, '  ')}}</pre>
+                                        </template>
+                                        <a-button icon="file-text" size="small"
+                                                  style="border:none;background:#fafafa;box-shadow:none">
+                                            {{normalHosts.indexOf(item.host)==-1?'异常响应':'正常响应'}}
+                                        </a-button>
+                                    </a-popover>
+                                    <a-button style="border:none;background:#fafafa;box-shadow:none"
+                                              v-if="requestType=='qae'||requestType=='qce'">环境变量
+                                    </a-button>
+                                    <a-popover title="拨测速度" trigger="click" >
+                                        <div slot="content" style="width:550px">
+                                            <a-row>
+                                                <a-col :span="12">
+                                                    <a-slider v-model="qps" :min="100" :max="2000" :step="100" afterChange="changeQPS"/>
+                                                </a-col>
+                                                <a-col :span="4">
+                                                    <span style="marginLeft: 10px">{{qps}}ms</span>
+                                                </a-col>
+                                                <a-col :span="4">
+                                                    <span style="marginLeft: 10px">QPS：{{Math.round(1000/qps * 100)/100}}</span>
+                                                </a-col>
+                                                <a-col :span="4">
+                                                    <a-button @click="onScheduleClick(item)" style="float:right">
+                                                        {{(scheduleItem == null || scheduleItem.host != item.host)?'开始':'停止'}}
+                                                    </a-button>
+                                                    <a-button @click="showScheduleModule=true" v-if="scheduleItem != null && scheduleItem.host == item.host" style="float:right">
+                                                        面板
+                                                    </a-button>
+                                                </a-col>
+                                            </a-row>
+                                        </div>
+                                        <a-button style="border:none;background:#fafafa;box-shadow:none" :disabled="!websocketEnabled">
+                                            {{(scheduleItem == null || scheduleItem.host != item.host || progressPercent >= 100)?'开始拨测':'正在拨测...'}}
+                                        </a-button>
+                                    </a-popover>
+                                    <a-popover title="链路traceId">
+                                        <template slot="content">
+                                            <a target="_blank"
+                                               href="http://saturn.live.qiyi.domain/#/saturn/traceLog/detail">{{item.traceId}}</a>
+                                        </template>
+                                        <a-button style="border:none;background:#fafafa;box-shadow:none">
+                                            请求链路
+                                        </a-button>
+                                    </a-popover>
+                                </template>
+                            </a-card>
+                            <a-card v-else>
+                                <a-tag slot="title" color="red">{{ item.host }}</a-tag>
+                                <a-alert slot="description" :message="item.exception" type="error" banner :show-icon="false"/>
+                            </a-card>
+                        </a-list-item>
+                    </a-list>
+                </a-card>
+            </a-col>
+        </a-row>
+        <a-row>
+            <a-col :span="24">
+                <template v-if="showScheduleModule">
+                    <a-modal
+                            :title="'拨测请求 ' + scheduleItem.host"
+                            :mask="false" zIndex="10000" :footer="null"
+                            :dialog-style="{top:'120px'}"
+                            width="60%" :closable="true"
+                            :visible="showScheduleModule"
+                            @cancel="showScheduleModule=false">
+                        <template>
+                            <div style="margin: 0px 10px;text-align:center">
+                                <a-row>
+                                    <a-col :span="4">
+                                        进度（QPS：{{Math.round(1000/qps * 100)/100}}）
+                                    </a-col>
+                                    <a-col :span="13">
+                                        <a-progress :percent="progressPercent" style="width:90%;float:left"/> {{progress}}
+                                    </a-col>
+                                    <a-col :span="4">
+                                        延时 <a-input-number :disabled="!scheduleItem" v-model="qps" :min="100" :max="2000" :step="100" style="width:60px" @change="changeQPS" /> ms
+                                    </a-col>
+                                    <a-col :span="3">
+                                        <a-button @click="onScheduleClick(scheduleItem==null?lastScheduleItem:scheduleItem)" style="float:right">
+                                            {{ scheduleProgress?'停止':'继续' }}
+                                        </a-button>
+                                    </a-col>
+                                </a-row>
+                            </div>
+                            <a-divider dashed >详情</a-divider>
+                            <div style="overflow:auto;border:none;height:450px;margin-top:-30px">
+                                <a-timeline :pending="scheduleProgress?true:false" :reverse="reverse" style="margin-top:20px">
+                                    <a-timeline-item v-for="(item,index) in scheduleItems" :key="item.receiveTime"
+                                                     :color="item.success?'green':'red'">
+                                        <div>
+                                            <a-space>
+                                                <span style="font-weight:500;color:#1daf58;padding-right:12px;font-size:20px;line-height:32px">
+                                                    {{formatTime(item.receiveTime)}}
+                                                </span>
+                                                <a-tag style="border:none">状态码：{{item.status}}</a-tag>
+                                                <a-tag style="border:none">耗时：{{item.duration}} ms</a-tag>
+                                                <a-tag style="border:none">大小：{{item.response.length}} B</a-tag>
+                                                <a-tag style="border:none">
+                                                    <a target="_blank" href="http://saturn.live.qiyi.domain/#/saturn/traceLog/detail">追踪Id：{{item.traceId}}</a>
+                                                </a-tag>
+                                            </a-space>
+                                        </div>
+                                        <!--                                        <div style="border:1px solid #eee;padding:10px;margin-top:10px;font-family:fangsong;line-height:24px;">-->
+                                        <div style="border:none;padding:0px 10px;margin-top:10px;font-family:fangsong;line-height:24px;">
+                                            <p style="line-height: 24px;background: #e9e8e8;padding: 10px;color: #585757;">
+                                                {{item.response.substr(0,280)}}...
+                                            </p>
+                                        </div>
+                                    </a-timeline-item>
+                                </a-timeline>
+                            </div>
+                        </template>
+                    </a-modal>
+                </template>
+            </a-col>
+        </a-row>
+    </div>
+</div>
+
+<script>
+    axios.defaults.withCredentials = true;
+    axios.defaults.timeout = 15000;
+
+    const vm = new Vue({
+        el: "#main",
+        data: function () {
+            return {
+               userId: "",
+               socket: null,
+               requestType: "nginx",
+               host: "mp-live.iqiyi.com",
+               method: "GET",
+               path: "",
+               param: "",
+               params: [],
+               uriData: [],
+               urlSearchData: [],
+               checkData: [],
+               sendSwitch: false,
+               showSearchList: false,
+               showSpin: false,
+               showResultList: false,
+               showQae: false,
+               qaeApp: "",
+               resultSuccess: false,
+               contentSame: false,
+               resultMsg: [0,0,0,0,0],
+               normalHosts: [],
+               hostOptions: [],
+               selectedIps: [],
+               indeterminate: true,
+               checkAll: false,
+               websocketEnabled: false,
+               scheduleItem: null,
+               scheduleItems: [],
+               lastScheduleItem: null,
+               qps: 1000,
+               progress: 0,
+               totalprogress: 100,
+               wsfailedCount: 0,
+               reverse: true,
+               showScheduleModule: false,
+               isHover: false
+            };
+        },
+        computed: {
+            progressPercent: function() {
+                return Math.round(this.progress * 100 / this.totalprogress);
+            },
+            scheduleProgress: function() {
+                return this.scheduleItem != null && this.progressPercent<100;
+            }
+        },
+        methods: {
+            onChange(e) {
+            　console.log(e)
+
+              if(this.requestType != "" && this.host != "" && this.method != "" && this.path != "") {
+                 this.sendSwitch = true;
+              } else {
+                 this.sendSwitch = false;
+              }
+
+              if(this.requestType == "qae") {
+                 this.showQae = true;
+              } else {
+                 this.showQae = false;
+              }
+
+              if (typeof(e) == "string" || typeof(e) == "undefined") {
+                 return;
+              }
+
+              var requestTypeValue = ["qlb","nginx","qce","qae"];
+              if(requestTypeValue.indexOf(e.target.value)>=0) {
+                  this.selectedIps = [];
+                  this.checkAll = false;
+                  this.hostOptions = [];
+
+                  if (e.target.value !='qae' || (e.target.value =='qae' && this.qaeApp != "")) {
+                      this.onHostSearchClick()
+                  }
+              }
+            },
+            qaeHostSearch() {
+                this.onHostSearchClick()
+            },
+            onCheckHostChange(e) {
+                this.indeterminate = !!this.selectedIps.length && this.selectedIps.length < this.hostOptions.length;
+                this.checkAll = this.selectedIps.length === this.hostOptions.length;
+            },
+            onCheckAllChange(e) {
+              Object.assign(this, {
+                selectedIps: e.target.checked ? this.hostOptions.map(function(item,index,array){return item.ip}) : [],
+                indeterminate: false,
+                checkAll: e.target.checked,
+              });
+            },
+            onParamSelect(item) {
+                this.param = item.value;
+                this.showSearchList = false;
+                this.onChange()
+            },
+            onCheckClick() {
+                this.showSearchList = false;
+                this.showResultList = false;
+                this.scheduleItem = null;
+
+                if(!this.sendSwitch || (this.requestType == "qae" && this.qaeApp == "")) {
+                    this.$notification.error({message: "请求参数不完整！"})
+                    return;
+                }
+
+                axios.get("/apimonitor/apiBatchRequest?method=" + this.method + "&path=" + this.path + "&host=" + this.host + "&param=" + window.btoa(this.param) + "&ips=" + this.selectedIps)
+                .then((response) => {
+                    let {code, data, msg} = response.data
+                    if (code === "A00000") {
+                        this.showResultList = true;
+                        this.checkData = data.checkRequestResponseList;
+                        this.resultMsg = data.statistis.split("/");
+                        this.contentSame = data.contentSame;
+                        this.normalHosts = data.normalHosts;
+                        this.resultSuccess = data.allsuccess;
+                    } else {
+                        this.$notification.error({message: msg})
+                    }
+                    //console.log(this.websocketEnabled);
+
+                })
+                .catch((error) => {
+                    this.$notification.error({message: error})
+                })
+            },
+            changeQPS(value) {
+                if (this.scheduleItem == null) {
+                    return;
+                }
+                var data = {
+                    "messageType": "schedule",
+                    "userId": this.userId,
+                    "message": {
+                        "method": this.method,
+                        "ip": this.scheduleItem.host,
+                        "host": this.host,
+                        "path": this.path,
+                        "param": window.btoa(this.param),
+                        "delay": this.qps
+                    }
+                }
+                this.socket.send(JSON.stringify(data));
+            },
+            onScheduleClick(item) {
+                //console.log(item)
+
+                if(this.scheduleItem != null) {
+                    var cancelMessage = {
+                        "messageType": "cancel",
+                        "userId": this.userId,
+                        "message": {
+                            "method": this.method,
+                            "ip": this.scheduleItem.host,
+                            "host": this.host,
+                            "path": this.path
+                        }
+                    }
+                    this.socket.send(JSON.stringify(cancelMessage));
+                }
+
+                if(this.scheduleItem != null && this.scheduleItem.host == item.host) {
+                    this.lastScheduleItem = this.scheduleItem;
+                    this.scheduleItem = null;
+                    this.$message.info(item.host +'拨测请求任务已结束！');
+                    return;
+                }
+
+                if(item == null) {
+                    return;
+                }
+
+                if (this.scheduleItem == null || this.scheduleItem.host != item.host) {
+                    var data = {
+                        "messageType": "schedule",
+                        "userId": this.userId,
+                        "message": {
+                            "method": this.method,
+                            "ip": item.host,
+                            "host": this.host,
+                            "path": this.path,
+                            "param": window.btoa(this.param),
+                            "delay": this.qps
+                        }
+                    }
+                    this.socket.send(JSON.stringify(data));
+                    this.scheduleItems = []
+                    this.scheduleItem = item;
+                    this.showScheduleModule = true;
+
+                    this.$message.info('已开始' + item.host +'拨测请求任务！');
+                }
+            },
+            onHostSearchClick() {
+            　　　axios.get("/apimonitor/searchHost?requestType=" + this.requestType + "&host=" + this.host + "&qaeApp=" + this.qaeApp)
+                .then((response) => {
+                    let {code, data, msg} = response.data
+                    if (code === "A00000") {
+                        this.hostOptions = data;
+                    } else {
+                        this.$notification.error({message: msg})
+                    }
+
+                })
+                .catch((error) => {
+                    this.$notification.error({message: error})
+                })
+            },
+            onUrlSelect(value) {
+                this.path = value;
+            },
+            onParamsDbclick() {
+                this.showSpin = true;
+                axios.get("/apimonitor/suggestParams?host=" + this.host + "&method=" + this.method + "&path=" + this.path)
+                .then((response) => {
+                    let {code, data, msg} = response.data
+                    if (code === "A00000" && data.length > 0) {
+                        this.params = data;
+                        this.showSearchList = true;
+                    } else {
+                        this.$message.warning('未查询到参数！');
+                    }
+                    this.showSpin = false;
+                })
+                .catch((error) => {
+                    this.showSpin = false;
+                    this.$notification.error({message: "查询请求报错:" + error.message})
+                })
+            },
+            onUrlSearch(value) {
+                this.urlSearchData = this.uriData.filter(function(url, index, arr) {return url.indexOf(value) >= 0});
+            },
+            getUriList() {
+                 axios.get("/apimonitor/suggestUriV2?")
+                .then((response) => {
+                    let {code, data, msg} = response.data
+                    if (code === "A00000") {
+                        this.uriData = data
+                    } else {
+                        //this.$notification.error({message: "列表获取失败，请重试！"})
+                    }
+                })
+                .catch((error) => {
+                    this.$notification.error({message: error.message})
+                })
+            },
+            generateUserId(len) {
+              len = len || 32;
+              var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+              var maxPos = $chars.length;
+              var userId = '';
+              for (i = 0; i < len; i++) {
+                  userId += $chars.charAt(Math.floor(Math.random() * maxPos));
+              }
+              return userId;
+            },
+            formatTime(time) {
+                var time=new Date(parseInt(time));
+                var h = time.getHours();
+                var mm = time.getMinutes();
+                var s = time.getSeconds();
+                var ms = time.getMilliseconds();
+                return (h < 10? ('0' + h): h) + ':' + (mm < 10?('0' + mm): mm) + ':' + (s < 10?('0' + s) : s) + '.' + ms;
+            },
+            wsOnmessage(evt) {
+                var received_msg = evt.data;
+                //console.log("数据已接收..." + received_msg);
+                var response = JSON.parse(received_msg);
+                var result = response.result
+                this.totalprogress = response.retryTimes
+                this.progress = response.times
+
+                if(this.scheduleItems.length > 15) {
+                    this.scheduleItems.splice(0,1)
+                }
+                this.scheduleItems.push(result)
+
+                if(result.success) {
+                    this.$notification.success({
+                        message: "拨测成功　+1",
+                        placement: "bottomRight",
+                        style: {width: '250px',marginLeft: '150px'}
+                    })
+                } else {
+                    this.$notification.error({
+                        message: result.host,
+                        duration: null,
+                        description: result.exception.substr(0, 200)
+                    })
+                }
+
+                if(this.progressPercent >= 100) {
+                    this.$message.success('拨测请求已完成！', 10);
+                }
+            },
+            wsOnopen() {
+                console.log("ws连接已打开...");
+                this.websocketEnabled = true;
+            },
+            wsOnclose() {
+               this.wsfailedCount++;
+
+               if(this.wsfailedCount < 5) {
+                  this.socket = new WebSocket("ws://" + window.location.hostname +":18088/ws");
+                  this.socket.onopen = this.wsOnopen;
+                  this.socket.onmessage = this.wsOnmessage;
+                  this.socket.onclose = this.wsOnclose;
+                } else {
+                    // 关闭 websocket
+                    console.log("ws连接已关闭...");
+                    this.websocketEnabled = false;
+                    this.$notification.warning({
+                        message: "长连接断开，无法操作拨测请求！"
+                    })
+                }
+            }
+        },
+        created() {
+            this.onHostSearchClick()
+            this.getUriList();
+            this.userId = this.generateUserId(10);
+
+            try {
+              this.socket = new WebSocket("ws://" + window.location.host +"/ws");
+            } catch(e) {
+              this.socket = new WebSocket("ws://" + window.location.hostname +":18088/ws");
+            }
+
+            this.socket.onopen = this.wsOnopen;
+            this.socket.onmessage = this.wsOnmessage;
+            this.socket.onclose = this.wsOnclose;
+        },
+        destroyed() {
+            console.log("关闭了！");
+            if (this.socket != null) {
+                var closeMessage = {
+                    "messageType": "close",
+                    "userId": this.userId,
+                }
+                this.socket.send(JSON.stringify(closeMessage));
+                //this.socket.close();
+            }
+        }
+    })
+</script>
+</body>
+</html>

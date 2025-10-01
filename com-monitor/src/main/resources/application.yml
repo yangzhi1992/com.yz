@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: test-demo3
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    user:
+      name: user
+      password: user
+  elasticsearch:
+    host: 127.0.0.1
+    port: 9200
+    username: admin
+    password: yICe#9UD
+
+server:
+  port: 8080 # 监听端口
+  context-path: / # 访问路径
+
+elastic:
+  nginx-log:
+    index-name: log_nginx_access-*
+
+components:
+  api:
+    base-packages: "com.commons.**"
+
+healthCheck:
+  qce: >
+    10.34.5.244,
+    10.34.5.7
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    com.example.resilience4jdemo: DEBUG
+

@@ -1,0 +1,12 @@
+package com.commons.monitor.service;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+public interface NginxEsService {
+
+    List<Map<String, String>> searchParamsLatest(String host, String uri, String method) throws IOException;
+
+    List<Map<String, String>> searchUriLatest(String host, String method, String path);
+}
