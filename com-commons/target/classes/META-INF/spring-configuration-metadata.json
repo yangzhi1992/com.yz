@@ -1,6 +1,11 @@
 {
   "groups": [
     {
+      "name": "",
+      "type": "com.commons.es.simple.props.ElasticSearchProperties",
+      "sourceType": "com.commons.es.simple.props.ElasticSearchProperties"
+    },
+    {
       "name": "components.security",
       "type": "com.commons.security.SecurityInfoProperties",
       "sourceType": "com.commons.security.SecurityInfoProperties"
@@ -123,6 +128,11 @@
       "description": "机器位，默认10",
       "sourceType": "com.commons.snowflake.SnowflakeProperties",
       "defaultValue": 10
+    },
+    {
+      "name": "elastic",
+      "type": "java.util.Map<java.lang.String,com.commons.es.simple.dto.ElasticConfigItem>",
+      "sourceType": "com.commons.es.simple.props.ElasticSearchProperties"
     },
     {
       "name": "management.endpoint.cachestats.cache.time-to-live",

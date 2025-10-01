@@ -1,7 +1,7 @@
 #封装okhttpclient扫描路径
 components:
-  enabled: true
   api:
+    enabled: true
     base-packages: "com.commons.api.**"
 
 common:

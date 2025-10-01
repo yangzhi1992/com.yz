@@ -1,0 +1,17 @@
+components:
+  elasticsearch:
+    enabled: false
+#elastic配置
+elastic:
+  nginx-log:
+    cluster-name: cluster1
+    index-name: log_nginx_access
+    username: user
+    password: user
+    nodes:
+      - host: 127.0.0.1
+        port: 9200
+      - host: 127.0.0.1
+        port: 9200
+      - host: 127.0.0.1
+        port: 9200

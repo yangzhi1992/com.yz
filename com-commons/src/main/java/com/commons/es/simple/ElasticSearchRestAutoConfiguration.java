@@ -22,7 +22,7 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 @ConditionalOnClass(RestHighLevelClient.class)
-@ConditionalOnProperty(prefix = "components.elasticsearch", name = "enabled")
+@ConditionalOnProperty(prefix = "components.elasticsearch", name = "enabled", matchIfMissing = false)
 public class ElasticSearchRestAutoConfiguration implements EnvironmentAware {
 
     private Environment environment;
