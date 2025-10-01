@@ -3,6 +3,7 @@ package com.commons.monitor.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
+import com.commons.common.utils.ArrayTool;
 import com.commons.common.utils.StringTool;
 import com.commons.common.utils.http.OkhttpClientTool;
 import com.commons.monitor.service.NginxEsService;
@@ -13,11 +14,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.support.IndicesOptions;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +44,13 @@ public class NginxEsServiceImpl implements NginxEsService {
 
     @Value("${elastic.nginx-log.index-name}")
     public String indexName;
+
+    @Autowired
+    @Qualifier("nginxLogRestClient")
+    private RestHighLevelClient businessRestClient;
+
+    @Value("${elastic.nginx-log.index-name}")
+    public String indexName2;
 
     @Override
     public List<Map<String, String>> searchParamsLatest(String host, String uri, String method) throws IOException {
@@ -68,6 +82,37 @@ public class NginxEsServiceImpl implements NginxEsService {
                 .indicesOptions(IndicesOptions.lenientExpandOpen())
                 .source(sourceBuilder);
 
+        return getResult2(request);
+    }
+
+    private List<Map<String, String>> getResult(SearchRequest request) {
+        SearchResponse response = null;
+        try {
+            response = businessRestClient.search(request, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            return null;
+        }
+
+        SearchHit[] searchHits = response.getHits()
+                                         .getHits();
+        if (ArrayTool.isBlank(searchHits)) {
+            return new ArrayList<>();
+        }
+
+        List<Map<String, String>> res = new ArrayList<>();
+
+        for (SearchHit hit : searchHits) {
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String queryParam = (String)sourceAsMap.get("query_params");
+
+            Map<String, String> b = new HashMap<>();
+            b.put("value", queryParam);
+            res.add(b);
+        }
+        return res;
+    }
+
+    private List<Map<String, String>> getResult2(SearchRequest request) {
         String url = "http://" + host2 + ":" +
                 port + "/" + indexName + "/_search";
         String username = "admin";
@@ -98,8 +143,6 @@ public class NginxEsServiceImpl implements NginxEsService {
                 }
             }
         }
-
         return res;
     }
-
 }

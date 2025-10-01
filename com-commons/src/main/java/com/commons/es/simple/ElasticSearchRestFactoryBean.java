@@ -1,7 +1,11 @@
 package com.commons.es.simple;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -67,9 +71,12 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
                                                               httpClientBuilder.setDefaultCredentialsProvider(
                                                                       credentialsProvider);
                                                           }
+
                                                           return httpClientBuilder;
                                                       }
                                               );
+
+
         client = new RestHighLevelClient(builder);
         try {
             // 校验远端集群是否可用
@@ -85,6 +92,32 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
 
         }
         initialized = true;
+    }
+
+    // 方法1：先尝试zlib格式，再尝试raw deflate
+    public static byte[] decompress(byte[] data) throws DataFormatException {
+        if (data.length >= 2 && data[0] == 0x78 && data[1] == 0x9C) {
+            return decompressInternal(data, true);
+        } else {
+            return decompressInternal(data, false);
+        }
+    }
+
+    private static byte[] decompressInternal(byte[] data, boolean nowrap) throws DataFormatException {
+        Inflater inflater = new Inflater(nowrap);
+        inflater.setInput(data);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        try {
+            while (!inflater.finished()) {
+                int count = inflater.inflate(buffer);
+                outputStream.write(buffer, 0, count);
+            }
+            return outputStream.toByteArray();
+        } finally {
+            inflater.end();
+        }
     }
 
     @Override

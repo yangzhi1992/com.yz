@@ -5,7 +5,7 @@ components:
 elastic:
   nginx-log:
     cluster-name: cluster1
-    index-name: log_nginx_access
+    index-name: log_nginx_access-*
     username: user
     password: user
     nodes:

@@ -15,7 +15,6 @@ public class ResponseDeflateInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
-
         if ("deflate".equalsIgnoreCase(response.header("Content-Encoding"))) {
             try {
                 byte[] decompressed = decompress(response.body()

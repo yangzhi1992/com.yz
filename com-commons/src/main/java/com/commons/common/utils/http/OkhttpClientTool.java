@@ -38,9 +38,9 @@ import okhttp3.Response;
 
 public class OkhttpClientTool {
 
-    private static final OkHttpClient CLIENT;
+    public static final OkHttpClient CLIENT;
 
-    private static final OkHttpClient SSL_CLIENT;
+    public static final OkHttpClient SSL_CLIENT;
 
     static {
         /**
@@ -76,7 +76,7 @@ public class OkhttpClientTool {
                 .connectionPool(connectionPool)
                 .dispatcher(dispatcher)
                 .addInterceptor(new DynamicTimeoutInterceptor())
-                .addNetworkInterceptor(new ResponseDeflateInterceptor())
+//                .addNetworkInterceptor(new ResponseDeflateInterceptor())
                 .retryOnConnectionFailure(true)
                 .build();
 
@@ -228,8 +228,7 @@ public class OkhttpClientTool {
             try (okhttp3.Response response = client.newCall(request)
                                                    .execute()) {  // ensure close resource
                 if (response.isSuccessful() && response.body() != null) {
-                    return response.body()
-                                   .string(); // 返回响应体
+                    return response.body().string();
                 } else {
                     throw new RuntimeException(
                             "Unexpected response: " + response.code() + ", message: " + response.message());
@@ -278,6 +277,8 @@ public class OkhttpClientTool {
                     requestBuilder.addHeader(entry.getKey(), entry.getValue());
                 }
             }
+
+            requestBuilder.addHeader("Accept-Encoding", "gzip, deflate");
             requestBuilder.addHeader("Accept", "application/json;charset=utf-8");
             requestBuilder.addHeader("Content-Type", "application/json;charset=utf-8");
             // 添加超时头信息（如果需要通过拦截器处理超时）
@@ -357,8 +358,7 @@ public class OkhttpClientTool {
             try (okhttp3.Response response = client.newCall(request)
                                                    .execute()) {
                 if (response.isSuccessful() && response.body() != null) {
-                    return response.body()
-                                   .string(); // 返回响应体
+                    return response.body().string();
                 } else {
                     throw new RuntimeException(
                             "Unexpected response: " + response.code() + ", message: " + response.message());

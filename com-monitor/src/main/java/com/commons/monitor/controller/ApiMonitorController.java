@@ -121,12 +121,6 @@ public class ApiMonitorController  {
         return ReturnValue.renderSuccess(data);
     }
 
-    @RequestMapping("/suggestUri")
-    @ResponseBody
-    public ReturnValue suggestUri(String host, String method, String path) {
-        return ReturnValue.renderSuccess(nginxEsService.searchUriLatest(host, method, path));
-    }
-
     @RequestMapping("/suggestUriV2")
     @ResponseBody
     public ReturnValue suggestUriV2() throws InterruptedException, ExecutionException, TimeoutException {
