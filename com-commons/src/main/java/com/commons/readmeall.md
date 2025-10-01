@@ -5,7 +5,7 @@
 * cache->本地换成
 * db->mybaties使用
 * engine->逻辑表达式引擎使用
-  * es->es 待完善
+* es->es
 * gateway->gateway 
 * grok->用于解析和匹配非结构化的日志数据，将其转换为结构化的键值对格式
 * javatree->树型菜单

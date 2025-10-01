@@ -1,7 +1,6 @@
 package com.commons.es.simple;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.zip.DataFormatException;
@@ -50,6 +49,7 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
         if (initialized) {
             return;
         }
+
         // 指定默认超时时间
         int connectTimeout = Integer.parseInt(properties.getOrDefault("connectTimeout", "5000"));
         int requestTimeout = Integer.parseInt(properties.getOrDefault("requestTimeout", "2000"));
@@ -58,7 +58,8 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
                                               .setRequestConfigCallback(
                                                       config -> config.setConnectTimeout(connectTimeout)
                                                                       .setConnectionRequestTimeout(requestTimeout)
-                                                                      .setSocketTimeout(socketTimeout))
+                                                                      .setSocketTimeout(socketTimeout)
+                                              )
                                               .setHttpClientConfigCallback(
                                                       httpClientBuilder -> {
                                                           final CredentialsProvider credentialsProvider =
@@ -75,7 +76,6 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
                                                           return httpClientBuilder;
                                                       }
                                               );
-
 
         client = new RestHighLevelClient(builder);
         try {
