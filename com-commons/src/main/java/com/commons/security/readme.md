@@ -4,6 +4,15 @@
         <artifactId>spring-boot-starter-security</artifactId>
         <version>${spring.boot.version}</version>
     </dependency>
+    引用以上jar后，没有任何权限配置请求接口会要求登录，默认用户名user 密码: 在应用启动时控制台生成的随机密码
+    启动日志中会显示类似这样的信息：
+    Using generated security password: 78fa095d-3f4c-48b1-ad50-e24c31d5cf35
+    配置相关用户名密码信息：
+    spring:
+        security:
+            user:
+                name: user
+                password: user
 2、配置文件
     security.yml
 3、注解进行权限控制
