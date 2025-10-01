@@ -76,7 +76,7 @@ public class OkhttpClientTool {
                 .connectionPool(connectionPool)
                 .dispatcher(dispatcher)
                 .addInterceptor(new DynamicTimeoutInterceptor())
-//                .addNetworkInterceptor(new ResponseDeflateInterceptor())
+                .addNetworkInterceptor(new ResponseDeflateInterceptor())
                 .retryOnConnectionFailure(true)
                 .build();
 

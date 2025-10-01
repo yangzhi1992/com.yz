@@ -75,45 +75,6 @@
                 </a-layout>
             </a-col>
         </a-row>
-        <a-row v-show="showQae" style="border:none">
-            <a-col :span="24">
-                <div style="padding:0;margin:10px">
-                    <div>选择QAE应用：</div>
-                    <a-radio-group v-model="qaeApp" @change="qaeHostSearch" v-show="showQae">
-                        <a-radio-button value="qlive-ops.fuyoo-server-docker.bjzjy-online01">
-                            fuyoo-server-docker.bjzjy
-                        </a-radio-button>
-                        <a-radio-button value="guoyuehua.fuyoo-server-canary.bjzyx-online01">
-                            fuyoo-server-canary.bjzyx
-                        </a-radio-button>
-                        <a-radio-button value="xuxiang.fuyoo-server-docker.bjzyx-online01">
-                            fuyoo-server-docker.bjzyx
-                        </a-radio-button>
-                        <a-radio-button value="caoqiang.fuyoo-server-initialattach-online.bjzjy-online01">
-                            fuyoo-server-initialattach-online.bjzjy-online01
-                        </a-radio-button>
-                        <a-radio-button value="caoqiang.fuyoo-server-initialattach-online.bjzyx-online01">
-                            fuyoo-server-initialattach-online.bjzyx-online01
-                        </a-radio-button>
-                        <a-radio-button value="chenjuntao.fuyoo-serve-gift.bjzjy-online01">
-                            fuyoo-serve-gift.bjzjy
-                        </a-radio-button>
-                        <a-radio-button value="guoyuehua.fuyoo-serve-gift.cnhb4-public-prod01">
-                            fuyoo-serve-gift.cnhb4-public-prod01
-                        </a-radio-button>
-                        <a-radio-button value="guoyuehua.fuyoo-server-vote-online.cnhb4-public-prod01">
-                            fuyoo-server-vote-online.cnhb4-public-prod01
-                        </a-radio-button>
-                        <a-radio-button value="caoqiang.fuyoo-server-vote-online.bjzyx-online01">
-                            fuyoo-server-vote-online.bjzyx-online01
-                        </a-radio-button>
-                        <a-radio-button value="caoqiang.fuyoo-server-vote-online.bjdxt-online03">
-                            fuyoo-server-vote-online.bjdxt-online03
-                        </a-radio-button>
-                    </a-radio-group>
-                </div>
-            </a-col>
-        </a-row>
         <a-row style="border:none">
             <a-col :span="16">
                 <div style="margin:10px 0px;color:#00BCD4">选择的参数：</div>
