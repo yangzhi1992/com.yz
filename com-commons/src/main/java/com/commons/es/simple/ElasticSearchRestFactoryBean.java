@@ -72,7 +72,6 @@ public class ElasticSearchRestFactoryBean implements FactoryBean<RestHighLevelCl
                                                               httpClientBuilder.setDefaultCredentialsProvider(
                                                                       credentialsProvider);
                                                           }
-
                                                           return httpClientBuilder;
                                                       }
                                               );
