@@ -1,4 +1,4 @@
-package com.commons.es.simple.dto;
+package com.commons.elasticsearch.simple.dto;
 
 import java.io.Serializable;
 import java.util.LinkedList;

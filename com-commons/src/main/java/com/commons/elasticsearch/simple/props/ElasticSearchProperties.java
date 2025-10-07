@@ -1,6 +1,6 @@
-package com.commons.es.simple.props;
+package com.commons.elasticsearch.simple.props;
 
-import com.commons.es.simple.dto.ElasticConfigItem;
+import com.commons.elasticsearch.simple.dto.ElasticConfigItem;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;

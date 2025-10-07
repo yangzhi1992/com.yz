@@ -7,7 +7,7 @@ spring:
       - security.yml
       - actuator.yml
       - lettuce.yml
-      - es.yml
+      - elasticsearch.yml
 #      - cache.yml
   application:
     name: test-demo

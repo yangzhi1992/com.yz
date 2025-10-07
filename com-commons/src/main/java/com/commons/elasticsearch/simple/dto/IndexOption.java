@@ -1,4 +1,4 @@
-package com.commons.es.simple.dto;
+package com.commons.elasticsearch.simple.dto;
 
 import com.commons.common.utils.BooleanPair;
 import com.google.common.collect.Lists;

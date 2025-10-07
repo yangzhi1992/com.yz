@@ -1,9 +1,9 @@
-package com.commons.es.simple;
+package com.commons.elasticsearch.simple;
 
 import com.commons.common.exception.BusinessException;
 import com.commons.common.utils.CollectionTool;
 import com.commons.common.utils.PropertiesTool;
-import com.commons.es.simple.props.ElasticSearchProperties;
+import com.commons.elasticsearch.simple.props.ElasticSearchProperties;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

@@ -1,4 +1,4 @@
-package com.commons.es.simple;
+package com.commons.elasticsearch.simple;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;

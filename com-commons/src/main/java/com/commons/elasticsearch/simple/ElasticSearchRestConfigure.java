@@ -1,12 +1,12 @@
-package com.commons.es.simple;
+package com.commons.elasticsearch.simple;
 
 import com.commons.common.exception.BusinessException;
 import com.commons.common.utils.CollectionTool;
 import com.commons.common.utils.PropertiesTool;
 import com.commons.common.utils.StringTool;
-import com.commons.es.simple.dto.ElasticConfigItem;
-import com.commons.es.simple.props.ElasticNode;
-import com.commons.es.simple.props.ElasticSearchProperties;
+import com.commons.elasticsearch.simple.dto.ElasticConfigItem;
+import com.commons.elasticsearch.simple.props.ElasticNode;
+import com.commons.elasticsearch.simple.props.ElasticSearchProperties;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

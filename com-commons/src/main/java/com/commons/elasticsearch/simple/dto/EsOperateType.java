@@ -1,4 +1,4 @@
-package com.commons.es.simple.dto;
+package com.commons.elasticsearch.simple.dto;
 
 /**
  * ES 写入类型

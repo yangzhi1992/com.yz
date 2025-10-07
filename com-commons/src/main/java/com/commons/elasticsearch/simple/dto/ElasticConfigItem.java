@@ -1,6 +1,6 @@
-package com.commons.es.simple.dto;
+package com.commons.elasticsearch.simple.dto;
 
-import com.commons.es.simple.props.ElasticNode;
+import com.commons.elasticsearch.simple.props.ElasticNode;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;

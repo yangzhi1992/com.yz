@@ -1,4 +1,4 @@
-package com.commons.es.simple.props;
+package com.commons.elasticsearch.simple.props;
 
 
 /**
