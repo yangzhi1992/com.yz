@@ -101,7 +101,7 @@ public class ListExample {
 		return infoDTOS.stream().collect(Collectors.toSet());
 	}
 
-	//List<InfoDTO>->Map<Long,InfoDTO>
+	//List<InfoDTO>->Map<Long,InfoDTO> 简单分类
 	public static Map<Long, InfoDTO> getInfoDtoToMapForNew(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -117,7 +117,7 @@ public class ListExample {
 				.filter(v -> v.getId() != null)
 				.collect(Collectors.toMap(InfoDTO::getId, k -> k.getName(), (oldV, newV) -> newV));
 	}
-	//List<InfoDTO>->Map<Long,List<InfoDTO>>
+	//List<InfoDTO>->Map<Long,List<InfoDTO>> 简单分类
 	public static Map<Long, List<InfoDTO>> getInfoDtoToMapList(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -126,7 +126,7 @@ public class ListExample {
 				);
 	}
 
-	//List<InfoDTO>->Map<Long,Set<String>>
+	//List<InfoDTO>->Map<Long,Set<String>> 简单分类
 	public static Map<Long, Set<String>> getInfoDtoToMapSet(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.collect(Collectors.groupingBy(
@@ -134,4 +134,11 @@ public class ListExample {
 						Collectors.mapping(InfoDTO::getName, Collectors.toSet())
 				));
 	}
+
+	//List<InfoDTO>->Map<Long, Map<String,List<InfoDTO>>> 多级分类
+	public static Map<Long, Map<String,List<InfoDTO>>> getInfoDtoToMapMap(List<InfoDTO> infoDTOS) {
+		return infoDTOS.stream()
+				.collect(Collectors.groupingBy(InfoDTO::getId, Collectors.groupingBy(InfoDTO::getCategory)));
+	}
 }
+
