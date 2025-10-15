@@ -12,4 +12,10 @@ public class InfoDTO implements Serializable {
 	private String name;
 
 	private String category;
+
+	private Double salary;
+
+	private String department;
+
+	private int age;
 }
