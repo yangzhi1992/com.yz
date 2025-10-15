@@ -2,8 +2,8 @@
   "groups": [
     {
       "name": "",
-      "type": "com.commons.es.simple.props.ElasticSearchProperties",
-      "sourceType": "com.commons.es.simple.props.ElasticSearchProperties"
+      "type": "com.commons.elasticsearch.simple.props.ElasticSearchProperties",
+      "sourceType": "com.commons.elasticsearch.simple.props.ElasticSearchProperties"
     },
     {
       "name": "components.security",
@@ -131,8 +131,8 @@
     },
     {
       "name": "elastic",
-      "type": "java.util.Map<java.lang.String,com.commons.es.simple.dto.ElasticConfigItem>",
-      "sourceType": "com.commons.es.simple.props.ElasticSearchProperties"
+      "type": "java.util.Map<java.lang.String,com.commons.elasticsearch.simple.dto.ElasticConfigItem>",
+      "sourceType": "com.commons.elasticsearch.simple.props.ElasticSearchProperties"
     },
     {
       "name": "management.endpoint.cachestats.cache.time-to-live",

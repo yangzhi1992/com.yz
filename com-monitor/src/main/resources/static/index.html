@@ -529,7 +529,7 @@
 
                     this.$message.info('已开始' + item.host +'拨测请求任务！');
                 }
-            },
+
             onHostSearchClick() {
             　　　axios.get("/apimonitor/searchHost?requestType=" + this.requestType + "&host=" + this.host + "&qaeApp=" + this.qaeApp)
                 .then((response) => {
