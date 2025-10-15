@@ -1,5 +1,6 @@
 package com.commons.java8;
 
+import com.alibaba.fastjson.JSON;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +87,14 @@ public class MapExample {
 
 
 		// 根据用户选择的多个字段动态分组
+		infoDTOS.add(InfoDTO.builder().id(1L).department("a").gender("00").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(2L).department("a").gender("01").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(3L).department("b").gender("00").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(4L).department("b").gender("00").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(5L).department("c").gender("00").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(6L).department("c").gender("01").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(7L).department("d").gender("00").salary(1D).build());
+		infoDTOS.add(InfoDTO.builder().id(8L).department("d").gender("01").salary(1D).build());
 		List<String> groupFields = Arrays.asList("department", "gender");
 		Map<List<Object>, List<InfoDTO>> dynamicGroups = infoDTOS.stream()
 				.collect(Collectors.groupingBy(emp ->
@@ -101,6 +110,7 @@ public class MapExample {
 								})
 								.collect(Collectors.toList())
 				));
+		System.out.println(JSON.toJSONString(dynamicGroups));
 
 		// 按部门分组，每组员工按工资降序排列
 		Map<String, List<InfoDTO>> sortedBySalary = infoDTOS.stream()
