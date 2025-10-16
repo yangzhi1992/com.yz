@@ -1,4 +1,4 @@
-package com.commons.fastjson;
+package com.commons.jsonforfast;
 
 import org.springframework.context.annotation.Configuration;
 

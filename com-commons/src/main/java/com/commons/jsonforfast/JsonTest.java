@@ -1,4 +1,4 @@
-package com.commons.fastjson;
+package com.commons.jsonforfast;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
