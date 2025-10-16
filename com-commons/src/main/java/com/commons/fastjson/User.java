@@ -1,4 +1,4 @@
-package com.commons.json;
+package com.commons.fastjson;
 
 import com.alibaba.fastjson2.annotation.JSONField;
 import java.util.Date;
