@@ -25,3 +25,19 @@
     <artifactId>spring-boot-starter-validation</artifactId>
     <version>${spring.boot.version}</version>
 </dependency>
+
+2.1 分组验证
+    2.1.1 第一验证组 CreateGroup,UpdateGroup
+    2.1.2 在DTO中使用分组 UserDto
+    2.1.3 Controller中使用分组 HibernateValidatorController
+2.2 自定义注解
+    2.1.1 创建自定义注解 PhoneNumber
+    2.1.2 实现验证逻辑 PhoneNumberValidator
+    2.1.3 在DTO中使用 UserDto
+2.3 Service 层验证
+    2.3.1 方法验证配置
+    2.3.2 Service 方法验证
+2.4 全局异常处理 GlobalExceptionHandler
+2.5 controller层验证 HibernateValidatorController
+2.6 自定义ValidatorFactory ValidatorConfig 
+2.7 国际化错误消息 UserDto,validation-messages.properties
