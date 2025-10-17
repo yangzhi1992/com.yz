@@ -1,6 +1,7 @@
 package com.commons.java8;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
 public class CompletableFutureExample {
 	public static void main(String[] args) {
@@ -58,6 +59,5 @@ public class CompletableFutureExample {
 		});
 		CompletableFuture<Object> anyResult = CompletableFuture.anyOf(future1, future2);
 		anyResult.thenAccept(result -> System.out.println("First Completed: " + result));
-
 	}
 }

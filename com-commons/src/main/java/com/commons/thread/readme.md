@@ -9,4 +9,7 @@
 3. 如何确认线程是否完成
    Thread.join()
    CountDownLatch
+4.
+Executors.newFixedThreadPool()  //队列无线导致内存溢出
+Executors.newCachedThreadPool() //线程池数量无线
 
