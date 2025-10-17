@@ -34,6 +34,7 @@
         }
     </style>
 </head>
+
 <body>
 <div id="main" class="mt--7 container-fluid">
     <div>
@@ -105,7 +106,6 @@
                         全选 （{{selectedIps.length}} / {{hostOptions.length}}）
                     </a-checkbox>
                 </div>
-                <!--                :options="hostOptions"-->
                 <a-card style="margin-top: 10px">
                     <a-checkbox-group v-model="selectedIps" name="checkboxgroup">
                         <a-card size="small" style="float:left;margin:10px" v-for="host in hostOptions" :key="host.ip">
@@ -216,9 +216,6 @@
                                             {{normalHosts.indexOf(item.host)==-1?'异常响应':'正常响应'}}
                                         </a-button>
                                     </a-popover>
-                                    <a-button style="border:none;background:#fafafa;box-shadow:none"
-                                              v-if="requestType=='qae'||requestType=='qce'">环境变量
-                                    </a-button>
                                     <a-popover title="拨测速度" trigger="click" >
                                         <div slot="content" style="width:550px">
                                             <a-row>
@@ -243,15 +240,6 @@
                                         </div>
                                         <a-button style="border:none;background:#fafafa;box-shadow:none" :disabled="!websocketEnabled">
                                             {{(scheduleItem == null || scheduleItem.host != item.host || progressPercent >= 100)?'开始拨测':'正在拨测...'}}
-                                        </a-button>
-                                    </a-popover>
-                                    <a-popover title="链路traceId">
-                                        <template slot="content">
-                                            <a target="_blank"
-                                               href="http://saturn.live.qiyi.domain/#/saturn/traceLog/detail">{{item.traceId}}</a>
-                                        </template>
-                                        <a-button style="border:none;background:#fafafa;box-shadow:none">
-                                            请求链路
                                         </a-button>
                                     </a-popover>
                                 </template>
@@ -312,7 +300,6 @@
                                                 </a-tag>
                                             </a-space>
                                         </div>
-                                        <!--                                        <div style="border:1px solid #eee;padding:10px;margin-top:10px;font-family:fangsong;line-height:24px;">-->
                                         <div style="border:none;padding:0px 10px;margin-top:10px;font-family:fangsong;line-height:24px;">
                                             <p style="line-height: 24px;background: #e9e8e8;padding: 10px;color: #585757;">
                                                 {{item.response.substr(0,280)}}...
@@ -339,7 +326,7 @@
             return {
                userId: "",
                socket: null,
-               requestType: "nginx",
+               requestType: "qce",
                host: "mp-live.iqiyi.com",
                method: "GET",
                path: "",
@@ -352,7 +339,6 @@
                showSearchList: false,
                showSpin: false,
                showResultList: false,
-               showQae: false,
                qaeApp: "",
                resultSuccess: false,
                contentSame: false,
@@ -393,34 +379,23 @@
                  this.sendSwitch = false;
               }
 
-              if(this.requestType == "qae") {
-                 this.showQae = true;
-              } else {
-                 this.showQae = false;
-              }
-
               if (typeof(e) == "string" || typeof(e) == "undefined") {
                  return;
               }
 
-              var requestTypeValue = ["qlb","nginx","qce","qae"];
+              var requestTypeValue = ["qce"];
               if(requestTypeValue.indexOf(e.target.value)>=0) {
                   this.selectedIps = [];
                   this.checkAll = false;
                   this.hostOptions = [];
-
-                  if (e.target.value !='qae' || (e.target.value =='qae' && this.qaeApp != "")) {
-                      this.onHostSearchClick()
-                  }
               }
             },
-            qaeHostSearch() {
-                this.onHostSearchClick()
-            },
+
             onCheckHostChange(e) {
                 this.indeterminate = !!this.selectedIps.length && this.selectedIps.length < this.hostOptions.length;
                 this.checkAll = this.selectedIps.length === this.hostOptions.length;
             },
+
             onCheckAllChange(e) {
               Object.assign(this, {
                 selectedIps: e.target.checked ? this.hostOptions.map(function(item,index,array){return item.ip}) : [],
@@ -428,20 +403,17 @@
                 checkAll: e.target.checked,
               });
             },
+
             onParamSelect(item) {
                 this.param = item.value;
                 this.showSearchList = false;
                 this.onChange()
             },
+
             onCheckClick() {
                 this.showSearchList = false;
                 this.showResultList = false;
                 this.scheduleItem = null;
-
-                if(!this.sendSwitch || (this.requestType == "qae" && this.qaeApp == "")) {
-                    this.$notification.error({message: "请求参数不完整！"})
-                    return;
-                }
 
                 axios.get("/apimonitor/apiBatchRequest?method=" + this.method + "&path=" + this.path + "&host=" + this.host + "&param=" + window.btoa(this.param) + "&ips=" + this.selectedIps)
                 .then((response) => {
@@ -456,13 +428,12 @@
                     } else {
                         this.$notification.error({message: msg})
                     }
-                    //console.log(this.websocketEnabled);
-
                 })
                 .catch((error) => {
                     this.$notification.error({message: error})
                 })
             },
+
             changeQPS(value) {
                 if (this.scheduleItem == null) {
                     return;
@@ -481,9 +452,8 @@
                 }
                 this.socket.send(JSON.stringify(data));
             },
-            onScheduleClick(item) {
-                //console.log(item)
 
+            onScheduleClick(item) {
                 if(this.scheduleItem != null) {
                     var cancelMessage = {
                         "messageType": "cancel",
@@ -529,7 +499,7 @@
 
                     this.$message.info('已开始' + item.host +'拨测请求任务！');
                 }
-
+            },
             onHostSearchClick() {
             　　　axios.get("/apimonitor/searchHost?requestType=" + this.requestType + "&host=" + this.host + "&qaeApp=" + this.qaeApp)
                 .then((response) => {
@@ -603,7 +573,6 @@
             },
             wsOnmessage(evt) {
                 var received_msg = evt.data;
-                //console.log("数据已接收..." + received_msg);
                 var response = JSON.parse(received_msg);
                 var result = response.result
                 this.totalprogress = response.retryTimes
@@ -677,10 +646,11 @@
                     "userId": this.userId,
                 }
                 this.socket.send(JSON.stringify(closeMessage));
-                //this.socket.close();
+                this.socket.close();
             }
         }
     })
 </script>
+
 </body>
 </html>

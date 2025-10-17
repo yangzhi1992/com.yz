@@ -10,7 +10,6 @@
         <module name="com-commons" />
         <module name="com-gateway" />
         <module name="com-manager" />
-        <module name="com-monitor" />
         <module name="com-test" />
         <module name="com-gatewayTwo" />
       </profile>
@@ -26,7 +25,6 @@
       <module name="com-gateway2" options="-parameters" />
       <module name="com-gatewayTwo" options="-parameters" />
       <module name="com-manager" options="-parameters" />
-      <module name="com-monitor" options="-parameters" />
       <module name="com-test" options="-parameters" />
       <module name="com.yz" options="-parameters" />
     </option>

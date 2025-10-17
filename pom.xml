@@ -19,7 +19,6 @@
         <module>com-test</module>
         <module>com-gateway</module>
         <module>com-gatewayTwo</module>
-        <module>com-monitor</module>
         <module>com-manager</module>
     </modules>
 
