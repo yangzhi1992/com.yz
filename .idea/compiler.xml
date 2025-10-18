@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="com-commons" />
         <module name="com-gateway" />
-        <module name="com-manager" />
         <module name="com-test" />
         <module name="com-gatewayTwo" />
       </profile>

@@ -31,7 +31,6 @@ public class GatewayConfig {
 
     @Configuration
     public class WebClientConfig {
-
         @Bean
         public WebClient webClient() {
             return WebClient.builder()

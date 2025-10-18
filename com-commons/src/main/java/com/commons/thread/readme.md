@@ -6,7 +6,7 @@
    如果你在 main 方法中创建的是普通线程（用户线程），并且 main 方法本身执行结束了，那 JVM 不会立即退出，而是 等待线程执行完毕 后再退出。
    情况 2：将线程设置为守护线程（Daemon Thread） ->DaemonThreadExample
    如果你在创建线程时，将其设置为 守护线程，当 main 方法执行完毕后，JVM 会立即退出，停止所有守护线程。
-3. 如何确认线程是否完成
+3. 阻塞线程
    Thread.join()
    CountDownLatch
 4.
