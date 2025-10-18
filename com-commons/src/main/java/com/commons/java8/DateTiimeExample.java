@@ -1,5 +1,6 @@
 package com.commons.java8;
 
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -12,15 +13,14 @@ public class DateTiimeExample {
     //Date 和 LocalDateTime 的区别：Date 是基于时间戳的，始终以 UTC 存储。而 LocalDateTime 是时区无关的，并且其范围不包括毫秒，因此它们的语义有些不同。
     //必须借助 Instant 和 ZoneId，以桥接二者。
     //LocalDateTime 是不可变对象，线程安全；Date 则是可变对象，非线程安全（需要手动同步）。
-    public void swap(){
+    public void swap() {
         //date -> long,long->date
         Date date = new Date();
         Long dateLong = date.getTime();
         date = new Date(dateLong);
 
         //date -> localDateTime
-        LocalDateTime localDateTime = date.toInstant()
-                .atZone(ZoneId.systemDefault()) // 使用系统默认时区
+        LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()) // 使用系统默认时区
                 .toLocalDateTime();
 
         // LocalDateTime -> Date
@@ -116,12 +116,20 @@ public class DateTiimeExample {
     }
 
     //7、格式化与解析（DateTimeFormatter） DateTimeFormatter 用于将日期/时间对象转换为字符串，或者将字符串解析为日期/时间对象。
-    public void format(){
+    public void localDateTimeFormat() {
         // 格式化
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = LocalDateTime.now().format(formatter); // 格式化日期时间
 
         // 解析
         LocalDateTime parsedDateTime = LocalDateTime.parse("2023-10-10 14:30:15", formatter); // 解析字符串
+    }
+
+    //8、date -> format
+    public void dateFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.sss");
+        Date date = new Date();
+        String dateStr = sdf.format(date);
+        System.out.println(dateStr);
     }
 }

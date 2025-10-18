@@ -4,6 +4,7 @@
 * boomfilter->布隆过滤器
 * cache->本地换成
 * db->mybaties使用
+* design->design设计模式
 * diff->比较内容差异
 * elasticsearch->elasticsearch
 * engine->engine
