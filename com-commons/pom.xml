@@ -320,6 +320,11 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
         <!-- jsckson -->
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
