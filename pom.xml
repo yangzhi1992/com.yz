@@ -19,7 +19,7 @@
         <module>com-test</module>
         <module>com-gateway</module>
         <module>com-gatewayTwo</module>
-        <module>com-manager</module>
+        <module>com-fuyoo</module>
     </modules>
 
     <properties>
