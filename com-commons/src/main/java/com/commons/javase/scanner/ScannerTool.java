@@ -1,4 +1,4 @@
-package com.commons.javaSe.scanner;
+package com.commons.javase.scanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;

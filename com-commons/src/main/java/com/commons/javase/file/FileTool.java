@@ -1,4 +1,4 @@
-package com.commons.javaSe.file;
+package com.commons.javase.file;
 
 import java.io.BufferedReader;
 import java.io.File;

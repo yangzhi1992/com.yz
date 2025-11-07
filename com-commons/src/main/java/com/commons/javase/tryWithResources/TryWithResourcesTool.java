@@ -1,4 +1,4 @@
-package com.commons.javaSe.tryWithResources;
+package com.commons.javase.tryWithResources;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
