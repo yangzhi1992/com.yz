@@ -100,7 +100,7 @@ public class DateTiimeExample {
     }
 
     /**
-     * 6
+     * 6、
      * Period 和 Duration
      * Period：表示两个日期之间的间隔，按年、月、日计算。
      * Duration：表示两个时间之间的间隔，按秒和纳秒计算。

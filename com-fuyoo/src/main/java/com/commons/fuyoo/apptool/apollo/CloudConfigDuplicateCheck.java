@@ -1,4 +1,4 @@
-package com.commons.apollo;
+package com.commons.fuyoo.apptool.apollo;
 
 import com.commons.common.utils.JsonTool;
 import java.nio.charset.StandardCharsets;
