@@ -65,6 +65,24 @@ public class ListExample {
 				.skip(20)  // 跳过前20条 (0-19)
 				.limit(10) // 取10条
 				.collect(Collectors.toList());
+
+		//anyMatch，allMatch，noneMatch，findFirst，findAny
+		List<String> fruits = Arrays.asList("Apple", "Banana", "Orange", "Grapes", "Peach");
+		// 1. 检查是否存在名字以 "Ap" 开头的水果
+		boolean hasApFruit = fruits.stream().anyMatch(fruit -> fruit.startsWith("Ap"));
+		System.out.println("是否包含以 'Ap' 开头的水果? " + hasApFruit);
+		// 2. 检查所有水果名是否含有字母 "e"
+		boolean allContainE = fruits.stream().allMatch(fruit -> fruit.contains("e"));
+		System.out.println("所有水果名称中是否含有 'e': " + allContainE);
+		// 3. 检查是否没有以 "Z" 开头的水果
+		boolean noneStartsWithZ = fruits.stream().noneMatch(fruit -> fruit.startsWith("Z"));
+		System.out.println("没有水果以 'Z' 开头: " + noneStartsWithZ);
+		// 4. 查找第一个水果
+		fruits.stream().findFirst()
+				.ifPresent(fruit -> System.out.println("第一个水果是: " + fruit));
+		// 5. 查找任意一个水果
+		fruits.parallelStream().findAny()
+				.ifPresent(fruit -> System.out.println("任意一个水果是: " + fruit)); // 可能是任意一个水果
 	}
 
 	//map InfoDTO->String 1->1 数据量越大效果越好（通常 >10,000元素）
