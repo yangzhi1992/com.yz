@@ -82,7 +82,7 @@ public class ListExample {
 				.ifPresent(fruit -> System.out.println("第一个水果是: " + fruit));
 		// 5. 查找任意一个水果
 		fruits.parallelStream().findAny()
-				.ifPresent(fruit -> System.out.println("任意一个水果是: " + fruit)); // 可能是任意一个水果
+				.ifPresent(fruit -> System.out.println("任意一个水果是: " + fruit));
 	}
 
 	//map InfoDTO->String 1->1 数据量越大效果越好（通常 >10,000元素）
