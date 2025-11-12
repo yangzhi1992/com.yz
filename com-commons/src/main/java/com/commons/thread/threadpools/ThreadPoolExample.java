@@ -3,6 +3,8 @@ package com.commons.thread.threadpools;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolExample {
 	public static void main(String[] args) {
@@ -19,5 +21,9 @@ public class ThreadPoolExample {
 
 		//创建一个线程数固定为 1 的线程池，任务会按添加顺序对线程进行排队执行
 		ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
+		//创建一个定时调度线程池
+		ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(2);
+		newScheduledThreadPool.schedule(() -> System.out.println("Task executed after 2 seconds"), 2, TimeUnit.SECONDS);
 	}
 }
