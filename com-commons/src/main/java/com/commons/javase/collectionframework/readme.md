@@ -104,3 +104,17 @@ Java集合大致可分成List、Set、Queue、Map四种接口体系。
     需要排序	TreeSet
     高并发环境	ConcurrentSkipListSet 或 CopyOnWriteArraySet
     存储枚举类型	EnumSet
+
+4、queue
+    非阻塞队列:不支持多线程的同步操作,仅适合单线程环境，或由外部进行线程同步控制。（PriorityQueue，LinkedList）
+        PriorityQueue:元素按照优先级自然排序（根据 Comparable 接口或自定义的 Comparator 排序）;默认实现是最小优先队列（队首为最小值）。
+        LinkedList：插入和删除效率较高，适合动态大小的队列；支持 FIFO 和 LIFO。
+    阻塞队列：支持线程阻塞和线程间同步操作，适合多线程环境；即，在队列为空时，消费线程会阻塞等待；在队列已满时，生产线程会阻塞等待。（ArrayBlockingQueue，LinkedBlockingQueue，PriorityBlockingQueue，DelayQueue，SynchronousQueue）
+        ArrayBlockingQueue: 是基于数组实现的阻塞队列;有限容量，在创建队列时需要指定其最大容量;队列满时，插入线程阻塞,队列空时，消费线程阻塞常用于生产者-消费者模式。
+        LinkedBlockingQueue: 是基于链表实现的阻塞队列，支持更高的并发性能;默认容量为 Integer.MAX_VALUE，可选有界或无界;插入与删除操作被不同的锁分开管理，吞吐量高于 ArrayBlockingQueue。
+        PriorityBlockingQueue: PriorityBlockingQueue 是一种基于优先级排序的阻塞队列;元素按照优先级处理,是一个无界队列（没有尺寸限制）。
+        DelayQueue: 是一个特殊的队列，存储的元素必须实现 Delayed 接口，同时元素只有在延迟时间到期后才可被消费;延迟任务调度,定时任务管理。
+        SynchronousQueue: 是一个无容量的阻塞队列，每次插入操作必须等待相应的删除操作，反之亦然;用于线程间直接传递数据。
+    双端队列：是 Queue 的子接口，支持双端操作（从队头和队尾都可以进行插入与删除）；可以用作栈（后进先出 LIFO）或双向队列（FIFO）。（ArrayDeque，LinkedList）
+    特殊队列：PriorityQueue，PriorityBlockingQueue，DelayQueue，SynchronousQueue
+
