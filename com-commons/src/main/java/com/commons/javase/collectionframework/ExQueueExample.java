@@ -12,9 +12,14 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
 public class ExQueueExample {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		priorityQueueTest();
 		linkedListTest();
+		arrayBlockingQueueTest();
+		linkedBlockingQueueTest();
+		priorityBlockingQueueTest();
+		delayQueueTest();
+		synchronousQueueTest();
 	}
 
 	public static void priorityQueueTest() {
@@ -84,7 +89,7 @@ public class ExQueueExample {
 		consumer.start();
 	}
 
-	public void priorityBlockingQueueTest() {
+	public static  void priorityBlockingQueueTest() {
 		PriorityBlockingQueue<Integer> queue = new PriorityBlockingQueue<>();
 
 		queue.put(50);
@@ -96,7 +101,7 @@ public class ExQueueExample {
 		}
 	}
 
-	public void delayQueueTest() throws InterruptedException {
+	public static  void delayQueueTest() throws InterruptedException {
 		DelayQueue<DelayedTask> queue = new DelayQueue<>();
 
 		queue.put(new DelayedTask("Task1", 1000));
@@ -106,7 +111,7 @@ public class ExQueueExample {
 		System.out.println(queue.take()); // 延迟 2 秒后输出 Task2
 	}
 
-	public void synchronousQueueTest() throws InterruptedException {
+	public static  void synchronousQueueTest() throws InterruptedException {
 		SynchronousQueue<String> queue = new SynchronousQueue<>();
 
 		// 生产者
