@@ -29,5 +29,5 @@ Executors.newCachedThreadPool() //线程池数量无线
    CountDownLatch
    FutureTask
    Synchronized
-   vola
+   volatile
    
