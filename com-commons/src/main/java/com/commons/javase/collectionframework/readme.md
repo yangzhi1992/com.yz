@@ -48,6 +48,7 @@ Java集合大致可分成List、Set、Queue、Map四种接口体系。
         void clear()	清空集合
         boolean isEmpty()	判断集合是否为空
         Object[] toArray()	将集合转换为数组
+
 2、map 
     Map 是 Java 提供的一个用于存储键值对的接口；
     键是唯一的，不能重复。如果插入重复的键，后插入的值会覆盖之前的值；
@@ -97,6 +98,18 @@ Java集合大致可分成List、Set、Queue、Map四种接口体系。
         ConcurrentSkipListSet 是一个基于跳表的数据结构，线程安全，支持高并发操作，同时还保持了元素的顺序;
         它类似于 TreeSet，支持快速的有序存取，但性能优于同样线程安全的 TreeSet;
         适用于： 高并发环境中，操作有序集合;
+
+    boolean add(E e)	添加一个元素，如果已存在则返回 false
+    boolean remove(Object o)	移除一个元素，成功返回 true
+    addAll(Collection c)	将指定集合的所有元素添加到当前集合中
+    retainAll(Collection c)	保留所有与指定集合相同的元素
+    removeAll(Collection c)	删除所有出现在指定集合中的元素
+    boolean contains(Object o)	检查集合中是否包含指定元素
+    boolean isEmpty()	判断集合是否为空
+    int size()	返回集合中元素的个数
+    Iterator<E> iterator()	返回 Iterator，用于遍历集合
+    Object[] toArray()	将集合中的元素转换为数组
+    <T> T[] toArray(T[] a)	将集合中的元素存储到指定的数组中
 
     场景需求	推荐 Set
     无序快速查找	HashSet
