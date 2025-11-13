@@ -1,0 +1,2 @@
+FutureTaskExample.java
+利用FutureTask的get()方法的阻塞性实现闭锁功能

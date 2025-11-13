@@ -1,4 +1,4 @@
-package com.commons.thread;
+package com.commons.thread.daemon;
 
 public class AsyncThreadExample {
     public static void main(String[] args) {

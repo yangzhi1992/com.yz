@@ -1,5 +1,9 @@
 package com.commons.thread.threadpools;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -14,17 +18,8 @@ import java.util.logging.Logger;
  * @author Brian Goetz and Tim Peierls
  */
 public class TimingThreadPool extends ThreadPoolExecutor {
-    public static void main(String[] args) {
-        TimingThreadPool timingThreadPool = new TimingThreadPool();
-        for (int i = 0; i < 10; i++) {
-            timingThreadPool.execute(() -> {
-                System.out.println(Thread.currentThread().getName());
-            });
-        }
-    }
-
     public TimingThreadPool() {
-        super(1, 1, 0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+        super(10, 10, 0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
     }
 
     private final ThreadLocal<Long> startTime = new ThreadLocal<Long>();
