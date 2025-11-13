@@ -1,4 +1,4 @@
-1. Java 线程分类：用户线程 和 守护线程
+1. Java 线程分类：用户线程 和 守护线程 - callback
    用户线程（User Thread）： 默认线程是用户线程。 JVM 会一直运行，直到所有用户线程都执行完毕。
    守护线程（Daemon Thread）： 当所有的 用户线程 运行结束后，JVM 会立即退出，即使守护线程还在运行。 JVM 的垃圾回收线程是一个典型的守护线程。
 2. 主线程与异步线程的关系
@@ -13,3 +13,21 @@
 Executors.newFixedThreadPool()  //队列无线导致内存溢出
 Executors.newCachedThreadPool() //线程池数量无线
 
+5.
+   Thread
+      join: （JoinCountDownLatchTest.java,Join.java）
+      yield: （YieldTest.java）yield()方法的作用是放弃当前cpu资源，将他让给其他任务去占用cpu执行的时间；放弃的时间不确定有可能马上放弃，马上又获得cpu时间片
+      sleep:
+      wait:
+      notify:
+      notifyAll:
+   Runnable
+   Callable
+   Future(ThreadPoolExecutor.submit())
+   Semaphore
+   CyclicBarrier
+   CountDownLatch
+   FutureTask
+   Synchronized
+   vola
+   
