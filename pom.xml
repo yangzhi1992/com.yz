@@ -20,6 +20,7 @@
         <module>com-gateway</module>
         <module>com-gatewayTwo</module>
         <module>com-fuyoo</module>
+        <module>com-camel</module>
     </modules>
 
     <properties>
@@ -141,6 +142,7 @@
                 <version>2.13.3</version>
             </dependency>-->
 
+            <!-- lombok -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -161,6 +163,7 @@
                 <version>2.10.1</version>
             </dependency>
 
+            <!-- okhttp -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
@@ -193,7 +196,6 @@
                 <artifactId>commons-collections4</artifactId>
                 <version>4.4</version>
             </dependency>
-
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
@@ -381,6 +383,28 @@
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>3.3.0</version>
+            </dependency>
+
+            <!-- apache camel  -->
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-starter</artifactId>
+                <version>3.14.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-rest</artifactId>
+                <version>3.14.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jackson</artifactId>
+                <version>3.14.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jdbc</artifactId>
+                <version>3.14.10</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

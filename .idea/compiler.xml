@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="com-fuyoo" />
+        <module name="com-camel" />
         <module name="com-commons" />
         <module name="com-gateway" />
         <module name="com-test" />
@@ -21,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="com-camel" options="-parameters" />
       <module name="com-commons" options="-parameters" />
       <module name="com-fuyoo" options="-parameters" />
       <module name="com-gateway" options="-parameters" />
