@@ -36,7 +36,7 @@ public class CamelSpringApplication {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                from("quartz://myQuartzScheduler?cron=0/10+*+*+*+*+?") // 定时器每秒触发一次 camel-quartz
+                from("quartz://myQuartzScheduler?cron=*+0/30+*+*+*+?") // 定时器每秒触发一次 camel-quartz
                         .setBody().constant("Quartz Hello World!") // 设置消息体
                         .to("stream:out"); // 输出到控制台 camel-stream
             }

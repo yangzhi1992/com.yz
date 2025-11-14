@@ -12,7 +12,7 @@ public class FileScanRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("file:inputFolder?delete=true&delay=5000") // 扫描 inputFolder 目录，每隔5秒获取文件
+        from("file:D:\\data\\log\\xl-plot?noop=true&delay=5000") // 扫描 inputFolder 目录，每隔5秒获取文件
             .log("Found file: ${header.CamelFileName}") // 打印文件名
             .to("stream:out"); // 打印消息到控制台
     }
