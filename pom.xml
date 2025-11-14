@@ -406,6 +406,16 @@
                 <artifactId>camel-jdbc</artifactId>
                 <version>3.14.10</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-stream</artifactId>
+                <version>3.14.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-quartz</artifactId>
+                <version>3.14.10</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
