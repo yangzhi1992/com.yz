@@ -9,10 +9,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="com-fuyoo" />
         <module name="com-camel" />
-        <module name="com-commons" />
         <module name="com-gateway" />
         <module name="com-test" />
         <module name="com-gatewayTwo" />
+        <module name="com-commons" />
+        <module name="com-hutool" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +29,7 @@
       <module name="com-gateway" options="-parameters" />
       <module name="com-gateway2" options="-parameters" />
       <module name="com-gatewayTwo" options="-parameters" />
+      <module name="com-hutool" options="-parameters" />
       <module name="com-manager" options="-parameters" />
       <module name="com-test" options="-parameters" />
       <module name="com.yz" options="-parameters" />

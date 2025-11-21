@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: test-hutool
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    user:
+      name: user
+      password: user
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+server:
+  port: 8080 # 监听端口
+  context-path: / # 访问路径
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
+    com.example.resilience4jdemo: DEBUG

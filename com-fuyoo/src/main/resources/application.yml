@@ -12,6 +12,15 @@ spring:
     port: 9200
     username: admin
     password: yICe#9UD
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+  web:
+    resources:
+      static-locations: classpath:/static/
 
 server:
   port: 8080 # 监听端口
@@ -50,4 +59,3 @@ logging:
   level:
     io.github.resilience4j: DEBUG
     com.example.resilience4jdemo: DEBUG
-

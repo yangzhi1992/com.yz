@@ -23,7 +23,8 @@ public class PrometheusDemo {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
         Counter requests = Counter.build()
-                .name("requests_total_guoyx")
+                .name("requests_total_table")
+                .labelNames("name_field","age_field")
                 .help("测试")
                 .register();
 
@@ -34,7 +35,7 @@ public class PrometheusDemo {
         while (true) {
             TimeUnit.SECONDS.sleep(5);
             int count = random.nextInt(max) % (max - min + 1) + min;
-            requests.inc(count);
+            requests.labels("a","19").inc(count);
             System.out.println(sdf.format(new Date()) + "increase count, current number:" + requests.get());
         }
     }

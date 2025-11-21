@@ -21,6 +21,7 @@
         <module>com-gatewayTwo</module>
         <module>com-fuyoo</module>
         <module>com-camel</module>
+        <module>com-hutool</module>
     </modules>
 
     <properties>
