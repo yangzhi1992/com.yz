@@ -22,6 +22,7 @@
         <module>com-fuyoo</module>
         <module>com-camel</module>
         <module>com-hutool</module>
+        <module>com-falcom</module>
     </modules>
 
     <properties>
@@ -416,6 +417,13 @@
                 <groupId>org.apache.camel</groupId>
                 <artifactId>camel-quartz</artifactId>
                 <version>3.14.10</version>
+            </dependency>
+
+            <!-- hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.8.16</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

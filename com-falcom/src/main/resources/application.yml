@@ -1,0 +1,5 @@
+app:
+  rules:
+    file-path: D:/rules2.yml
+    scan-interval: 60000  # 1分钟
+    mysql-datasource: mysql  # Hutool 数据源名称

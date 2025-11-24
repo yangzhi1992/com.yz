@@ -14,6 +14,7 @@
         <module name="com-gatewayTwo" />
         <module name="com-commons" />
         <module name="com-hutool" />
+        <module name="com-falcom" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -25,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="com-camel" options="-parameters" />
       <module name="com-commons" options="-parameters" />
+      <module name="com-falcom" options="-parameters" />
       <module name="com-fuyoo" options="-parameters" />
       <module name="com-gateway" options="-parameters" />
       <module name="com-gateway2" options="-parameters" />
