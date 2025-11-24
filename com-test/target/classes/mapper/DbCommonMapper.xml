@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.commons.db.mapper.DbCommonMapper">
-    <resultMap id="BaseResultMap" type="com.commons.db.model.DbCommonEntity">
+<mapper namespace="com.commons.test.db.mapper.DbCommonMapper">
+    <resultMap id="BaseResultMap" type="com.commons.test.db.model.DbCommonEntity">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
@@ -10,7 +10,7 @@
         id, create_time, update_time
     </sql>
     <select id="selectDb"
-        parameterType="com.commons.db.model.DbCommonEntity"
+        parameterType="com.commons.test.db.model.DbCommonEntity"
         resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

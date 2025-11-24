@@ -17,12 +17,8 @@ showParams = true
 sqlLevel = debug
 
 [mysql]
-#url = jdbc:mysql://bj.tianjiops.w.qiyi.db:2135/tianji_ops?useSSL=false
-#user = tianji_ops
-#pass = 6bZ@FJ5v
-url = jdbc:mysql://bdrds.fuyoodevtest.w.qiyi.db:1520/middle?useSSL=false
-user = pgclive
-pass = CqiuBXjjk3Ma
-remarks = true
+url = jdbc:mysql://localhost:3306/xxx?useSSL=false
+user = xxx
+pass = xxx
 driver = com.mysql.jdbc.Driver
 
