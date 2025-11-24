@@ -39,12 +39,12 @@ public class FileContentReload implements Processor {
 			// 3. 发送请求
 			try (Response response = client.newCall(request).execute()) {
 				if (response.isSuccessful()) {
-					log.debug("Prometheus 配置重载成功！");
+					System.out.println("Prometheus 配置重载成功！");
 				} else {
-					log.debug("请求失败: " + response.code() + " " + response.message());
+					System.out.println("请求失败: " + response.code() + " " + response.message());
 				}
 			} catch (IOException e) {
-				log.error("网络错误: " + e.getMessage());
+				System.out.println("网络错误: " + e.getMessage());
 			}
 		}
 	}

@@ -33,14 +33,14 @@ public class FileContentComparator implements Processor {
 				// 比较内容是否相同（忽略首尾空白字符）
 				if (normalizeContent(newContent).equals(normalizeContent(existingContent))) {
 					contentChanged = false;
-					log.debug("文件内容相同，无需更新");
+					System.out.println("文件内容相同，无需更新");
 				} else {
-					log.info("检测到文件内容变化");
-					log.debug("新内容:\n{}", newContent);
-					log.debug("旧内容:\n{}", existingContent);
+					System.out.println("检测到文件内容变化");
+					System.out.println(String.format("新内容:\n%s", newContent));
+					System.out.println(String.format("旧内容:\n%s", existingContent));
 				}
 			} else {
-				log.info("规则文件不存在，将创建新文件");
+				System.out.println("规则文件不存在，将创建新文件");
 			}
 		} catch (IOException e) {
 			log.warn("读取现有规则文件失败，将创建新文件", e);

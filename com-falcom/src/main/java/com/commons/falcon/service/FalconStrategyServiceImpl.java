@@ -2,20 +2,15 @@ package com.commons.falcon.service;
 
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
-import com.commons.falcon.camel.FileContentReload;
 import com.commons.falcon.dto.StrategyDTO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FalconStrategyServiceImpl {
-
-	private static final Logger log = LoggerFactory.getLogger(FileContentReload.class);
 
 	@Value("${app.rules.mysql-datasource}")
 	private String datasourceName;
@@ -78,10 +73,10 @@ public class FalconStrategyServiceImpl {
 		);
 		entities.forEach(v -> {
 			try {
-				log.debug("metric：" + v.get("metric") + ",tags：" + v.getStr("tags")
+				System.out.println("metric：" + v.get("metric") + ",tags：" + v.getStr("tags")
 						.split("=")[1]);
 			} catch (Exception e) {
-				log.error("error:" + v.getStr("tags"));
+				System.out.println("error:" + v.getStr("tags"));
 			}
 		});
 
