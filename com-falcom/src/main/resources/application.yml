@@ -1,5 +1,5 @@
 app:
   rules:
-    file-path: D:/rules2.yml
+    file-path: /data/prometheus/prometheus-2.47.0.linux-amd64/rules2.yml
     scan-interval: 30000  # 1分钟
     mysql-datasource: mysql  # Hutool 数据源名称

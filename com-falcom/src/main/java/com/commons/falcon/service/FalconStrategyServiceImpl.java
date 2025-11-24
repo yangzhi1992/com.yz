@@ -71,14 +71,6 @@ public class FalconStrategyServiceImpl {
 						+ "    'partner=qlive-admin-node'\n"
 						+ "  ) AND tags IS NOT NULL AND tags <> '' ORDER BY id DESC"
 		);
-		entities.forEach(v -> {
-			try {
-				System.out.println("metric：" + v.get("metric") + ",tags：" + v.getStr("tags")
-						.split("=")[1]);
-			} catch (Exception e) {
-				System.out.println("error:" + v.getStr("tags"));
-			}
-		});
 
 		List<StrategyDTO> strategyList = entities.stream()
 				.map(v -> {

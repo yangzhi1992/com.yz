@@ -90,6 +90,13 @@
                     <encoding>utf-8</encoding>
                 </configuration>
             </plugin>
+
+            <!-- 打包插件spring boot项目会主动注册 mainifest.mf 文件，如果不打包，会报错  -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.9</version>
+            </plugin>
         </plugins>
     </build>
 </project>
