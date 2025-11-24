@@ -1,8 +1,5 @@
 package com.commons.camel;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
-
 //动态扫描多个文件夹，处理不同类型的文件，重命名并移动到对应的文件夹中。
 //include=.*\\.txt 和 include=.*\\.csv：仅匹配特定扩展名的文件。
 //根据文件类型，将文件路由到不同的处理函数或目录中。

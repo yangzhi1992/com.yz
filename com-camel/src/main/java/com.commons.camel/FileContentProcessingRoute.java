@@ -1,8 +1,5 @@
 package com.commons.camel;
 
-import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
-
 //扫描目录中新增的文件，并读取文件内容进行处理。
 //noop=true：文件不会从 inputFolder 中删除，只读取文件内容。
 //file:name.noext：文件名（去掉扩展名），附加上 processed- 前缀创建新的文件名称。

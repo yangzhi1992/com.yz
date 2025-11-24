@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/com-gatewayTwo/com-gatewayTwo.iml" filepath="$PROJECT_DIR$/com-gatewayTwo/com-gatewayTwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com-hutool.iml" filepath="$PROJECT_DIR$/com-hutool.iml" />
       <module fileurl="file://$PROJECT_DIR$/com.yz.iml" filepath="$PROJECT_DIR$/com.yz.iml" />
     </modules>
   </component>

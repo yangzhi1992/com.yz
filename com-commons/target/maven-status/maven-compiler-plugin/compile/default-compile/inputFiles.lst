@@ -23,6 +23,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\cache\springcache\cacheyml\CaffeineCacheService.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\HiddenIterator.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\engine\AviatorUtils.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\collectionframework\ExSetExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ResourceFactory.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\grok\GrokTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\Streaming.java
@@ -48,7 +49,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\timer\timewheel\Schedu
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\callback\asynchronous\Wang.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Preloader.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\RandomTool.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\AsyncThreadExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter07\AtomicIntegerArrayTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\jsonforjackson\JacksonConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Immutable.java
@@ -63,6 +63,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\http\DynamicTimeoutInterceptor.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ServerStatusBeforeSplit.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\snowflake\SnowflakeIdWorker.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\threadpools\ThreadPoolExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\converter\jackson\JacksonConverterFactory.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\CallAdapter.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\PossibleReordering.java
@@ -90,9 +91,12 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\cache\springcache\java\concurrentmap\SimpleCacheService.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\converter\jackson\JacksonRequestBodyConverter.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter03\FinalReferenceEscapeExample.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\collectionframework\ExQueueExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter03\ReorderExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\test\OkHttpInterceptorExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter08\JoinCountDownLatchTest.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\threadlocal\ThreadLocalExample.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\daemon\AsyncThreadExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\OneShotLatch.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter05\BoundedQueue.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\PseudoRandom.java
@@ -116,7 +120,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\PropertiesTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\design\singleton\SingletonHungry.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\elasticsearch\simple\dto\EsOperateType.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\apollo\CloudConfigDuplicateCheck.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\cache\ehcache\EhcacheXmlExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter04\DefaultThreadPool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\RequestOptions.java
@@ -135,7 +138,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Point.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\redis\lettuce\MultiRedisProperties.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ValueLatch.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\daemon\DaemonThread1.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\并发工具类\信号量\SemaphoreTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\cache\springcache\java\caffenine\CacheConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\Callback.java
@@ -173,6 +175,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\OneValueCache.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter04\ConnectionPool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\TrackingExecutor.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\collectionframework\ExListExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\cache\springcache\java\caffenine\UserInfo.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\spring\proxy\ProxyTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\NoVisibility.java
@@ -189,6 +192,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\GrumpyBoundedBuffer.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\LazyInitRace.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\spring\proxy\cglib\CglibProxy.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\scanner\ScannerTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\java8\ListExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\BuiltInConverters.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\elasticsearch\simple\dto\MqMsg.java
@@ -250,6 +254,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\javatree\VirtualDataGenerator.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\并发工具类\闭锁\countdownlatch\CountDownLatchTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter03\VolatileExample.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\futuretask\FutureTaskExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\PartMap.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\SynchronizedInteger.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\SafeStates.java
@@ -290,6 +295,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\Mode
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\timer\spring\spring3\AsyncConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\JsonTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\ServiceMethod.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\tryWithResources\TryWithResourcesTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\jsonforjackson\JavaTimeEntity.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\timer\spring\spring3\AsyncController.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Holder.java
@@ -298,6 +304,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\db\DataSourceTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\jsonforfast\JsonConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\CountingSheep.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\collectionframework\ExMapExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\RenderWithTimeBudget.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\Multipart.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\NetTool.java
@@ -311,6 +318,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\StripedMap.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\BetterVector.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\Query.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\timer\thread\CustomThreadPoolWithMonitor.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\BooleanPair.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\exception\BusinessException.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ThisEscape.java
@@ -319,7 +327,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\jsonforjackson\JsonFormatExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\OutOfTime.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\TimedLocking.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\daemon\DaemonThread.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\hibernateValidator\java\UserRegistrationForm.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\common\utils\JsonCallback.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter04\SleepUtils.java
@@ -333,6 +340,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\test\OkHttpExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\db\DataSourceConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\spring\scope\SingletonService.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\daemon\DaemonThreadExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\UEHLogger.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\threadpools\TimingThreadPool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Memoizer3.java
@@ -389,6 +397,7 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\annotation\ApiOptions.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\StuffIntoPublic.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\snowflake\SnowflakeProperties.java
+D:\workspace\com.yz\com-commons\src\main\java\com\commons\javase\file\FileTool.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\swagger\OpenApiConfig.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ServerStatusAfterSplit.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter08\CyclicBarrierTest3.java
@@ -404,7 +413,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发�
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\WithinThreadExecutor.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\CasCounter.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程艺术\chapter04\ConnectionPoolTest.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\并发工具类\闭锁\futuretask\FutureTaskTest.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\PrimeGenerator.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\TaskExecutionWebServer.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Sequence.java
@@ -414,7 +422,6 @@ D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\callback\synchr
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\SemaphoreBoundedBuffer.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\api\retrofit\http\GET.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\db\annotation\DataSource.java
-D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\DaemonThreadExample.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\ThreeStooges.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\thread\书籍\并发编程实战\Factorizer.java
 D:\workspace\com.yz\com-commons\src\main\java\com\commons\redis\lettuce\MultiRedisService.java
