@@ -17,9 +17,9 @@ showParams = true
 sqlLevel = debug
 
 [mysql]
-url = jdbc:mysql://127.0.0.1:2135/xxx?useSSL=false
-user = xxx
-pass = xxx
+url = jdbc:mysql://127.0.0.1:3306/yangzhi?useSSL=false
+user = root
+pass = 123456
 remarks = true
 driver = com.mysql.jdbc.Driver
 

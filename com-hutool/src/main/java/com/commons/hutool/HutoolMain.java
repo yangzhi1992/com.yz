@@ -1,9 +1,15 @@
 package com.commons.hutool;
 
-//TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
-// 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
-public class HutoolMain {
-	public static void main(String[] args) {
+import cn.hutool.db.Db;
+import cn.hutool.db.Entity;
 
-	}
+import java.sql.SQLException;
+
+public class HutoolMain {
+
+    private static final Db db = Db.use("mysql");
+
+    public static void main(String[] args) throws SQLException {
+        Long id = db.insertForGeneratedKey(Entity.create("user").set("name", "unitTestUser").set("age", 66));
+    }
 }
