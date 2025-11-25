@@ -13,12 +13,14 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FileContentReload implements Processor {
 
-	private static final Logger log = LoggerFactory.getLogger(FileContentReload.class);
+	@Value("${app.rules.prometheus-url}")
+	private String prometheusUrl;
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
@@ -31,7 +33,7 @@ public class FileContentReload implements Processor {
 
 			// 2. 构造 Request
 			Request request = new Request.Builder()
-					.url("http://10.71.19.12:9090/-/reload")
+					.url(prometheusUrl)
 					.post(RequestBody.create("", null)) // 空请求体
 					.header("Authorization", credentials)
 					.build();
