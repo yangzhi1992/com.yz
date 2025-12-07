@@ -14,7 +14,7 @@ public class ChatTest {
 	public static void main(String[] args) throws Exception {
 		String token = "b53d136be1d84131ab674d7218580242";  // 设置用户 Token
 		String projectName = "qlive";        // 设置项目名称
-		String queueName = "user_online_test";          // 设置队列名称
+		String queueName = "user_online_ppc_test";          // 设置队列名称
 		String producerGroup = "PG-user_online_test";      // 设置生产组
 
 		StreamProducerConfiguration producerConfiguration = new StreamProducerConfiguration(token);
@@ -28,10 +28,11 @@ public class ChatTest {
 		StreamKafkaProducer<String, String> producer = StreamJavaProducerUtils23.createStreamKafkaProducer(producerConfiguration);
 
 		JSONObject msg = new JSONObject();
-		msg.put("partnerId",20);
-		msg.put("roomId", 9001000009080949L);
+		msg.put("partnerId",5);
+		msg.put("roomId", 9001000009082649L);
 		msg.put("userIp", "123.126.30.178");
 		msg.put("status", 1);
+		msg.put("userId",1595586270L);
 		msg.put("deviceId", "device1234561");
 		msg.put("updateTime", (new Date()).getTime());
 		msg.put("platform", "pcw");

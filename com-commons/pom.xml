@@ -346,6 +346,12 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jdbc</artifactId>
         </dependency>-->
+
+        <!-- disruptor -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
