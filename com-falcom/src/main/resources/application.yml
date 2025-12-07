@@ -3,3 +3,4 @@ app:
     file-path: /data/prometheus/prometheus-2.47.0.linux-amd64/rules2.yml
     scan-interval: 30000  # 1分钟
     mysql-datasource: mysql  # Hutool 数据源名称
+    prometheus-url: http://10.71.19.12:9090/-/reload
