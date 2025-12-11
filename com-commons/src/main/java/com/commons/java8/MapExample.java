@@ -5,8 +5,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -146,5 +149,59 @@ public class MapExample {
 				.filter(entry -> entry.getValue().size() > 5)
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
+	}
+
+	public static void foreach() {
+		Map<String,String> map = new HashMap<>();
+		//1. 通过 keySet() 遍历键（Key）
+		//先获取所有键，再通过键获取值。
+		//效率较低（因为 map.get(key) 需要哈希计算）。
+		for (String key : map.keySet()) {
+			String value = map.get(key);
+			System.out.println("Key: " + key + ", Value: " + value);
+		}
+
+		//2. 通过 values() 只遍历值（Value）
+		for (String value : map.values()) {
+			System.out.println("Value: " + value);
+		}
+
+		//3. 通过 entrySet() 遍历键值对（推荐）
+		//最高效的遍历方式（直接获取键值对，无需二次查询）。
+		//适用于需要同时访问键和值的场景。
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+			System.out.println("Key: " + key + ", Value: " + value);
+		}
+
+		//4. 使用 Iterator 迭代器遍历
+		//可以在遍历时通过 iterator.remove() 安全删除元素。
+		//适用于需要修改集合的场景。
+		Iterator<Entry<String, String>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> entry = iterator.next();
+			System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+			// 可以在遍历中安全删除元素：iterator.remove();
+		}
+
+		//5. Java 8+ 的 forEach + Lambda 表达式
+		//代码简洁，内部使用 entrySet() 实现，效率高。
+		//需要 Java 8 或更高版本。
+		map.forEach((key, value) -> {
+			System.out.println("Key: " + key + ", Value: " + value);
+		});
+
+		//6. 通过 Stream API 处理（Java 8+）
+		//支持链式操作（过滤、映射等）。
+		//适合复杂的数据处理。
+		map.entrySet().stream()
+				.filter(entry -> entry.getKey().startsWith("prefix_")) // 过滤键
+				.forEach(entry -> System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue()));
+
+		//7. 并行流遍历（大数据量优化）
+		//利用多核 CPU 加速遍历（线程不安全操作需谨慎）。
+		map.entrySet().parallelStream() // 并行处理
+				.forEach(entry -> System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue()));
 	}
 }
