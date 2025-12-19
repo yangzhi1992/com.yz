@@ -29,7 +29,7 @@ public class ChatTest {
 
 		JSONObject msg = new JSONObject();
 		msg.put("partnerId",5);
-		msg.put("roomId", 9001000009082649L);
+		msg.put("roomId", 9001000009079849L);
 		msg.put("userIp", "123.126.30.178");
 		msg.put("status", 1);
 		msg.put("userId",1595586270L);

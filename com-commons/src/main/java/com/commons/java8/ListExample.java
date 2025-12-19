@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.Builder;
@@ -117,13 +118,11 @@ public class ListExample {
 	public static String getInfoDtoNameToString(List<InfoDTO> infoDTOS) {
 		return String.join(",", getInfoDtoNameToList(infoDTOS));
 	}
-
 	public static String getInfoDtoNameToString1(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.map(InfoDTO::getName)
 				.collect(Collectors.joining(","));
 	}
-
 	public static String getInfoDtoNameToString2(List<InfoDTO> infoDTOS) {
 		return StringUtils.join(getInfoDtoNameToList(infoDTOS), ",");
 	}
@@ -139,7 +138,6 @@ public class ListExample {
 	public static Set<InfoDTO> getInfoDtoToSet(List<InfoDTO> infoDTOS) {
 		return new HashSet<>(infoDTOS);
 	}
-
 	public static Set<InfoDTO> getInfoDtoToSet1(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.collect(Collectors.toSet());
@@ -153,7 +151,6 @@ public class ListExample {
 						k -> k, //value获取原对象
 						(oldV, newV) -> newV)); //新的数据覆盖旧的数据
 	}
-
 	public static Map<Long, InfoDTO> getInfoDtoToMapForOld(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -169,7 +166,6 @@ public class ListExample {
 						k -> k.getName(), //value获取原对象的name属性
 						(oldV, newV) -> newV));
 	}
-
 	public static Map<Long, String> getInfoDtoToMapMapForNew2(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -185,6 +181,15 @@ public class ListExample {
 				.collect(
 						Collectors.groupingBy(InfoDTO::getId)
 				);
+	}
+	public static Map<Long, List<InfoDTO>> getInfoDtoToMapList2(List<InfoDTO> infoDTOS) {
+		return infoDTOS.stream()
+				.filter(v -> v.getId() != null)
+				.collect(
+						Collectors.groupingBy(
+								InfoDTO::getId,
+								Collectors.mapping(Function.identity(), Collectors.toList())
+						));
 	}
 
 	//List<InfoDTO>->Map<Long,List<String>> 简单分类 values->List<InfoDTO.getName>
