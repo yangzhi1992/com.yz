@@ -1,5 +1,6 @@
 package com.commons.disruptor;
 
+import com.commons.disruptor.batchAndTime.MessageBatchEventHandler;
 import com.commons.disruptor.single.MessageEventHandler;
 import com.google.common.util.concurrent.RateLimiter;
 import com.lmax.disruptor.BlockingWaitStrategy;
@@ -34,7 +35,11 @@ public class DisruptorConfig {
         this.disruptor = new Disruptor<>(new MessageEventFactory(), BUFFER_SIZE, DaemonThreadFactory.INSTANCE, ProducerType.MULTI, new BlockingWaitStrategy());
 
         // 设置事件处理器
+
+        // single
         this.disruptor.handleEventsWith(new MessageEventHandler(rateLimiter));
+        // batchAndTime
+        this.disruptor.handleEventsWith(new MessageBatchEventHandler(rateLimiter));
 
         // 1. 独立消费模式（每个事件被所有处理器处理）（广播模式）
         //this.disruptor.handleEventsWith(new MessageEventHandler(rateLimiter),new MessageEventHandler(rateLimiter));
