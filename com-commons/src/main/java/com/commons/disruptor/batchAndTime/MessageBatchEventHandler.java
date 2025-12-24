@@ -1,4 +1,4 @@
-package com.commons.disruptor.batch;
+package com.commons.disruptor.batchAndTime;
 
 import com.commons.disruptor.MessageEvent;
 import com.google.common.util.concurrent.RateLimiter;
@@ -14,21 +14,31 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class MessageEventHandler implements EventHandler<MessageEvent>, LifecycleAware {
-	private final RateLimiter rateLimiter;
-	private final int batchSize = 100;
-	private final long flushIntervalMillis = 100;
+public class MessageBatchEventHandler implements EventHandler<MessageEvent>, LifecycleAware {
 
+	private final RateLimiter rateLimiter;
+	
+	private final int batchSize = 100;
+
+	private final long flushIntervalMillis = 1000;
+
+	// 批量数据缓存
 	private final List<MessageEvent> batch = new ArrayList<>();
+	
+	// 批量数据锁
 	private final Lock batchLock = new ReentrantLock();
+	
+	/**
+	 * 关键优化点：标记是否正在执行flush操作
+	 * 使用 AtomicBoolean 确保原子性，防止批量和定时任务同时执行flush
+	 */
+	private final AtomicBoolean isFlushing = new AtomicBoolean(false);
 
 	private ScheduledExecutorService scheduler;
 	private ScheduledFuture<?> future;
 	private final AtomicBoolean isShutdown = new AtomicBoolean(false);
 
-	public MessageEventHandler(
-			RateLimiter rateLimiter
-	) {
+	public MessageBatchEventHandler(RateLimiter rateLimiter) {
 		this.rateLimiter = rateLimiter;
 	}
 
@@ -42,26 +52,37 @@ public class MessageEventHandler implements EventHandler<MessageEvent>, Lifecycl
 		try {
 			batch.add(event);
 
-			boolean shouldFlush = batch.size() >= batchSize || endOfBatch;
+			boolean shouldFlush = batch.size() >= batchSize;
 
 			if (shouldFlush) {
-				flushInternal();
+				if (isFlushing.compareAndSet(false, true)) {
+					try {
+						rateLimiter.acquire();
+						flushInternal("batch");
+					} finally {
+						isFlushing.set(false);
+					}
+				}
 			}
 		} finally {
 			batchLock.unlock();
 		}
 	}
 
-	private void flushInternal() {
+	/**
+	 * 执行flush操作
+	 * 
+	 * @param flag 标识flush来源（batch/schedule/shutdown），用于日志追踪
+	 */
+	private void flushInternal(String flag) {
 		if (batch.isEmpty()) {
 			return;
 		}
 
 		try {
-			rateLimiter.acquire();
-		} catch (Exception e) {
-		} finally {
+			List<MessageEvent> batchToFlush = new ArrayList<>(batch);
 			batch.clear();
+		} catch (Exception e) {
 		}
 	}
 
@@ -75,17 +96,25 @@ public class MessageEventHandler implements EventHandler<MessageEvent>, Lifecycl
 
 		future = scheduler.scheduleAtFixedRate(() -> {
 			try {
-				if (!batch.isEmpty()) {
-					batchLock.lock();
-					try {
-						if (!batch.isEmpty()) {
-							flushInternal();
+				if (isFlushing.compareAndSet(false, true)) {
+					if (batchLock.tryLock()) {
+						try {
+							if (!batch.isEmpty()) {
+								rateLimiter.acquire();
+								flushInternal("schedule");
+							}
+						} finally {
+							batchLock.unlock();
+							isFlushing.set(false);
 						}
-					} finally {
-						batchLock.unlock();
+					} else {
+						// 如果获取不到锁，说明事件处理线程正在操作batch
+						// 释放flush标志，让事件处理线程继续（如果它需要flush的话）
+						isFlushing.set(false);
 					}
 				}
 			} catch (Exception e) {
+				isFlushing.set(false);
 			}
 		}, flushIntervalMillis, flushIntervalMillis, TimeUnit.MILLISECONDS);
 	}
@@ -108,19 +137,18 @@ public class MessageEventHandler implements EventHandler<MessageEvent>, Lifecycl
 				}
 			} catch (InterruptedException e) {
 				scheduler.shutdownNow();
-				Thread.currentThread()
-						.interrupt();
+				Thread.currentThread().interrupt();
 			}
 		}
 
-		// 最后处理剩余数据
 		batchLock.lock();
 		try {
 			if (!batch.isEmpty()) {
-				flushInternal();
+				flushInternal("shutdown");
 			}
 		} finally {
 			batchLock.unlock();
 		}
 	}
 }
+
