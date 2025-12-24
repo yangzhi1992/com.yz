@@ -13,17 +13,20 @@ import java.util.stream.Stream;
 
 public class LiveTrackService {
 	public static void main(String[] args) {
+		//设置业务方列表及排序
 		List<Long> partnerIdList = Arrays.asList(20L,19L,3L,16L,5L);
 
+		//查询所有主播直播间直播场次数据：存在一个主播多个业务方，每个业务方多个直播间，每个直播间多个场次数据
 		List<LiveTrackDTO> liveTrackDTOS = new ArrayList<>();
 		List<LiveTrackDTO> filteredAndSortedList = liveTrackDTOS.stream()
 				.filter(track -> {
+					//先过滤播控平台-1[pugc];12(ios),10(android)[ppc],播控上线，屏蔽搜索和屏蔽推荐都为false
 					return (track.getPlayPlatform() == -1 || track.getPlayPlatform() == 12 || track.getPlayPlatform() == 10) &&
 							track.getPlatformAvailableStatus() == 1 &&
 							track.getPlatformRejectSearch() == 0 &&
 							track.getPlatformRejectRecommend() == 0;
 				})
-				// 第一步：按anchorId分组
+				//第一步：按anchorId分组
 				.collect(Collectors.groupingBy(LiveTrackDTO::getAnchorId))
 				.values()
 				.stream()

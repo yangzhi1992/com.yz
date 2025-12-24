@@ -19,14 +19,29 @@ public class LiveTrackDTO implements Serializable {
 
     private static final long serialVersionUID = -7801100011937851796L;
 
+    /**
+     * 场次ID
+     */
     private Long liveTrackId;
 
+    /**
+     * 业务方ID
+     */
     private Long partnerId;
 
+    /**
+     * 主播ID
+     */
     private Long anchorId;
 
+    /**
+     * 直播间ID
+     */
     private Long liveStudioId;
 
+    /**
+     * 节目开始时间
+     */
     private Date realStartTime;
 
     /**
