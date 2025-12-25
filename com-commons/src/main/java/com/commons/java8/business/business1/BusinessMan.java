@@ -58,7 +58,7 @@ public class BusinessMan {
 				.filter(v -> studioToAnchorMap.containsKey(v.getLiveStudioId()))     // 1. 过滤
 				// Map<Long, Optional<Long>> 格式
 				.collect(Collectors.groupingBy(                                                        // 2. 分组
-						history -> studioToAnchorMap.get(history.getLiveStudioId()), // 分组键：anchorId
+						UserViewHistoryDTO::getAnchorId, // 分组键：anchorId
 						Collectors.mapping(                                                            // 3. 映射
 								UserViewHistoryDTO::getViewTime,                                       // 提取viewTime
 								Collectors.maxBy(Comparator.naturalOrder())                            // 找出最大值
@@ -168,21 +168,21 @@ public class BusinessMan {
 								)
 						));
 
-		// 按用户分组，然后按商品分组，统计浏览次数和最近浏览时间
-		Map<Long, Map<String, UserViewHistoryDTO>> userItemStats = userViewHistorys.stream()
+		// 按用户分组，然后按主播分组，统计浏览次数和最近浏览时间
+		Map<Long, Map<Long, UserViewHistoryDTO>> userItemStats = userViewHistorys.stream()
 				.collect(Collectors.groupingBy(
 						UserViewHistoryDTO::getUserId,
 						Collectors.groupingBy(
-								UserViewHistoryDTO::getUserId,
+								UserViewHistoryDTO::getAnchorId,
 								Collectors.mapping(
 										Function.identity(),
 										Collectors.collectingAndThen(
 												Collectors.toList(),
-												list -> {
+												(List<UserViewHistoryDTO> v) -> {  // 显式指定List的类型
 													UserViewHistoryDTO stats = UserViewHistoryDTO.builder()
 															.build();
-													stats.setViewCount(list.size());
-													stats.setLastViewTime(list.stream()
+													stats.setViewCount(v.size());
+													stats.setLastViewTime(v.stream()
 															.map(UserViewHistoryDTO::getViewTime)
 															.max(Comparator.naturalOrder())
 															.orElse(null));

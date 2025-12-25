@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -107,22 +108,30 @@ public class ListExample {
 				.collect(Collectors.toList());
 	}
 
-	//map InfoDTO->String 1->1
+	//map InfoDTO->String 1->1 map
 	public static List<String> getInfoDtoNameToList(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.map(InfoDTO::getName)
 				.collect(Collectors.toList());
 	}
 
+	//map InfoDTO->String 1->1 Collectors.mapping
+	public static List<String> getInfoDtoNameToList2(List<InfoDTO> infoDTOS) {
+		return infoDTOS.stream()
+				.collect(Collectors.mapping(InfoDTO::getName, Collectors.toList()));
+	}
+
 	//List->String
 	public static String getInfoDtoNameToString(List<InfoDTO> infoDTOS) {
 		return String.join(",", getInfoDtoNameToList(infoDTOS));
 	}
+
 	public static String getInfoDtoNameToString1(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.map(InfoDTO::getName)
 				.collect(Collectors.joining(","));
 	}
+
 	public static String getInfoDtoNameToString2(List<InfoDTO> infoDTOS) {
 		return StringUtils.join(getInfoDtoNameToList(infoDTOS), ",");
 	}
@@ -138,6 +147,7 @@ public class ListExample {
 	public static Set<InfoDTO> getInfoDtoToSet(List<InfoDTO> infoDTOS) {
 		return new HashSet<>(infoDTOS);
 	}
+
 	public static Set<InfoDTO> getInfoDtoToSet1(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.collect(Collectors.toSet());
@@ -151,6 +161,7 @@ public class ListExample {
 						k -> k, //value获取原对象
 						(oldV, newV) -> newV)); //新的数据覆盖旧的数据
 	}
+
 	public static Map<Long, InfoDTO> getInfoDtoToMapForOld(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -166,6 +177,7 @@ public class ListExample {
 						k -> k.getName(), //value获取原对象的name属性
 						(oldV, newV) -> newV));
 	}
+
 	public static Map<Long, String> getInfoDtoToMapMapForNew2(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -182,6 +194,7 @@ public class ListExample {
 						Collectors.groupingBy(InfoDTO::getId)
 				);
 	}
+
 	public static Map<Long, List<InfoDTO>> getInfoDtoToMapList2(List<InfoDTO> infoDTOS) {
 		return infoDTOS.stream()
 				.filter(v -> v.getId() != null)
@@ -198,6 +211,25 @@ public class ListExample {
 				.collect(Collectors.groupingBy(
 						InfoDTO::getId,
 						Collectors.mapping(InfoDTO::getName, Collectors.toList())
+				));
+	}
+
+	public static Map<String, Optional<InfoDTO>> getCategoryMaxAgeInfoDTO(List<InfoDTO> infoDTOS) {
+		return infoDTOS.stream()
+				.collect(Collectors.groupingBy(
+						InfoDTO::getCategory,
+						Collectors.maxBy(Comparator.comparing(InfoDTO::getAge))
+				));
+	}
+
+	public static Map<String, Optional<InfoDTO>> getCategoryMaxAgeInfoDTO2(List<InfoDTO> infoDTOS) {
+		return infoDTOS.stream()
+				.collect(Collectors.groupingBy(
+						InfoDTO::getCategory,
+						Collectors.mapping(
+								Function.identity(),
+								Collectors.maxBy(Comparator.comparing(InfoDTO::getAge))
+						)
 				));
 	}
 
@@ -229,7 +261,7 @@ public class ListExample {
 		//语法简洁，无需处理索引。
 		//所有 List 实现均高效（内部使用 Iterator）。
 		//遍历中不能直接修改集合（会抛 ConcurrentModificationException）。
-		for(String str : list) {
+		for (String str : list) {
 			System.out.println(str);
 		}
 
@@ -260,7 +292,7 @@ public class ListExample {
 		//5. Java 8+ 的 forEach + Lambda
 		//代码简洁，内部使用增强 for-each 实现。
 		//适合简单遍历（无法使用 break/continue）。
-		list.forEach(v->{
+		list.forEach(v -> {
 			System.out.println(v);
 		});
 
@@ -271,7 +303,6 @@ public class ListExample {
 		//7. 并行流遍历（大数据量优化）
 		list.parallelStream()
 				.forEach(item -> System.out.println(item)); // 并行处理
-
 
 	}
 
