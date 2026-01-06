@@ -40,8 +40,7 @@
     {
       "name": "components.security.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "com.commons.security.SecurityInfoProperties",
-      "defaultValue": true
+      "sourceType": "com.commons.security.SecurityInfoProperties"
     },
     {
       "name": "components.security.permit-all-urls",
@@ -57,36 +56,31 @@
       "name": "components.snowflake.heartbeat-grace-second",
       "type": "java.lang.Integer",
       "description": "心跳过期宽限时间，默认1s",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 1
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.heartbeat-second",
       "type": "java.lang.Integer",
       "description": "心跳时间，默认30s",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 30
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.lock-expire-second",
       "type": "java.lang.Long",
       "description": "锁过期时间",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 5
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.millisecond",
       "type": "java.lang.Boolean",
       "description": "时间类型，默认毫秒，否则是秒",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": true
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.redis-error-random-init",
       "type": "java.lang.Boolean",
       "description": "redis 异常时使用随机数初始化",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": false
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.redis-template",
@@ -98,36 +92,31 @@
       "name": "components.snowflake.sequence-bits",
       "type": "java.lang.Long",
       "description": "每个时间粒度内自增位数量，默认12",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 12
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.start-timestamp",
       "type": "java.lang.Long",
       "description": "开始时间戳，默认2019-07-26",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 1564128000000
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.try-lock-max-times",
       "type": "java.lang.Integer",
       "description": "获取锁最大尝试次数",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 100
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.try-lock-sleep-ms",
       "type": "java.lang.Integer",
       "description": "获取锁休息时间",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 100
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "components.snowflake.worker-bits",
       "type": "java.lang.Integer",
       "description": "机器位，默认10",
-      "sourceType": "com.commons.snowflake.SnowflakeProperties",
-      "defaultValue": 10
+      "sourceType": "com.commons.snowflake.SnowflakeProperties"
     },
     {
       "name": "elastic",
@@ -152,29 +141,25 @@
       "name": "mybatis.base-package",
       "type": "java.lang.String",
       "description": "Mapper类所在的base package",
-      "sourceType": "com.commons.db.MybatisProperties",
-      "defaultValue": "com.commons.db.mapper"
+      "sourceType": "com.commons.db.MybatisProperties"
     },
     {
       "name": "mybatis.config-location",
       "type": "java.lang.String",
       "description": "mybatis配置文件路径",
-      "sourceType": "com.commons.db.MybatisProperties",
-      "defaultValue": "classpath:mybatis-config.xml"
+      "sourceType": "com.commons.db.MybatisProperties"
     },
     {
       "name": "mybatis.expression",
       "type": "java.lang.String",
       "description": "mapper aop拦截路径，一般不需要修改",
-      "sourceType": "com.commons.db.MybatisProperties",
-      "defaultValue": "execution(* com.iqiyi..*.repository.*.*(..))"
+      "sourceType": "com.commons.db.MybatisProperties"
     },
     {
       "name": "mybatis.mapper-locations",
       "type": "java.lang.String",
       "description": "mapper文件路径:多个location以,分隔",
-      "sourceType": "com.commons.db.MybatisProperties",
-      "defaultValue": "classpath*:mapper\/*.xml"
+      "sourceType": "com.commons.db.MybatisProperties"
     },
     {
       "name": "mybatis.nodes",
@@ -195,8 +180,7 @@
     {
       "name": "spring.redis.multi.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "com.commons.redis.lettuce.MultiRedisProperties",
-      "defaultValue": false
+      "sourceType": "com.commons.redis.lettuce.MultiRedisProperties"
     }
   ],
   "hints": []
