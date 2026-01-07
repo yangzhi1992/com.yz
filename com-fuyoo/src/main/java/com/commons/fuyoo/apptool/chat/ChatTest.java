@@ -13,9 +13,9 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 public class ChatTest {
 	public static void main(String[] args) throws Exception {
 		String token = "b53d136be1d84131ab674d7218580242";  // 设置用户 Token
-		String projectName = "qlive";        // 设置项目名称
+		String projectName = "qlive";                       // 设置项目名称
 		String queueName = "user_online_ppc_test";          // 设置队列名称
-		String producerGroup = "PG-user_online_test";      // 设置生产组
+		String producerGroup = "PG-user_online_test";       // 设置生产组
 
 		StreamProducerConfiguration producerConfiguration = new StreamProducerConfiguration(token);
 		producerConfiguration.setProject(projectName);

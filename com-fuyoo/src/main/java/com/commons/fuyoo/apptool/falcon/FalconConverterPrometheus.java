@@ -1,15 +1,10 @@
 package com.commons.fuyoo.apptool.falcon;
 
-import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class FalconConverterPrometheus {
 	private static final Map<String, String> SEVERITY_MAP = new HashMap<>();
@@ -26,31 +21,30 @@ public class FalconConverterPrometheus {
 		SEVERITY_MAP.put("default", "warning");
 	}
 
-	public static void main(String[] args) {
-		List<String> lines = new ArrayList<>();
-		try (Stream<String> stream = Files.lines(Paths.get("D:\\xxxx.json"))) {
-			stream.forEach(lines::add);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		JSONArray jsonArray = JSONArray.parseArray(lines.get(0));
-		jsonArray.forEach(v -> {
+	public String convertToPrometheusRules(List<JSONObject> strategyDTOS) throws SQLException {
+		StringBuilder yamlContent = new StringBuilder();
+		yamlContent.append("groups:\n");
+		yamlContent.append("- name: falcon.rules\n");
+		yamlContent.append("  rules:\n");
+		strategyDTOS.forEach(v -> {
 			try {
-				JSONObject jsonRule = (JSONObject)v;
-				System.out.println(convertJsonRuleToYaml(jsonRule));
+				String ruleYaml = convertJsonRuleToYaml(v);
+				yamlContent.append(ruleYaml)
+						.append("\n");
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		});
+		return yamlContent.toString();
 	}
 
-	private static String convertJsonRuleToYaml(JSONObject jsonRule) throws Exception {
-		String metric = jsonRule.getString("metric");
-		String tags = jsonRule.getString("tags");
-		String func = jsonRule.getString("func");
-		String op = jsonRule.getString("op");
-		String rightValue = jsonRule.getString("right_value");
+	private static String convertJsonRuleToYaml(JSONObject strategyDTO) throws Exception {
+		String metric = strategyDTO.getString("metric");
+		String tags = strategyDTO.getString("tags");
+		String func = strategyDTO.getString("func");
+		String op = strategyDTO.getString("op");
+		String rightValue = strategyDTO.getString("rightValue");
+
 		// 解析tags
 		Map<String, String> tagMap = parseTags(tags);
 
