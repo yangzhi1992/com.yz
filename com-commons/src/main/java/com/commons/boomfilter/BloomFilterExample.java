@@ -7,7 +7,7 @@ import java.nio.charset.Charset;
 
 public class BloomFilterExample {
     public static void main(String[] args) {
-        // 创建布隆过滤器：总容量 1000，误判率 0.01（1%）
+        // 创建布隆过滤器：总容量 1000，误判率 0.01（1%）-容量越大，错误率越小占用本地内存越大
         BloomFilter<Integer> bloomFilter = BloomFilter.create(
             Funnels.integerFunnel(), // Integer 类型处理器
             1000,                    // 总容量（预计要存储的元素数量）
