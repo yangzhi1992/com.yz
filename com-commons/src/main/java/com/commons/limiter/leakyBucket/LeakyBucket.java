@@ -98,6 +98,9 @@ public class LeakyBucket {
 
 	}
 
+	/**
+	 * 这个适合量请求量不多的程序
+	 */
 	public void refreshRate() {
 		//取消定时执行的线程
 		if (this.future != null && !this.future.isCancelled()) {
