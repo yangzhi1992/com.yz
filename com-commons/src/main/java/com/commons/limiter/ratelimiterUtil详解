@@ -1,0 +1,83 @@
+RateLimiterUtil 代码解析
+这个工具类通过反射机制对 Guava 的 RateLimiter 进行了定制化扩展，主要实现了对令牌桶初始状态的精细控制。以下是详细解析：
+
+核心功能
+定制令牌桶初始状态：
+
+可以设置初始时桶中就装满令牌（filledWithToken=true）
+可以自定义最大突发流量缓冲时间（maxBurstSeconds）
+突破 Guava 默认限制：
+
+Guava 默认 maxBurstSeconds=1.0（固定1秒缓冲）
+本工具允许自定义此值（如示例中的2秒）
+关键方法解析
+1. create(double permitsPerSecond, double maxBurstSeconds)
+java
+public static RateLimiter create(double permitsPerSecond, double maxBurstSeconds)
+默认创建时就填充令牌桶
+permitsPerSecond：QPS限制（如5表示每秒5个请求）
+maxBurstSeconds：突发流量缓冲时间（如2表示最多累积2秒的令牌）
+2. create(double permitsPerSecond, double maxBurstSeconds, boolean filledWithToken)
+java
+public static RateLimiter create(double permitsPerSecond, double maxBurstSeconds, boolean filledWithToken)
+核心实现逻辑：
+
+通过反射获取内部 SleepingStopwatch 实例
+创建 SmoothBursty 限流器实例
+设置速率和初始令牌数
+3. setField() 反射工具方法
+java
+private static boolean setField(Object targetObject, String fieldName, Object fieldValue)
+递归查找字段（包括父类）
+设置字段值（用于修改 storedPermits）
+示例场景解析
+java
+double permitsPerSecond = 5;
+double capacity = 10;
+double maxBurstSeconds = new BigDecimal(capacity)
+    .divide(new BigDecimal(permitsPerSecond), 1, RoundingMode.HALF_DOWN)
+    .doubleValue();
+// maxBurstSeconds = 2.0 (10/5=2)
+RateLimiter rateLimiter = RateLimiterUtil.create(permitsPerSecond, maxBurstSeconds);
+效果：
+
+每秒生成5个令牌（QPS=5）
+桶容量=10（5*2）
+初始时桶中有10个令牌
+与原生 Guava RateLimiter 对比
+特性	原生 RateLimiter	本工具类
+最大突发时间	固定1秒	可自定义
+初始令牌数	0	可设置为满桶
+实现方式	直接API调用	反射修改内部状态
+线程安全	是	是（继承原生特性）
+使用注意事项
+反射风险：
+
+依赖 Guava 内部实现细节，版本升级可能不兼容
+字段名变更会导致功能失效
+性能考虑：
+
+反射调用有一定性能开销（但只需初始化时调用一次）
+不适合高频创建的场景
+合理配置：
+
+java
+// 不合理的配置示例（突发时间过长）
+RateLimiterUtil.create(100, 60); // 最大可累积60秒的令牌（6000个）
+替代方案：
+
+考虑使用 Resilience4j 或 Sentinel 等更灵活的限流库
+分布式限流需使用 Redis + Lua 方案
+典型使用场景
+java
+// API限流：每秒100请求，最多累积2秒的突发流量
+RateLimiter limiter = RateLimiterUtil.create(100, 2);
+
+public Response handleRequest(Request req) {
+    if (limiter.tryAcquire()) {
+        return process(req);
+    } else {
+        return new Response(429, "Too Many Requests");
+    }
+}
+这个工具类适合需要精细控制突发流量的场景，但要注意其基于反射的实现方式带来的维护成本。
